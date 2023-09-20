@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Girijashankar Jambhale - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <style>
+        /* Custom CSS for portfolio */
+        /* GitHub Dark Theme Color Palette */
+        body {
+            background-color: #0d1117;
+            /* GitHub dark theme background color */
+            color: #c9d1d9;
+            /* GitHub dark theme text color */
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #161b22;
+            /* GitHub dark theme header background color */
+            color: #c9d1d9;
+            /* GitHub dark theme text color */
+            text-align: center;
+            padding: 2rem 0;
+
+            background-image: url('assets/black-cover.png');
+            background-size: cover;
+            /* Adjust the background size as needed */
+            background-position: center;
+            /* Adjust the background position as needed */
+            text-indent: -9999px;
+        }
+
+        .footer {
+            background-color: #161b22;
+            /* GitHub dark theme header background color */
+            color: #c9d1d9;
+            /* GitHub dark theme text color */
+            text-align: center;
+            padding: 2rem 0;
+
+            background-image: url('assets/footer-cover.png');
+            background-size: cover;
+            /* Adjust the background size as needed */
+            background-position: center;
+            /* Adjust the background position as needed */
+            /* text-indent: -9999px; */
+        }
+
+        .section {
+            background-color: #161b22;
+            /* GitHub dark theme section background color */
+            color: #c9d1d9;
+            /* GitHub dark theme text color */
+            padding: 2rem;
+            margin: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon {
+            color: #58a6ff;
+            /* GitHub blue color */
+        }
+
+        .btn-github {
+            background-color: #333;
+            /* GitHub dark theme button background color */
+            color: #c9d1d9;
+            /* GitHub dark theme text color */
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-github:hover {
+            background-color: #2d2d2d;
+            /* GitHub dark theme button hover background color */
+        }
+
+        .project-item {
+            border: 1px solid #30363d;
+            /* GitHub dark theme project item border color */
+            background-color: #161b22;
+            /* GitHub dark theme project item background color */
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+            margin: 1rem;
+        }
+
+        .project-item:hover {
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-info {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Additional custom styles */
+
+        .spacer {
+            margin-bottom: 2rem;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px silver;
+            object-fit: cover;
+            margin: 1rem;
+        }
+
+        /* Silver glow effect */
+        .silver-glow {
+            /* box-shadow: 0 0 10px silver; */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .silver-glow:hover {
+            box-shadow: 0 0 20px silver;
+        }
+
+        /* Custom CSS for buttons */
+        .bottom-link-style {
+            display: inline-block;
+            padding: 0 1rem;
+            margin: 0.25rem;
+            border-bottom: 2px solid white;
+            border-radius: 0.25rem;
+        }
+
+        /* Media queries for responsiveness */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 960px;
+            }
+
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-gap: 1rem;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <header class="header">
+        <div class="container mx-auto">
+            <div class="image-container">
+                <img src="assets/profile.jpg" alt="Profile Image" class="profile-image silver-glow">
+            </div>
+            <h1 class="text-3xl font-bold">Girijashankar Jambhale</h1>
+            <p class="text-lg">Full Stack Developer</p>
+        </div>
+    </header>
+
+    <!-- Contact Information and About Me section -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- About Me section -->
+        <div class="section p-6 rounded-lg shadow-lg silver-glow">
+            <h2 class="text-2xl font-semibold">
+                <i class="fas fa-info-circle icon"></i> About Me
+            </h2>
+            <p class="mt-4">
+                Highly skilled Full Stack Developer with 5+ years of experience in designing, developing, and deploying
+                web applications and APIs using ReactJS, Node.js, and a range of technologies. Proven expertise in both
+                frontend and backend development, strong problem-solving abilities, and a commitment to delivering
+                high-quality, scalable solutions. Proficient in AWS, Azure, Git, and more.</p>
+        </div>
+
+        <!-- Contact Information section -->
+        <div class="section silver-glow">
+            <h2 class="text-2xl font-semibold">
+                <i class="fas fa-address-card icon"></i> Contact Information
+            </h2>
+            <ul class="list-disc pl-6 mt-4">
+                <!-- Contact info here -->
+                <li><span class="font-semibold">Location:</span> <span class="masked">Pune, Maharashtra, 4****1</span>
+                </li>
+                <li><span class="font-semibold">Phone:</span> <span class="masked">888-***-****</span></li>
+                <li><span class="font-semibold">Email:</span> <span class="masked">girij***********@gmail.com</span>
+                </li>
+                <li><span class="font-semibold">Profiles:</span>
+                    <a href="https://www.linkedin.com/in/girijashankarj" class="bottom-link-style" target="_blank"
+                        rel="noopener noreferrer">Linked</a>
+                    <a href="https://github.com/girijashankarj" class="bottom-link-style" target="_blank"
+                        rel="noopener noreferrer">GitHub</a>
+                    <a href="https://medium.com/@girijashankarj" class="bottom-link-style" target="_blank"
+                        rel="noopener noreferrer">Medium</a>
+                </li>
+
+            </ul>
+        </div>
+
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Education section -->
+        <section class="section silver-glow">
+            <h2 class="text-2xl font-semibold">
+                <i class="fas fa-graduation-cap icon"></i> Education
+            </h2>
+            <!-- Education details go here -->
+            <div>
+                <h3 class="text-lg font-semibold">Master of Science in Computer Science</h3>
+                <p>Fergusson College, Pune</p>
+                <p>June 2015 - May 2018</p>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-lg font-semibold">Bachelor of Science in Computer Science</h3>
+                <p>Dr. D.Y. Patil College, Pune</p>
+                <p>June 2013 - April 2015</p>
+            </div>
+        </section>
+
+        <!-- Hobbies section -->
+        <section class="section silver-glow">
+            <h2 class="text-2xl font-semibold">
+                <i class="fas fa-heart icon"></i> Hobbies
+            </h2>
+            <ul class="list-disc pl-6 mt-4">
+                <!-- Hobbies content -->
+                <li>Mobile Photography</li>
+                <li>Collaborative Mapping on Google Maps</li>
+                <li>Technical Reading</li>
+            </ul>
+        </section>
+    </section>
+
+
+    <!-- Skills and Certifications section -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Skills section -->
+        <div class="section silver-glow">
+            <h2 class="text-2xl font-semibold">
+                <i class="fas fa-code icon"></i> Skills
+            </h2>
+            <ul class="list-disc pl-6 mt-4">
+                <li>
+                    <strong>Frontend Technologies:</strong> ReactJS, Redux, Router, HTML, CSS, SCSS, JavaScript,
+                    TypeScript
+                </li>
+                <li>
+                    <strong>Backend Technologies:</strong> Node.js, Java, MySQL
+                </li>
+                <li>
+                    <strong>Cloud Services:</strong> AWS, Azure, Serverless
+                </li>
+                <li>
+                    <strong>Development Tools:</strong> Git, GitHub, npm, Jira
+                </li>
+                <li>
+                    <strong>Data Formats:</strong> JSON, REST, AJAX
+                </li>
+            </ul>
+        </div>
+
+        <!-- Certifications section -->
+        <div class="section relative silver-glow">
+            <div class="container mx-auto relative z-10">
+
+                <h2 class="text-2xl font-semibold">
+                    <i class="fas fa-certificate icon"></i> Certifications
+                </h2>
+                <ul class="list-disc pl-6 mt-4">
+                    <!-- Certification content here -->
+                    <li>
+                        <strong>Microsoft Certified</strong><br>
+                        Azure Fundamentals AZ900
+                        GitHub Copilot Technical Preview
+                    </li>
+                    <li>
+                        <strong>Cisco Networking Academy </strong><br>
+                        JavaScript Essentials
+                    </li>
+                    <li>
+                        <strong>OPSWAT</strong><br>
+                        Introduction to Critical Infrastructure Protection (ICIP)
+                    </li>
+                    <li>
+                        <strong>HackerRank</strong><br>
+                        React Developer Certification
+                    </li>
+                </ul>
+            </div>
+            <!-- Background image with opacity -->
+            <div class="bg-opacity-50 absolute inset-0 bg-cover bg-center"
+                style="background-image: url('assets/tech-cover.jpg'); opacity:0.35;">
+            </div>
+    </section>
+
+    <section class="section silver-glow">
+        <h2 class="text-2xl font-semibold text-white">
+            <i class="fas fa-code-branch icon"></i> Contributions
+        </h2>
+        <!-- Contributions content here -->
+        <!-- GitHub Projects -->
+        <div class="mt-4">
+            <details>
+                <summary>
+                    <h3 class="text-xl font-semibold" style="display: inline-block;">GitHub Projects</h3>
+                </summary>
+                <!-- List of GitHub projects -->
+                <ul class="list-disc pl-6 mt-2">
+                    <li><a href="https://github.com/girijashankarj/reactjs_file_explorer_app" class="underline"
+                            target="_blank" rel="noopener noreferrer">React File Explorer App</a></li>
+                    <li><a href="https://github.com/girijashankarj/js_file_explorer_app_with_flux" class="underline"
+                            target="_blank" rel="noopener noreferrer">JS File Explorer App with Flux</a></li>
+                    <li><a href="https://github.com/girijashankarj/material_ui_todo_app" class="underline"
+                            target="_blank" rel="noopener noreferrer">Material-UI Todo App</a></li>
+                    <li><a href="https://github.com/girijashankarj/react_basic_webpack_app" class="underline"
+                            target="_blank" rel="noopener noreferrer">React Basic Webpack App</a></li>
+                    <li><a href="https://github.com/girijashankarj/tensorflow_practise_app" class="underline"
+                            target="_blank" rel="noopener noreferrer">TensorFlow Practice App</a></li>
+                    <li><a href="https://github.com/girijashankarj/json_diff_using_lodash" class="underline"
+                            target="_blank" rel="noopener noreferrer">JSON Diff using Lodash</a></li>
+                    <li><a href="https://github.com/girijashankarj/neon_counter_app_with_flux_architecture"
+                            class="underline" target="_blank" rel="noopener noreferrer">Neon Counter App with Flux
+                            Architecture</a></li>
+                </ul>
+            </details>
+        </div>
+
+        <!-- GitHub Pages -->
+        <div class="mt-4">
+            <details>
+                <summary>
+                    <h3 class="text-xl font-semibold" style="display: inline-block;">GitHub Pages</h3>
+                </summary>
+                <!-- List of GitHub Pages -->
+                <ul class="list-disc pl-6 mt-2">
+                    <li><a href="https://girijashankarj.github.io/discuss_react_patterns/" class="underline"
+                            target="_blank" rel="noopener noreferrer">Exploring React Concepts and Patterns</a></li>
+                    <li><a href="https://girijashankarj.github.io/discuss_event_loop/" class="underline" target="_blank"
+                            rel="noopener noreferrer">Event Loop</a></li>
+                </ul>
+            </details>
+        </div>
+
+        <!-- Medium Articles -->
+        <div class="mt-4">
+            <details>
+                <summary>
+                    <h3 class="text-xl font-semibold" style="display: inline-block;">Medium Articles</h3>
+                </summary>
+                <!-- List of Medium articles -->
+                <ul class="list-disc pl-6 mt-2">
+                    <li><a href="https://medium.com/@girijashankarj/error-handling-and-fallbacks-using-react-hooks-simplified-explanation-1feedce524db"
+                            class="underline" target="_blank" rel="noopener noreferrer">Error Handling and Fallbacks
+                            using React Hooks - Simplified Explanation</a></li>
+                    <li><a href="https://medium.com/@girijashankarj/why-react-developers-are-embracing-next-js-ca6fd0922359"
+                            class="underline" target="_blank" rel="noopener noreferrer">Why React Developers Are
+                            Embracing Next.js</a></li>
+                    <li><a href="https://medium.com/@girijashankarj/react-diffing-a-deeper-dive-into-virtual-dom-comparison-14ea11dcc251"
+                            class="underline" target="_blank" rel="noopener noreferrer">React Diffing: A Deeper Dive
+                            into Virtual DOM Comparison</a></li>
+                    <li><a href="https://medium.com/@girijashankarj/web-workers-your-personal-web-development-sidekicks-making-the-web-a-smooth-and-responsive-place-b34e25aec382"
+                            class="underline" target="_blank" rel="noopener noreferrer">Web Workers: Your Personal
+                            Web
+                            Development Sidekicks</a></li>
+                    <li><a href="https://medium.com/@girijashankarj/what-problem-does-web-workers-actually-solves-69282c27ad59"
+                            class="underline" target="_blank" rel="noopener noreferrer">What Problem Does Web
+                            Workers
+                            Actually Solve?</a></li>
+                    <li><a href="https://medium.com/@girijashankarj/the-async-battle-royale-promises-vs-web-workers-a427927d1a74"
+                            class="underline" target="_blank" rel="noopener noreferrer">The Async Battle Royale:
+                            Promises vs. Web Workers</a></li>
+                </ul>
+            </details>
+        </div>
+        </div>
+    </section>
+
+    <!-- Work Experience section -->
+    <section class="section p-6 rounded-lg shadow-lg silver-glow">
+        <h2 class="text-2xl font-semibold">
+            <i class="fas fa-briefcase icon"></i> Work Experience
+        </h2>
+
+        <!-- GS Lab -->
+        <div class="mt-6">
+            <details>
+                <summary class="cursor-pointer">
+                    <h3 class="text-lg font-semibold" style="display: inline-block;">GS Lab, Pune, India</h3>
+                    <p><strong>Full Stack Developer</strong></p>
+                    <p>10 Feb 2020 to Present (2.10 years)</p>
+                </summary>
+
+                <!-- Project: UPI Dashboard -->
+                <div class="ml-6 mt-4">
+                    <details>
+                        <summary class="cursor-pointer">
+                            <h4 class="text-md font-semibold" style="display: inline-block;">[Top NBFC] - UPI Dashboard
+                            </h4>
+                        </summary>
+                        <p>(15th June 2023 to 14th Sept 2023) (4 months as a Support)</p>
+                        <p>Participated in the development of a dynamic UPI (Unified Payments Interface) dashboard
+                            Mobile App for real-time transaction monitoring and analytics.</p>
+                        <p><strong>Responsibilities:</strong></p>
+                        <ul class="list-disc pl-6 mt-2">
+                            <li>Participated in the architecture and development of the UPI Dashboard.</li>
+                            <li>Collaborating with cross-functional teams to ensure seamless integration of real-time
+                                data.</li>
+                            <li>Implementing robust security measures to safeguard sensitive payment information.</li>
+                            <li>Enabling data-driven decision-making through insightful transaction analytics.</li>
+                            <li>Optimizing user experience for effortless transaction monitoring.</li>
+                            <li>Mentored junior developers through code reviews.</li>
+                        </ul>
+                        <p><strong>Environment:</strong> Flutter, FlutterFlow, Android, Dart, Firebase, Material</p>
+                    </details>
+                </div>
+
+                <!-- Project: Credit Checking App -->
+                <div class="ml-6 mt-4">
+                    <details>
+                        <summary class="cursor-pointer">
+                            <h4 class="text-md font-semibold" style="display: inline-block;">[Top NBFC] - Credit
+                                Checking App</h4>
+                        </summary>
+                        <p>(16th March 2023 to 14th Sept 2023) (6 months)</p>
+                        <p>Global Identity, Access Management Tool, and Self-Service Identity and Access management
+                            applications deliver ease set operation for user identity management, access strategy,
+                            alignment planning, and service evaluation.</p>
+                        <p><strong>Responsibilities:</strong></p>
+                        <ul class="list-disc pl-6 mt-2">
+                            <li>Developed scalable user identity management features.</li>
+                            <li>Mentored junior developers through code reviews.</li>
+                            <li>Aligned client needs with feature priorities.</li>
+                            <li>Contributed to successful Azure-based cloud deployment.</li>
+                            <li>Explored emerging JavaScript libraries to boost automation capabilities.</li>
+                        </ul>
+                        <p><strong>Environment:</strong> React.js, Material UI, Node.js, Nginx, Azure, MySQL, Firebase
+                        </p>
+                    </details>
+                </div>
+
+                <!-- Project: Fortune 500 Client -->
+                <div class="ml-6 mt-4">
+                    <details>
+                        <summary class="cursor-pointer">
+                            <h4 class="text-md font-semibold" style="display: inline-block;">[Fortune 500 Client] Access
+                                Management</h4>
+                        </summary>
+                        <p>(1 Jan 2021 to 31 Dec 2022) (2 years)</p>
+                        <p>Global Identity, Access Management Tool, and Self-Service Identity and Access management
+                            applications deliver ease set operation for user identity management, access strategy,
+                            alignment planning, and service evaluation.</p>
+                        <p><strong>Responsibilities:</strong></p>
+                        <ul class="list-disc pl-6 mt-2">
+                            <li>Created AWS Serverless Architecture Boiler Plate meeting the Application requirement and
+                                scalability.</li>
+                            <li>Arranged the Code Components Structure which provides solutions to complex scenarios and
+                                integration issues.</li>
+                            <li>Contributed in Designing the Deployment flows of CI/CD Pipelines.</li>
+                            <li>Introduced Layers Integration to Handle Common Part and Custom Node Modules as an Image
+                                with AWS Lambda for faster execution and deployments.</li>
+                            <li>Documented and Mentored Team in making use of Version Controls and Deployment
+                                Procedures.</li>
+                            <li>Implemented Common Layer for AWS Validation, Common Error Handling Mechanism throughout
+                                the application and Introduced Plain Logger and Winston Logger for the Development and
+                                Server Auditing Reference.</li>
+                            <li>Created a Debugging Configuration for Developers Support in Live Debugging. Wrote Script
+                                for Supporting the Offline Development and Debugging.</li>
+                            <li>Helped team with many technical approaches, writing practices, thought process, and
+                                difficulties.</li>
+                        </ul>
+                        <p><strong>Environment:</strong> AWS Lambda, AWS API Gateway, AWS Layers, Serverless, AWS
+                            CloudWatch, GraphQL, Swagger UI, AJV, Winston, Lodash, Apollo Server, MySQL, Node.js</p>
+                    </details>
+                </div>
+
+                <!-- Project: Content Automation -->
+                <div class="ml-6 mt-4">
+                    <details>
+                        <summary class="cursor-pointer">
+                            <h4 class="text-md font-semibold" style="display: inline-block;">[Security] Content
+                                Automation</h4>
+                        </summary>
+                        <p>(10 Feb 2020 to 31 Dec 2020)(11 months)</p>
+                        <p>Application provides solutions for automating various life cycles related to Content
+                            generation chaining outputs, handling events by triggering appropriate control measure
+                            actions.</p>
+                        <p><strong>Responsibilities:</strong></p>
+                        <ul class="list-disc pl-6 mt-2">
+                            <li>Designed and developed reusable components along with error handling operation and
+                                efficient state management.</li>
+                            <li>Developed responsive and scalable CSS modules using media queries.</li>
+                            <li>Introduced the latest library and version for Project Scalability and Enhancement.</li>
+                            <li>Involved in UX Design strategy of new Features and suggested improvements.</li>
+                        </ul>
+                        <p><strong>Environment:</strong> ReactJS, Redux, Saga, Router, Flex, SCSS, MySQL</p>
+                    </details>
+                </div>
+            </details>
+        </div>
+
+        <!-- ContentServ Technologies -->
+        <div class="mt-6">
+            <details>
+                <summary class="cursor-pointer">
+                    <h3 class="text-lg font-semibold" style="display: inline-block;">ContentServ Technologies</h3>
+                    <p><strong>Frontend Developer</strong></p>
+                    <p>18 Dec 2017 to 07 Feb 2020 (2.1 years)</p>
+                </summary>
+
+                <!-- Project: Marketing Experience Management -->
+                <div class="ml-6 mt-4">
+                    <details>
+                        <summary class="cursor-pointer">
+                            <h4 class="text-md font-semibold" style="display: inline-block;">Marketing Experience
+                                Management</h4>
+                        </summary>
+                        <p>Application focuses on Marketing and Recommending right products to the right person at a
+                            right time via various Events in the form of bundles and relationships.</p>
+                        <p><strong>Responsibilities:</strong></p>
+                        <ul class="list-disc pl-6 mt-2">
+                            <li>Worked on development and integration of multiple POC for product development.</li>
+                            <li>Enhanced the application with latest ES6 features and design pattern implementation such
+                                as Factory Pattern and Builder Pattern for Utilities.</li>
+                            <li>Worked on multiple feature implementation and refactoring of the application using the
+                                latest version of React.</li>
+                        </ul>
+                        <p><strong>Environment:</strong> ReactJS, Flux, JavaScript, Java, SCSS</p>
+                    </details>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <footer class="footer bg-gray-900 text-white py-12">
+        <div class="container mx-auto text-center">
+            <ul class="mt-10">
+                <p>&copy; 2023 Girijashankar Jambhale</p>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+
+</html>

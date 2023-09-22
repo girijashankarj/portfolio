@@ -67,6 +67,16 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
+        .indented {
+            margin-left: 20px;
+            white-space: nowrap;
+            /* Prevent text from wrapping */
+            overflow: hidden;
+            /* Hide overflowing content */
+            text-overflow: ellipsis;
+            /* Show ellipsis (...) for overflowed text */
+        }
+
         .icon {
             color: #58a6ff;
             /* GitHub blue color */
@@ -310,25 +320,34 @@
         <div class="mt-4">
             <ul class="list-disc pl-6 mt-4">
                 <!-- Contact info here -->
-                <li><span class="font-semibold">Location:</span> <span class="masked">Pune, Maharashtra, 4****1</span>
-                </li>
-                <li><span class="font-semibold">Phone:</span> <span class="masked">888-***-****</span></li>
-                <li><span class="font-semibold">Email:</span> <span class="masked">girij***********@gmail.com</span>
-                </li>
                 <li>
                     <span class="font-semibold">Profiles:</span>
-                    <a href="https://www.linkedin.com/in/girijashankarj" class="bottom-link-style" target="_blank"
-                        rel="noopener noreferrer">
-                        <i class="fab fa-linkedin"></i> Linked
-                    </a>
-                    <a href="https://github.com/girijashankarj" class="bottom-link-style" target="_blank"
-                        rel="noopener noreferrer">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="https://medium.com/@girijashankarj" class="bottom-link-style" target="_blank"
-                        rel="noopener noreferrer">
-                        <i class="fab fa-medium"></i> Medium
-                    </a>
+                    <p class="indented">
+                        <a href="https://www.linkedin.com/in/girijashankarj" class="bottom-link-style" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i> Linked
+                        </a>
+                        <a href="https://github.com/girijashankarj" class="bottom-link-style" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://medium.com/@girijashankarj" class="bottom-link-style" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-medium"></i> Medium
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <span class="font-semibold">Email:</span>
+                    <p class="indented">girij***********@gmail.com</p>
+                </li>
+                <li>
+                    <span class="font-semibold">Phone:</span>
+                    <p class="indented">888-***-****</p>
+                </li>
+                <li>
+                    <span class="font-semibold">Location:</span>
+                    <p class="indented">Pune, Maharashtra, India - 4****1</p>
                 </li>
             </ul>
             <div class="mt-4">
@@ -342,20 +361,25 @@
         </h2>
         <ul class="list-disc pl-6 mt-4">
             <li>
-                <strong>Frontend Technologies:</strong><br> ReactJS, Redux, Router, HTML, CSS, SCSS, JavaScript,
-                TypeScript
+                <strong>Frontend Technologies:</strong><br>
+                <p class="indented">ReactJS, Redux, Router, HTML, CSS, SCSS, JavaScript,
+                    TypeScript</p>
             </li>
             <li>
-                <strong>Backend Technologies:</strong><br> Node.js, Java, MySQL
+                <strong>Backend Technologies:</strong><br>
+                <p class="indented">Node.js, Java, MySQL</p>
             </li>
             <li>
-                <strong>Cloud Services:</strong><br> AWS, Azure, Serverless
+                <strong>Cloud Services:</strong><br>
+                <p class="indented">AWS, Azure, Serverless</p>
             </li>
             <li>
-                <strong>Development Tools:</strong><br> Git, GitHub, npm, Jira
+                <strong>Development Tools:</strong><br>
+                <p class="indented">Git, GitHub, npm, Jira</p>
             </li>
             <li>
-                <strong>Data Formats:</strong><br> JSON, REST, AJAX
+                <strong>Data Formats:</strong><br>
+                <p class="indented">JSON, REST, AJAX</p>
             </li>
         </ul>
     </section>
@@ -371,20 +395,20 @@
             <!-- Certification content here -->
             <li>
                 <strong>Microsoft Certified</strong><br>
-                Azure Fundamentals AZ900<br>
-                GitHub Copilot Technical Preview
+                <p class="indented">Azure Fundamentals AZ900</p>
+                <p class="indented">GitHub Copilot Technical Preview</p>
             </li>
             <li>
                 <strong>Cisco Networking Academy </strong><br>
-                JavaScript Essentials
+                <p class="indented">JavaScript Essentials</p>
             </li>
             <li>
                 <strong>OPSWAT</strong><br>
-                Introduction to Critical Infrastructure Protection (ICIP)
+                <p class="indented">Introduction to Critical Infrastructure Protection (ICIP)</p>
             </li>
             <li>
                 <strong>HackerRank</strong><br>
-                React Developer Certification
+                <p class="indented">React Developer Certification</p>
             </li>
         </ul>
         </div>
@@ -641,14 +665,14 @@
         </h2>
         <!-- Academics details go here -->
         <div>
-            <h3 class="text-lg font-semibold">Master of Science in Computer Science</h3>
-            <p>Fergusson College, Pune</p>
-            <p>June 2015 - May 2018</p>
+            <h3 class="text-lg font-semibold">Master of Computer Application in Science</h3>
+            <p class="indented">Fergusson College, Pune</p>
+            <p class="indented">June 2015 - May 2018</p>
         </div>
         <div class="mt-4">
             <h3 class="text-lg font-semibold">Bachelor of Science in Computer Science</h3>
-            <p>Dr. D.Y. Patil College, Pune</p>
-            <p>June 2013 - April 2015</p>
+            <p class="indented">Dr. D.Y. Patil College, Pune</p>
+            <p class="indented">June 2013 - April 2015</p>
         </div>
     </section>
 
@@ -663,6 +687,7 @@
             <li>Mobile Photography</li>
             <li>Collaborative Mapping on Google Maps</li>
             <li>Technical Reading</li>
+            <li>Teaching and Career Talks</li>
         </ul>
     </section>
 

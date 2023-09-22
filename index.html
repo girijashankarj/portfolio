@@ -19,31 +19,31 @@
         body {
             background-color: #0d1117;
             /* GitHub dark theme background color */
-            color: #c9d1d9;
+            color: white;
             /* GitHub dark theme text color */
-            font-family: Arial, sans-serif;
+            font-family: Proxima Nova, system-ui, sans-serif;
         }
 
         .header {
             background-color: #161b22;
             /* GitHub dark theme header background color */
-            color: #c9d1d9;
+            color: white;
             /* GitHub dark theme text color */
             text-align: center;
             padding: 2rem 0;
 
-            background-image: url('assets/black-cover.png');
+            background-image: url('assets/cover.jpg');
             background-size: cover;
             /* Adjust the background size as needed */
             background-position: center;
             /* Adjust the background position as needed */
-            text-indent: -9999px;
+            /* text-indent: -9999px; */
         }
 
         .footer {
             background-color: #161b22;
             /* GitHub dark theme header background color */
-            color: #c9d1d9;
+            color: white;
             /* GitHub dark theme text color */
             text-align: center;
             padding: 2rem 0;
@@ -59,10 +59,10 @@
         .section {
             background-color: #161b22;
             /* GitHub dark theme section background color */
-            color: #c9d1d9;
+            color: white;
             /* GitHub dark theme text color */
             padding: 2rem;
-            margin: 1rem;
+            margin: 1.3rem;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -75,7 +75,7 @@
         .btn-github {
             background-color: #333;
             /* GitHub dark theme button background color */
-            color: #c9d1d9;
+            color: white;
             /* GitHub dark theme text color */
             padding: 0.5rem 1rem;
             border: none;
@@ -118,8 +118,10 @@
 
         .image-container {
             display: flex;
-            justify-content: start;
+            justify-content: center;
             align-items: center;
+            color: #000;
+            /* Set the text color to a contrasting color (e.g., black) */
         }
 
         .profile-image {
@@ -133,12 +135,8 @@
 
         /* Silver glow effect */
         .silver-glow {
-            /* box-shadow: 0 0 10px silver; */
-            transition: box-shadow 0.3s ease-in-out;
-        }
-
-        .silver-glow:hover {
-            box-shadow: 0 0 20px silver;
+            transition: box-shadow 0.2s ease-in-out;
+            box-shadow: 0 0 15px silver;
         }
 
         /* Custom CSS for buttons */
@@ -153,7 +151,7 @@
         /* Media queries for responsiveness */
         @media (min-width: 768px) {
             .container {
-                max-width: 960px;
+                max-width: 500px;
             }
 
             .grid {
@@ -167,36 +165,149 @@
 </head>
 
 <body>
+    <nav class="bg-gray-800">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div class="relative flex h-16 items-center justify-between">
+                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                    <!-- Mobile menu button-->
+                    <button type="button"
+                        class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                        aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="absolute -inset-0.5"></span>
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                    <div class="flex flex-shrink-0 items-center">
+                        <img class="h-8 w-auto" src="assets/favicon_io/favicon-32x32.png" alt="My Logo">
+                    </div>
+                    <div class="hidden sm:ml-6 sm:block">
+                        <div class="flex space-x-4">
+                            <a href="#about" onclick="toggleMobileMenu(event, `about`)"
+                                class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                aria-current="page">About Me</a>
+                            <a href="#contact" onclick="toggleMobileMenu(event, `contact`)"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact
+                            </a>
+                            <a href="#skills" onclick="toggleMobileMenu(event, `skills`)"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Skills</a>
+                            <a href="#certifications" onclick="toggleMobileMenu(event, `certifications`)"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Certifications</a>
+                            <a href="#contributions" onclick="toggleMobileMenu(event, `contributions`)"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contributions</a>
+                            <a href="#experience" onclick="toggleMobileMenu(event, `experience`)"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Experience</a>
+                            <a href="#education" onclick="toggleMobileMenu(event, `education`)"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Academics</a>
+                            <a href="#hobbies" onclick="toggleMobileMenu(event, `hobbies`)"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Hobbies</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <!-- <button type="button"
+                        class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <span class="absolute -inset-1.5"></span>
+                        <span class="sr-only">View notifications</span>
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                        </svg>
+                    </button> -->
+
+                    <!-- Profile dropdown -->
+                    <div class="relative ml-3">
+                        <div>
+                            <button type="button"
+                                class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                <span class="absolute -inset-1.5"></span>
+                                <span class="sr-only">Open user menu</span>
+                                <img class="h-8 w-8 rounded-full" src="assets/profile-header.jpeg" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="sm:hidden" id="mobile-menu">
+            <div class="space-y-1 px-2 pb-3 pt-2">
+                <a href="#about" onclick="toggleMobileMenu(event, `about`)"
+                    class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+                    aria-current="page">About</a>
+                <a href="#contact" onclick="toggleMobileMenu(event, `contact`)"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                    Contact</a>
+                <a href="#skills" onclick="toggleMobileMenu(event, `skills`)"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                    Skills</a>
+                <a href="#certifications" onclick="toggleMobileMenu(event, `certifications`)"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                    Certifications</a>
+                <a href="#contributions" onclick="toggleMobileMenu(event, `contributions`)"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                    Contributions</a>
+                <a href="#experience" onclick="toggleMobileMenu(event, `experience`)"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                    Experience</a>
+                <a href="#education" onclick="toggleMobileMenu(event, `education`)"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                    Academics</a>
+                <a href="#hobbies" onclick="toggleMobileMenu(event, `hobbies`)"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                    Hobbies</a>
+            </div>
+        </div>
+    </nav>
+
     <header class="header">
         <div class="container mx-auto">
-            <div class="image-container">
-                <img src="assets/profile.jpg" alt="Profile Image" class="profile-image silver-glow">
+            <div class="image-container"
+                style="background-color: rgba(255, 255, 255, .15); backdrop-filter: blur(5px);">
+                <img src="assets/profile.png" alt="Profile Image" class="profile-image">
+                <span>
+                    <div class="text-4xl font-bold text-white">Girijashankar Jambhale</div>
+                    <div class="text-lg text-white">Full Stack Developer</div>
+                </span>
             </div>
-            <h1 class="text-3xl font-bold">Girijashankar Jambhale</h1>
-            <p class="text-lg">Full Stack Developer</p>
         </div>
     </header>
 
-    <!-- Contact Information and About Me section -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        <!-- About Me section -->
-        <div class="section p-6 rounded-lg shadow-lg silver-glow">
-            <h2 class="text-2xl font-semibold">
-                <i class="fas fa-info-circle icon"></i> About Me
-            </h2>
+    <!-- About Me section -->
+    <section id="about" class="section bg-center bg-no-repeat bg-gray-700 bg-blend-multiply p-6 rounded-lg shadow-lg"
+        style=" background-image: url(assets/cover/pacman.jpg); background-size: cover;">
+        <h2 class="text-2xl font-semibold">
+            <i class="fas fa-info-circle icon"></i> About Me
+        </h2>
+        <div class="mt-4">
             <p class="mt-4">
-                Highly skilled Full Stack Developer with 5+ years of experience in designing, developing, and deploying
-                web applications and APIs using ReactJS, Node.js, and a range of technologies. Proven expertise in both
-                frontend and backend development, strong problem-solving abilities, and a commitment to delivering
-                high-quality, scalable solutions. Proficient in AWS, Azure, Git, and more.</p>
-        </div>
+                Hey, I'm Girijashankar!
+                I've got a Master's in CS and 5+ years of hands-on coding experience.<br>
+                I'm all about JavaScript, React, Node.js, and lately, diving into cloud computing.<br>
+                I aim to learn things by going deep into internal behaviors and read between the lines.<br>
+                I share my tech insights in simple terms here. Let's geek out together!</p>
+            <div class="mt-4">
+    </section>
 
-        <!-- Contact Information section -->
-        <div class="section silver-glow">
-            <h2 class="text-2xl font-semibold">
-                <i class="fas fa-address-card icon"></i> Contact Information
-            </h2>
+    <!-- Contact Information section -->
+    <section id="contact" class="section bg-center bg-no-repeat bg-gray-700 bg-blend-multiply p-6 rounded-lg shadow-lg"
+        style=" background-image: url(assets/cover/lightbulbs.jpg); background-size: cover;">
+        <h2 class="text-2xl font-semibold">
+            <i class="fas fa-address-card icon"></i> Contact Information
+        </h2>
+        <div class="mt-4">
             <ul class="list-disc pl-6 mt-4">
                 <!-- Contact info here -->
                 <li><span class="font-semibold">Location:</span> <span class="masked">Pune, Maharashtra, 4****1</span>
@@ -204,116 +315,84 @@
                 <li><span class="font-semibold">Phone:</span> <span class="masked">888-***-****</span></li>
                 <li><span class="font-semibold">Email:</span> <span class="masked">girij***********@gmail.com</span>
                 </li>
-                <li><span class="font-semibold">Profiles:</span>
+                <li>
+                    <span class="font-semibold">Profiles:</span>
                     <a href="https://www.linkedin.com/in/girijashankarj" class="bottom-link-style" target="_blank"
-                        rel="noopener noreferrer">Linked</a>
+                        rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i> Linked
+                    </a>
                     <a href="https://github.com/girijashankarj" class="bottom-link-style" target="_blank"
-                        rel="noopener noreferrer">GitHub</a>
+                        rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
                     <a href="https://medium.com/@girijashankarj" class="bottom-link-style" target="_blank"
-                        rel="noopener noreferrer">Medium</a>
+                        rel="noopener noreferrer">
+                        <i class="fab fa-medium"></i> Medium
+                    </a>
                 </li>
-
             </ul>
-        </div>
-
-    </section>
-
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Education section -->
-        <section class="section silver-glow">
-            <h2 class="text-2xl font-semibold">
-                <i class="fas fa-graduation-cap icon"></i> Education
-            </h2>
-            <!-- Education details go here -->
-            <div>
-                <h3 class="text-lg font-semibold">Master of Science in Computer Science</h3>
-                <p>Fergusson College, Pune</p>
-                <p>June 2015 - May 2018</p>
-            </div>
             <div class="mt-4">
-                <h3 class="text-lg font-semibold">Bachelor of Science in Computer Science</h3>
-                <p>Dr. D.Y. Patil College, Pune</p>
-                <p>June 2013 - April 2015</p>
-            </div>
-        </section>
-
-        <!-- Hobbies section -->
-        <section class="section silver-glow">
-            <h2 class="text-2xl font-semibold">
-                <i class="fas fa-heart icon"></i> Hobbies
-            </h2>
-            <ul class="list-disc pl-6 mt-4">
-                <!-- Hobbies content -->
-                <li>Mobile Photography</li>
-                <li>Collaborative Mapping on Google Maps</li>
-                <li>Technical Reading</li>
-            </ul>
-        </section>
     </section>
 
+    <!-- Skills section -->
+    <section id="skills" class="section bg-center bg-no-repeat bg-gray-700 bg-blend-multiply p-6 rounded-lg shadow-lg"
+        style="background-image: url(assets/cover/bike.jpg); background-size: cover;">
+        <h2 class="text-2xl font-semibold">
+            <i class="fas fa-code icon"></i> Skills
+        </h2>
+        <ul class="list-disc pl-6 mt-4">
+            <li>
+                <strong>Frontend Technologies:</strong><br> ReactJS, Redux, Router, HTML, CSS, SCSS, JavaScript,
+                TypeScript
+            </li>
+            <li>
+                <strong>Backend Technologies:</strong><br> Node.js, Java, MySQL
+            </li>
+            <li>
+                <strong>Cloud Services:</strong><br> AWS, Azure, Serverless
+            </li>
+            <li>
+                <strong>Development Tools:</strong><br> Git, GitHub, npm, Jira
+            </li>
+            <li>
+                <strong>Data Formats:</strong><br> JSON, REST, AJAX
+            </li>
+        </ul>
+    </section>
 
-    <!-- Skills and Certifications section -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Skills section -->
-        <div class="section silver-glow">
-            <h2 class="text-2xl font-semibold">
-                <i class="fas fa-code icon"></i> Skills
-            </h2>
-            <ul class="list-disc pl-6 mt-4">
-                <li>
-                    <strong>Frontend Technologies:</strong> ReactJS, Redux, Router, HTML, CSS, SCSS, JavaScript,
-                    TypeScript
-                </li>
-                <li>
-                    <strong>Backend Technologies:</strong> Node.js, Java, MySQL
-                </li>
-                <li>
-                    <strong>Cloud Services:</strong> AWS, Azure, Serverless
-                </li>
-                <li>
-                    <strong>Development Tools:</strong> Git, GitHub, npm, Jira
-                </li>
-                <li>
-                    <strong>Data Formats:</strong> JSON, REST, AJAX
-                </li>
-            </ul>
+    <!-- Certifications section -->
+    <section id="certifications"
+        class="section bg-center bg-no-repeat bg-gray-700 bg-blend-multiply p-6 rounded-lg shadow-lg"
+        style=" background-image: url(assets/cover/astronaut.jpg); background-size: cover;">
+        <h2 class="text-2xl font-semibold">
+            <i class="fas fa-certificate icon"></i> Certifications
+        </h2>
+        <ul class="list-disc pl-6 mt-4">
+            <!-- Certification content here -->
+            <li>
+                <strong>Microsoft Certified</strong><br>
+                Azure Fundamentals AZ900<br>
+                GitHub Copilot Technical Preview
+            </li>
+            <li>
+                <strong>Cisco Networking Academy </strong><br>
+                JavaScript Essentials
+            </li>
+            <li>
+                <strong>OPSWAT</strong><br>
+                Introduction to Critical Infrastructure Protection (ICIP)
+            </li>
+            <li>
+                <strong>HackerRank</strong><br>
+                React Developer Certification
+            </li>
+        </ul>
         </div>
-
-        <!-- Certifications section -->
-        <div class="section relative silver-glow">
-            <div class="container mx-auto relative z-10">
-
-                <h2 class="text-2xl font-semibold">
-                    <i class="fas fa-certificate icon"></i> Certifications
-                </h2>
-                <ul class="list-disc pl-6 mt-4">
-                    <!-- Certification content here -->
-                    <li>
-                        <strong>Microsoft Certified</strong><br>
-                        Azure Fundamentals AZ900
-                        GitHub Copilot Technical Preview
-                    </li>
-                    <li>
-                        <strong>Cisco Networking Academy </strong><br>
-                        JavaScript Essentials
-                    </li>
-                    <li>
-                        <strong>OPSWAT</strong><br>
-                        Introduction to Critical Infrastructure Protection (ICIP)
-                    </li>
-                    <li>
-                        <strong>HackerRank</strong><br>
-                        React Developer Certification
-                    </li>
-                </ul>
-            </div>
-            <!-- Background image with opacity -->
-            <div class="bg-opacity-50 absolute inset-0 bg-cover bg-center"
-                style="background-image: url('assets/tech-cover.jpg'); opacity:0.35;">
-            </div>
     </section>
 
-    <section class="section silver-glow">
+    <section id="contributions"
+        class="section bg-center bg-no-repeat bg-gray-700 bg-blend-multiply p-6 rounded-lg shadow-lg"
+        style=" background-image: url(assets/cover/laptops.jpg); background-size: cover;">
         <h2 class="text-2xl font-semibold text-white">
             <i class="fas fa-code-branch icon"></i> Contributions
         </h2>
@@ -395,10 +474,12 @@
         </div>
     </section>
 
-    <!-- Work Experience section -->
-    <section class="section p-6 rounded-lg shadow-lg silver-glow">
+    <!-- Experience section -->
+    <section id="experience"
+        class="section bg-center bg-no-repeat bg-gray-700 bg-blend-multiply p-6 rounded-lg shadow-lg"
+        style=" background-image: url(assets/cover/milkyway.jpg); background-size: cover;">
         <h2 class="text-2xl font-semibold">
-            <i class="fas fa-briefcase icon"></i> Work Experience
+            <i class="fas fa-briefcase icon"></i> Experience
         </h2>
 
         <!-- GS Lab -->
@@ -551,14 +632,101 @@
         </div>
     </section>
 
-    <footer class="footer bg-gray-900 text-white py-12">
-        <div class="container mx-auto text-center">
-            <ul class="mt-10">
-                <p>&copy; 2023 Girijashankar Jambhale</p>
+    <!-- Academics section -->
+    <section id="education"
+        class="section bg-center bg-no-repeat bg-gray-700 bg-blend-multiply p-6 rounded-lg shadow-lg"
+        style=" background-image: url(assets/cover/math.jpg); background-size: cover;">
+        <h2 class="text-2xl font-semibold">
+            <i class="fas fa-graduation-cap icon"></i> Academics
+        </h2>
+        <!-- Academics details go here -->
+        <div>
+            <h3 class="text-lg font-semibold">Master of Science in Computer Science</h3>
+            <p>Fergusson College, Pune</p>
+            <p>June 2015 - May 2018</p>
+        </div>
+        <div class="mt-4">
+            <h3 class="text-lg font-semibold">Bachelor of Science in Computer Science</h3>
+            <p>Dr. D.Y. Patil College, Pune</p>
+            <p>June 2013 - April 2015</p>
+        </div>
+    </section>
+
+    <!-- Hobbies section -->
+    <section id="hobbies" class="section bg-center bg-no-repeat bg-gray-700 bg-blend-multiply p-6 rounded-lg shadow-lg"
+        style=" background-image: url(assets/cover/casette.jpg); background-size: cover;">
+        <h2 class="text-2xl font-semibold">
+            <i class="fas fa-heart icon"></i> Hobbies
+        </h2>
+        <ul class="list-disc pl-6 mt-4">
+            <!-- Hobbies content -->
+            <li>Mobile Photography</li>
+            <li>Collaborative Mapping on Google Maps</li>
+            <li>Technical Reading</li>
+        </ul>
+    </section>
+
+    <footer class="section bg-center bg-no-repeat bg-gray-700 bg-blend-multiply"
+        style="background-image: url(assets/cover/js_cup.jpg); background-size: cover;">
+        <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-27">
+            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+                Thank you for visiting my portfolio. It's still in the early stages of development</h1>
+            <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-24">If you have any questions or
+                suggestions, please don't hesitate to reach out.</p>
+            </p>
+            <ul class="mt-5">
+                <li>
+                    <a href="https://www.linkedin.com/in/girijashankarj" class="bottom-link-style" target="_blank"
+                        rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i> Linked
+                    </a>
+                    <a href="https://github.com/girijashankarj" class="bottom-link-style" target="_blank"
+                        rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://medium.com/@girijashankarj" class="bottom-link-style" target="_blank"
+                        rel="noopener noreferrer">
+                        <i class="fab fa-medium"></i> Medium
+                    </a>
+                </li>
             </ul>
+            <p class="mt-4">&copy; 2023 Girijashankar Jambhale</p>
+            <p class="mt-4">Special thanks to the open-source contributors for providing the images used on this
+                portfolio.</p>
         </div>
     </footer>
 
+    <script>
+        function addRedBorder( element ) {
+            element.classList.add( 'silver-glow' );
+            setTimeout( () => {
+                element.classList.remove( 'silver-glow' );
+            }, 2000 );
+        }
+
+        function toggleMobileMenu( e, targetId ) {
+            e.preventDefault();
+            var mobileMenu = document.getElementById( "mobileMenu" );
+            if ( mobileMenu ) {
+                mobileMenu.style.display === "block" ? mobileMenu.style.display = "none" : mobileMenu.style.display = "block";
+            }
+
+            // Find the target section
+            const targetSection = document.getElementById( targetId );
+
+            if ( targetSection ) {
+                // Calculate the position to scroll to (center of the section)
+                const scrollPosition = targetSection.offsetTop - ( window.innerHeight / 2 );
+
+                // Use the scrollTo method to scroll to the desired position
+                window.scrollTo( {
+                    top: scrollPosition,
+                    behavior: 'smooth'
+                } );
+                addRedBorder( targetSection )
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -25,7 +25,7 @@
         }
 
         .header {
-            background-color: #161b22;
+            background-color: #1f242d;
             /* GitHub dark theme header background color */
             color: white;
             /* GitHub dark theme text color */
@@ -40,8 +40,12 @@
             /* text-indent: -9999px; */
         }
 
+        nav {
+            background-color: #0d1117;
+        }
+
         .footer {
-            background-color: #161b22;
+            background-color: #1f242d;
             /* GitHub dark theme header background color */
             color: white;
             /* GitHub dark theme text color */
@@ -57,7 +61,7 @@
         }
 
         .section {
-            background-color: #161b22;
+            background-color: #1f242d;
             /* GitHub dark theme section background color */
             color: white;
             /* GitHub dark theme text color */
@@ -102,7 +106,7 @@
         .project-item {
             border: 1px solid #30363d;
             /* GitHub dark theme project item border color */
-            background-color: #161b22;
+            background-color: #1f242d;
             /* GitHub dark theme project item background color */
             padding: 1rem;
             border-radius: 8px;
@@ -130,13 +134,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: row;
             color: #000;
             /* Set the text color to a contrasting color (e.g., black) */
         }
 
         .profile-image {
-            width: 200px;
-            height: 200px;
+            max-width: 200px;
+            /* Set the maximum width of the image to the container width */
+            max-height: 200px;
+            /* Maintain the image's aspect ratio */
             border-radius: 50%;
             border: 5px silver;
             object-fit: cover;
@@ -169,6 +176,26 @@
                 grid-template-columns: repeat(2, 1fr);
                 grid-gap: 1rem;
             }
+
+            .profile-image {
+                max-width: 80%;
+                max-height: 80%;
+                /* Reduce the maximum width for smaller screens */
+            }
+        }
+
+        @media (min-width: 500px) {
+            .profile-image {
+                max-width: 30%;
+                max-height: 30%;
+                /* Further reduce the maximum width for even smaller screens */
+            }
+        }
+
+        @media (max-width: 500px) {
+            .image-container {
+                flex-direction: column;
+            }
         }
     </style>
 
@@ -182,7 +209,7 @@
                     <!-- Mobile menu button-->
                     <button type="button"
                         class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                        aria-controls="mobile-menu" aria-expanded="false">
+                        aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMobileMenu(event)">
                         <span class="absolute -inset-0.5"></span>
                         <span class="sr-only">Open main menu</span>
                         <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -202,23 +229,22 @@
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
-                            <a href="#about" onclick="toggleMobileMenu(event, `about`)"
+                            <a href="#about" onclick="onMenuItemClick(event, `about`)"
                                 class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                                 aria-current="page">About Me</a>
-                            <a href="#contact" onclick="toggleMobileMenu(event, `contact`)"
-                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact
-                            </a>
-                            <a href="#skills" onclick="toggleMobileMenu(event, `skills`)"
+                            <a href="#contact" onclick="onMenuItemClick(event, `contact`)"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
+                            <a href="#skills" onclick="onMenuItemClick(event, `skills`)"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Skills</a>
-                            <a href="#certifications" onclick="toggleMobileMenu(event, `certifications`)"
+                            <a href="#certifications" onclick="onMenuItemClick(event, `certifications`)"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Certifications</a>
-                            <a href="#contributions" onclick="toggleMobileMenu(event, `contributions`)"
+                            <a href="#contributions" onclick="onMenuItemClick(event, `contributions`)"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contributions</a>
-                            <a href="#experience" onclick="toggleMobileMenu(event, `experience`)"
+                            <a href="#experience" onclick="onMenuItemClick(event, `experience`)"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Experience</a>
-                            <a href="#education" onclick="toggleMobileMenu(event, `education`)"
+                            <a href="#education" onclick="onMenuItemClick(event, `education`)"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Academics</a>
-                            <a href="#hobbies" onclick="toggleMobileMenu(event, `hobbies`)"
+                            <a href="#hobbies" onclick="onMenuItemClick(event, `hobbies`)"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Hobbies</a>
                         </div>
                     </div>
@@ -252,30 +278,30 @@
         </div>
 
         <!-- Mobile menu, show/hide based on menu state. -->
-        <div class="sm:hidden" id="mobile-menu">
+        <div class="sm:hidden hidden" id="mobile-menu" aria-expanded="false">
             <div class="space-y-1 px-2 pb-3 pt-2">
-                <a href="#about" onclick="toggleMobileMenu(event, `about`)"
+                <a href="#about" onclick="onMenuItemClick(event, `about`)"
                     class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
-                    aria-current="page">About</a>
-                <a href="#contact" onclick="toggleMobileMenu(event, `contact`)"
+                    aria-current="page">About Me</a>
+                <a href="#contact" onclick="onMenuItemClick(event, `contact`)"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
                     Contact</a>
-                <a href="#skills" onclick="toggleMobileMenu(event, `skills`)"
+                <a href="#skills" onclick="onMenuItemClick(event, `skills`)"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
                     Skills</a>
-                <a href="#certifications" onclick="toggleMobileMenu(event, `certifications`)"
+                <a href="#certifications" onclick="onMenuItemClick(event, `certifications`)"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
                     Certifications</a>
-                <a href="#contributions" onclick="toggleMobileMenu(event, `contributions`)"
+                <a href="#contributions" onclick="onMenuItemClick(event, `contributions`)"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
                     Contributions</a>
-                <a href="#experience" onclick="toggleMobileMenu(event, `experience`)"
+                <a href="#experience" onclick="onMenuItemClick(event, `experience`)"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
                     Experience</a>
-                <a href="#education" onclick="toggleMobileMenu(event, `education`)"
+                <a href="#education" onclick="onMenuItemClick(event, `education`)"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
                     Academics</a>
-                <a href="#hobbies" onclick="toggleMobileMenu(event, `hobbies`)"
+                <a href="#hobbies" onclick="onMenuItemClick(event, `hobbies`)"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
                     Hobbies</a>
             </div>
@@ -658,7 +684,7 @@
 
     <!-- Academics section -->
     <section id="education"
-        class="section bg-center bg-no-repeat bg-gray-700 bg-blend-multiply p-6 rounded-lg shadow-lg"
+        class="section bg-center bg-no-repeat bg-gray-300 bg-blend-multiply p-6 rounded-lg shadow-lg"
         style=" background-image: url(assets/cover/math.jpg); background-size: cover;">
         <h2 class="text-2xl font-semibold">
             <i class="fas fa-graduation-cap icon"></i> Academics
@@ -729,9 +755,17 @@
             }, 2000 );
         }
 
-        function toggleMobileMenu( e, targetId ) {
+        function toggleMobileMenu( e ) {
             e.preventDefault();
-            var mobileMenu = document.getElementById( "mobileMenu" );
+            let mobileMenu = document.getElementById( "mobile-menu" );
+            if ( mobileMenu ) {
+                mobileMenu.style.display === "block" ? mobileMenu.style.display = "none" : mobileMenu.style.display = "block";
+            }
+        }
+
+        function onMenuItemClick( e, targetId ) {
+            e.preventDefault();
+            let mobileMenu = document.getElementById( "mobile-menu" );
             if ( mobileMenu ) {
                 mobileMenu.style.display === "block" ? mobileMenu.style.display = "none" : mobileMenu.style.display = "block";
             }

@@ -28,5 +28,5 @@ build
 .tmp
 *.tsbuildinfo
 
-# Old HTML file (replaced by React)
-index.html
+# Note: index.html is the source template and should be tracked
+# Only ignore built HTML files in dist/

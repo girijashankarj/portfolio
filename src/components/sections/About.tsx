@@ -15,11 +15,14 @@ export function About() {
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
           gap: '1.5rem',
-          alignItems: 'start',
+          alignItems: 'stretch',
         }}>
           <Reveal>
             <div className="card" style={{
               gridColumn: 'span 1',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
             }}>
               <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Profile</h3>
               <p style={{ marginBottom: '1rem' }}>
@@ -53,6 +56,9 @@ export function About() {
           <Reveal>
             <div className="card" style={{
               gridColumn: 'span 1',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
             }}>
               <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Achievements & Contributions</h3>
               <div style={{ marginBottom: '1rem' }}>
@@ -72,11 +78,15 @@ export function About() {
                   <li>Always vocal about new technologies, improvements, and innovation opportunities</li>
                 </ul>
               </div>
+              <div style={{ marginTop: 'auto' }}></div>
             </div>
           </Reveal>
           <Reveal>
             <div className="card" style={{
               gridColumn: 'span 1',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
             }}>
               <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>What I'm Looking For</h3>
               <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem', marginBottom: '1rem' }}>
@@ -94,7 +104,7 @@ export function About() {
                   <strong>Current Role:</strong> Leading AI enablement initiatives at Synechron
                 </p>
               </div>
-              <p style={{ marginTop: '1rem', marginBottom: 0, fontSize: '0.85rem', color: 'var(--muted)' }}>
+              <p style={{ marginTop: 'auto', marginBottom: 0, fontSize: '0.85rem', color: 'var(--muted)' }}>
                 <i className="fa-solid fa-clock" style={{ marginRight: '0.5rem' }}></i>
                 Available for new opportunities. Response time: <strong>24-48 hours</strong>
               </p>

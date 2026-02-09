@@ -77,7 +77,7 @@ export function Navbar() {
               flex: '0 1 auto',
               overflow: 'hidden',
             }}>
-              <img src="/assets/profile-header.jpeg" alt="Girijashankar Jambhale - AI Platform Engineer" style={{
+              <img src={`${import.meta.env.BASE_URL}assets/profile-header.jpeg`} alt="Girijashankar Jambhale - AI Platform Engineer" style={{
                 width: 'clamp(36px, 5vw, 42px)',
                 height: 'clamp(36px, 5vw, 42px)',
                 borderRadius: '50%',

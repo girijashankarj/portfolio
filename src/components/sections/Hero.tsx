@@ -9,7 +9,7 @@ export function Hero() {
       role="banner"
       style={{
         padding: '4.5rem 0 3rem',
-        backgroundImage: `linear-gradient(135deg, var(--hero-overlay-start), var(--hero-overlay-end)), url('/assets/cover.jpg')`,
+        backgroundImage: `linear-gradient(135deg, var(--hero-overlay-start), var(--hero-overlay-end)), url('${import.meta.env.BASE_URL}assets/cover.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -142,7 +142,7 @@ export function Hero() {
         <Reveal>
           <div className="card-elevated">
             <img 
-              src="/assets/profile.png" 
+              src={`${import.meta.env.BASE_URL}assets/profile.png`}
               alt="Girijashankar Jambhale - AI Platform Engineer specializing in Gen AI and MLOps" 
               loading="lazy"
               width="400"

@@ -39,6 +39,27 @@ jobs:
           GITHUB_PAGES: 'true'
         run: npx vite build
       
+      - name: Debug - Check built HTML
+        run: |
+          echo "=== Checking dist/index.html ==="
+          if [ -f "dist/index.html" ]; then
+            echo "Script tags found:"
+            grep -o '<script[^>]*>' dist/index.html || echo "No script tags found"
+            echo ""
+            echo "Checking for /src/main.tsx:"
+            if grep -q '/src/main.tsx' dist/index.html; then
+              echo "ERROR: Script tag NOT transformed - still contains /src/main.tsx"
+              echo "First 50 lines of dist/index.html:"
+              head -50 dist/index.html
+              exit 1
+            else
+              echo "SUCCESS: Script tag appears to be transformed"
+            fi
+          else
+            echo "ERROR: dist/index.html not found!"
+            exit 1
+          fi
+      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

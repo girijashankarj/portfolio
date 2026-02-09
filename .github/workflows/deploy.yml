@@ -36,6 +36,19 @@ jobs:
         env:
           GITHUB_PAGES: 'true'
       
+      - name: Verify build output
+        run: |
+          if [ ! -f "dist/index.html" ]; then
+            echo "Error: dist/index.html not found"
+            exit 1
+          fi
+          echo "Build verification: Checking script tag in dist/index.html"
+          if grep -q '/src/main.tsx' dist/index.html; then
+            echo "Warning: Script tag not transformed - this may cause issues"
+          else
+            echo "Success: Script tag appears to be transformed"
+          fi
+      
       - name: Setup Pages
         uses: actions/configure-pages@v4
       

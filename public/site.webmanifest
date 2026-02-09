@@ -2,7 +2,7 @@
     "name": "Girijashankar Jambhale Portfolio",
     "short_name": "Portfolio",
     "description": "A portfolio showcasing my work and skills",
-    "start_url": "./index.html",
+    "start_url": "/portfolio/",
     "display": "standalone",
     "background_color": "#0d1117",
     "theme_color": "#161b22",
@@ -21,7 +21,7 @@
     "splash_pages": null,
     "prefer_related_applications": false,
     "related_applications": [],
-    "scope": "./",
+    "scope": "/portfolio/",
     "serviceworker": {
       "src": "./service-worker.js",
       "scope": "./"

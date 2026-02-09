@@ -20,6 +20,7 @@
     <link rel="canonical" href="https://girijashankarj.github.io/portfolio/">
     
     <!-- Content Security Policy -->
+    <!-- Note: frame-ancestors only works in HTTP headers, not meta tags -->
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
       script-src 'self' 'unsafe-inline' 'unsafe-eval';
@@ -27,7 +28,6 @@
       font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com;
       img-src 'self' data: https:;
       connect-src 'self' https://api.github.com;
-      frame-ancestors 'none';
     ">
     
     <!-- Open Graph / Facebook -->
@@ -58,9 +58,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-    <link rel="robots" href="/robots.txt">
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="sitemap" type="application/xml" href="./sitemap.xml">
+    <link rel="robots" href="./robots.txt">
     
     <!-- Additional SEO -->
     <meta name="geo.region" content="IN-MH">

@@ -65,7 +65,6 @@ graph LR
     E --> E1[Meta Tags]
     E --> E2[Open Graph]
     E --> E3[Structured Data]
-    E --> E4[Web Manifest]
 ```
 
 - **Dark/Light theme** — toggle with Redux state and localStorage persistence
@@ -79,7 +78,7 @@ graph LR
 - **Downloadable resume** — one-click resume download
 - **Back to Top button** — smooth scroll to top
 - **Responsive design** — mobile-first layout
-- **PWA-ready** — web manifest (`site.webmanifest`) and favicon set included
+- **Favicon set** — favicon included
 - **SEO optimized** — meta tags, Open Graph, structured data, sitemap
 - **TypeScript** — full type safety
 - **Redux Toolkit** — state management for theme and filters
@@ -141,7 +140,6 @@ mindmap
 | **Fonts**        | Google Fonts (Fraunces, Quicksand)   |
 | **Icons**        | Font Awesome 6.5                     |
 | **Deployment**   | GitHub Pages                         |
-| **PWA**          | Web Manifest (site.webmanifest)      |
 
 ---
 
@@ -182,7 +180,6 @@ graph TD
     B --> B1[index.html]
     B --> B2[robots.txt]
     B --> B3[sitemap.xml]
-    B --> B4[site.webmanifest]
     
     C --> C1[components/]
     C --> C2[hooks/]

@@ -9,7 +9,6 @@ export function Navbar() {
   const dispatch = useDispatch()
   const { activeNav, theme } = useSelector((state: RootState) => state.portfolio)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,7 +33,6 @@ export function Navbar() {
   useEffect(() => {
     const handleResize = () => {
       const isMobileView = window.innerWidth <= 900
-      setIsMobile(isMobileView)
       if (!isMobileView) {
         setIsMobileMenuOpen(false)
       }

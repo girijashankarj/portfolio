@@ -13,14 +13,16 @@ export function About() {
         </p>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+          gridTemplateColumns: 'repeat(3, 1fr)',
           gap: '1.5rem',
-          alignItems: 'stretch',
+          alignItems: 'start',
         }}>
           <Reveal>
-            <div className="card">
+            <div className="card" style={{
+              gridColumn: 'span 1',
+            }}>
               <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Profile</h3>
-              <p style={{ marginBottom: '1rem', flex: '1 1 auto' }}>
+              <p style={{ marginBottom: '1rem' }}>
                 AI Platform Engineer and Senior Associate Consultant with <strong>8+ years</strong> of full-stack experience 
                 across product-based and service companies. <strong>JavaScript is my primary and favorite language</strong>, 
                 with experience in Python, Java, and C++.
@@ -43,6 +45,16 @@ export function About() {
                   <li>Data Structures & Algorithms - Basic knowledge, actively practicing on LeetCode</li>
                 </ul>
               </div>
+              <p style={{ marginTop: 'auto', fontStyle: 'italic', color: 'var(--muted)', marginBottom: 0, fontSize: '0.9rem' }}>
+                <strong>My Philosophy:</strong> Learn → Try → Share. I continuously explore new technologies, experiment through projects, and share knowledge with the global tech community.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal>
+            <div className="card" style={{
+              gridColumn: 'span 1',
+            }}>
+              <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Achievements & Contributions</h3>
               <div style={{ marginBottom: '1rem' }}>
                 <h4 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '0.95rem', fontWeight: 600 }}>Key Achievements:</h4>
                 <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem' }}>
@@ -60,38 +72,50 @@ export function About() {
                   <li>Always vocal about new technologies, improvements, and innovation opportunities</li>
                 </ul>
               </div>
-              <p style={{ marginTop: 'auto', fontStyle: 'italic', color: 'var(--muted)', marginBottom: 0, fontSize: '0.9rem' }}>
-                <strong>My Philosophy:</strong> Learn → Try → Share. I continuously explore new technologies, experiment through projects, and share knowledge with the global tech community.
-              </p>
             </div>
           </Reveal>
           <Reveal>
-            <div className="card">
+            <div className="card" style={{
+              gridColumn: 'span 1',
+            }}>
               <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>What I'm Looking For</h3>
-              <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem' }}>
+              <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem', marginBottom: '1rem' }}>
                 <li><strong>AI Platform Engineer</strong> roles focusing on Gen AI and MLOps</li>
                 <li><strong>Senior/Lead positions</strong> in AI enablement and developer tooling</li>
                 <li><strong>Consulting opportunities</strong> for AI adoption and automation</li>
                 <li><strong>AI-enabled product work</strong> in innovative startups or enterprises</li>
               </ul>
+              <div style={{ marginBottom: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+                <h4 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '0.95rem', fontWeight: 600 }}>Credentials:</h4>
+                <p style={{ marginBottom: 0, fontSize: '0.9rem' }}>
+                  <strong>Education:</strong> MCA (Savitribai Phule Pune University)<br/>
+                  <strong>Certifications:</strong> AWS Certified AI Practitioner, AWS ML Engineer Associate<br/>
+                  <strong>Pursuing:</strong> AWS Solutions Architect<br/>
+                  <strong>Current Role:</strong> Leading AI enablement initiatives at Synechron
+                </p>
+              </div>
               <p style={{ marginTop: '1rem', marginBottom: 0, fontSize: '0.85rem', color: 'var(--muted)' }}>
                 <i className="fa-solid fa-clock" style={{ marginRight: '0.5rem' }}></i>
                 Available for new opportunities. Response time: <strong>24-48 hours</strong>
               </p>
             </div>
           </Reveal>
-          <Reveal>
-            <div className="card">
-              <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Credentials</h3>
-              <p style={{ marginBottom: 0, flex: '1 1 auto', fontSize: '0.9rem' }}>
-                <strong>Education:</strong> MCA (Savitribai Phule Pune University)<br/>
-                <strong>Certifications:</strong> AWS Certified AI Practitioner, AWS ML Engineer Associate<br/>
-                <strong>Pursuing:</strong> AWS Solutions Architect<br/>
-                <strong>Current Role:</strong> Leading AI enablement initiatives at Synechron
-              </p>
-            </div>
-          </Reveal>
         </div>
+        <style>{`
+          @media (max-width: 900px) {
+            #about > div > div:last-child {
+              grid-template-columns: 1fr !important;
+            }
+          }
+          @media (min-width: 901px) and (max-width: 1200px) {
+            #about > div > div:last-child {
+              grid-template-columns: repeat(2, 1fr) !important;
+            }
+            #about > div > div:last-child > div:first-child {
+              grid-column: span 2 !important;
+            }
+          }
+        `}</style>
       </div>
     </section>
   )

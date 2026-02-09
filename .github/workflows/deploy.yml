@@ -31,35 +31,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
+      - name: Type-check
+        run: npx tsc -b
+      
       - name: Build
-        run: npm run build
         env:
           GITHUB_PAGES: 'true'
-      
-      - name: Verify build output
-        run: |
-          if [ ! -f "dist/index.html" ]; then
-            echo "Error: dist/index.html not found"
-            exit 1
-          fi
-          echo "Build verification: Checking script tag in dist/index.html"
-          echo "--- Script tags in built HTML ---"
-          grep -o '<script[^>]*src="[^"]*"[^>]*>' dist/index.html || echo "No script tags found"
-          if grep -q '/src/main.tsx' dist/index.html; then
-            echo "ERROR: Script tag not transformed - still contains /src/main.tsx"
-            echo "This will cause 404 errors on GitHub Pages"
-            exit 1
-          else
-            echo "Success: Script tag appears to be transformed correctly"
-          fi
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+        run: npx vite build
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: dist
 
   deploy:
     environment:

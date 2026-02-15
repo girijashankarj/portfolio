@@ -1,19 +1,8 @@
 import { useState } from 'react'
 import { Reveal } from '../shared/Reveal'
+import { getAppsScriptUrl } from '@/common/apps-script'
 
-// Only allow trusted Google Apps Script web app URLs (prevents injection)
-const VALID_SCRIPT_URL =
-  /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/
-
-function getNewsletterScriptUrl(): string {
-  const raw = import.meta.env.VITE_NEWSLETTER_SCRIPT_URL
-  if (typeof raw === 'string' && VALID_SCRIPT_URL.test(raw.trim())) {
-    return raw.trim()
-  }
-  return ''
-}
-
-const NEWSLETTER_SCRIPT_URL = getNewsletterScriptUrl()
+const APPS_SCRIPT_URL = getAppsScriptUrl()
 
 export function NewsletterSubscribe() {
   const [name, setName] = useState('')
@@ -26,7 +15,7 @@ export function NewsletterSubscribe() {
 
     setStatus('sending')
     try {
-      const res = await fetch(NEWSLETTER_SCRIPT_URL, {
+      const res = await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name.trim(), email: email.trim() }),
@@ -42,7 +31,7 @@ export function NewsletterSubscribe() {
     }
   }
 
-  const isConfigured = NEWSLETTER_SCRIPT_URL.length > 0
+  const isConfigured = APPS_SCRIPT_URL.length > 0
 
   return (
     <Reveal>

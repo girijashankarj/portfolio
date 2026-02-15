@@ -1,5 +1,13 @@
 import { useState } from 'react'
 import { Reveal } from '../shared/Reveal'
+import { getAppsScriptUrl } from '@/common/apps-script'
+
+const MAX_MESSAGE_LENGTH = 200
+
+function sanitize(str: string, maxLen?: number): string {
+  const s = str.replace(/<[^>]*>/g, '').replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, '').trim()
+  return maxLen ? s.slice(0, maxLen) : s
+}
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -9,42 +17,60 @@ export function ContactForm() {
     message: '',
   })
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
-  const [showConfirmDialog, setShowConfirmDialog] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const scriptUrl = getAppsScriptUrl()
+  const isConfigured = scriptUrl.length > 0
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Show confirmation dialog instead of immediately opening mailto
-    setShowConfirmDialog(true)
-  }
+    if (!isConfigured) {
+      setErrorMsg('Contact form is not configured.')
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 3000)
+      return
+    }
 
-  const handleConfirmSend = () => {
-    setShowConfirmDialog(false)
+    const payload = {
+      name: sanitize(formData.name, 100),
+      email: sanitize(formData.email, 254),
+      subject: sanitize(formData.subject, 150),
+      message: sanitize(formData.message, MAX_MESSAGE_LENGTH),
+    }
+
+    if (!payload.name || !payload.email || !payload.subject || !payload.message) {
+      setErrorMsg('All fields are required.')
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 3000)
+      return
+    }
+
     setStatus('sending')
-
-    // Using Formspree or similar service
-    // For now, we'll use mailto as fallback
-    const mailtoLink = `mailto:girijashankarj@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`
-    
-    // Try to open mailto link
-    window.location.href = mailtoLink
-    
-    // Simulate success after a delay
-    setTimeout(() => {
+    setErrorMsg('')
+    try {
+      const res = await fetch(scriptUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string }
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || 'Failed to send')
+      }
       setStatus('success')
       setFormData({ name: '', email: '', subject: '', message: '' })
       setTimeout(() => setStatus('idle'), 3000)
-    }, 1000)
-  }
-
-  const handleCancelSend = () => {
-    setShowConfirmDialog(false)
+    } catch {
+      setStatus('error')
+      setErrorMsg('Failed to send message. Please try again.')
+      setTimeout(() => setStatus('idle'), 4000)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
+    const { name, value } = e.target
+    if (name === 'message' && value.length > MAX_MESSAGE_LENGTH) return
+    setFormData({ ...formData, [name]: value })
   }
 
   return (
@@ -176,7 +202,7 @@ export function ContactForm() {
               fontSize: '0.9rem',
               color: 'var(--text)',
             }}>
-              Message *
+              Message * <span style={{ color: 'var(--muted)', fontWeight: 400 }}>({formData.message.length}/{MAX_MESSAGE_LENGTH})</span>
             </label>
             <textarea
               id="message"
@@ -184,7 +210,8 @@ export function ContactForm() {
               value={formData.message}
               onChange={handleChange}
               required
-              rows={5}
+              maxLength={MAX_MESSAGE_LENGTH}
+              rows={4}
               placeholder="Tell me about your project or opportunity..."
               style={{
                 width: '100%',
@@ -228,7 +255,7 @@ export function ContactForm() {
               color: '#ef4444',
               fontSize: '0.9rem',
             }}>
-              <i className="fa-solid fa-exclamation-circle"></i> Failed to send message. Please try again.
+              <i className="fa-solid fa-exclamation-circle"></i> {errorMsg}
             </div>
           )}
           <button
@@ -270,113 +297,6 @@ export function ContactForm() {
           </button>
         </form>
 
-        {/* Confirmation Dialog */}
-        {showConfirmDialog && (
-          <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.6)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000,
-            padding: '1rem',
-          }} onClick={handleCancelSend}>
-            <div className="card-elevated" style={{
-              maxWidth: '500px',
-              width: '100%',
-              padding: '2rem',
-              position: 'relative',
-            }} onClick={(e) => e.stopPropagation()}>
-              <h3 style={{
-                marginTop: 0,
-                marginBottom: '1rem',
-                fontSize: '1.25rem',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.75rem',
-              }}>
-                <i className="fa-solid fa-envelope-circle-check" style={{ color: 'var(--accent)' }}></i>
-                <span>Open Email Client?</span>
-              </h3>
-              <p style={{
-                marginBottom: '1.5rem',
-                color: 'var(--text)',
-                lineHeight: '1.6',
-                fontSize: '0.95rem',
-              }}>
-                We'll open your default email application (Gmail, Outlook, Apple Mail, etc.) with your message pre-filled. 
-                You can review and send it from there.
-              </p>
-              <div style={{
-                display: 'flex',
-                gap: '1rem',
-                justifyContent: 'flex-end',
-                flexWrap: 'wrap',
-              }}>
-                <button
-                  type="button"
-                  onClick={handleCancelSend}
-                  className="btn-ghost"
-                  style={{
-                    padding: '0.75rem 1.5rem',
-                    borderRadius: '8px',
-                    border: '1px solid var(--border)',
-                    background: 'var(--bg-soft)',
-                    color: 'var(--text)',
-                    fontSize: '0.95rem',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--accent)'
-                    e.currentTarget.style.background = 'var(--card)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--border)'
-                    e.currentTarget.style.background = 'var(--bg-soft)'
-                  }}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  onClick={handleConfirmSend}
-                  style={{
-                    padding: '0.75rem 1.5rem',
-                    borderRadius: '8px',
-                    background: 'var(--gradient-primary)',
-                    border: 'none',
-                    color: '#ffffff',
-                    fontSize: '0.95rem',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    boxShadow: '0 4px 12px rgba(66, 133, 244, 0.2)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-1px)'
-                    e.currentTarget.style.boxShadow = '0 6px 16px rgba(66, 133, 244, 0.3)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(66, 133, 244, 0.2)'
-                  }}
-                >
-                  <i className="fa-solid fa-check"></i>
-                  <span>Yes, Open Email</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </Reveal>
   )

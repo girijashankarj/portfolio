@@ -1,19 +1,39 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Reveal } from '../shared/Reveal'
 import { getAppsScriptUrl } from '@/common/apps-script'
 
-const APPS_SCRIPT_URL = getAppsScriptUrl()
 const MAX_NAME_LENGTH = 100
 const MAX_EMAIL_LENGTH = 254
+const FORM_IFRAME_NAME = 'portfolio-form-frame'
 
 export function NewsletterSubscribe() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
-
   const [errorMsg, setErrorMsg] = useState('')
+  const resolveRef = useRef<((data: { ok?: boolean; error?: string }) => void) | null>(null)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const scriptUrl = getAppsScriptUrl()
+  const isConfigured = scriptUrl.length > 0
+
+  useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      if (resolveRef.current && typeof e.data === 'string') {
+        try {
+          const data = JSON.parse(e.data) as { ok?: boolean; message?: string; error?: string; formType?: string }
+          if (data.formType !== 'newsletter') return
+          resolveRef.current(data)
+        } catch {
+          resolveRef.current({ ok: false, error: 'Invalid response' })
+        }
+        resolveRef.current = null
+      }
+    }
+    window.addEventListener('message', handler)
+    return () => window.removeEventListener('message', handler)
+  }, [])
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const n = name.trim().slice(0, MAX_NAME_LENGTH)
     const em = email.trim().slice(0, MAX_EMAIL_LENGTH)
@@ -21,28 +41,26 @@ export function NewsletterSubscribe() {
 
     setStatus('sending')
     setErrorMsg('')
-    try {
-      const res = await fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ name: n, email: em }),
-      })
-      const data = (await res.json()) as { ok?: boolean; message?: string; error?: string }
+    resolveRef.current = (data) => {
       if (data.ok) {
         setStatus('success')
         setName('')
         setEmail('')
-        setTimeout(() => setStatus('idle'), 4000)
       } else {
         setErrorMsg(data.error || 'Subscription failed')
         setStatus('error')
-        setTimeout(() => setStatus('idle'), 4000)
       }
-    } catch (err) {
-      setErrorMsg(err instanceof Error ? err.message : 'Network error. Check the script URL.')
-      setStatus('error')
       setTimeout(() => setStatus('idle'), 4000)
     }
+    setTimeout(() => {
+      if (resolveRef.current) {
+        resolveRef.current({ ok: false, error: 'Request timed out' })
+        resolveRef.current = null
+        setErrorMsg('Request timed out. Please try again.')
+        setStatus('error')
+        setTimeout(() => setStatus('idle'), 4000)
+      }
+    }, 30000)
   }
 
   const isConfigured = APPS_SCRIPT_URL.length > 0
@@ -64,13 +82,21 @@ export function NewsletterSubscribe() {
           Curated AI, GenAI & MLOps digest. Weekly insights, no spam.
         </p>
         {isConfigured ? (
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <form
+            action={scriptUrl}
+            method="POST"
+            target={FORM_IFRAME_NAME}
+            onSubmit={handleSubmit}
+            style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+          >
+            <input type="hidden" name="formType" value="newsletter" />
             <div>
               <label htmlFor="newsletter-name" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text)' }}>
                 Name *
               </label>
               <input
                 id="newsletter-name"
+                name="name"
                 type="text"
                 placeholder="Your name"
                 value={name}
@@ -95,6 +121,7 @@ export function NewsletterSubscribe() {
               </label>
               <input
                 id="newsletter-email"
+                name="email"
                 type="email"
                 placeholder="your@email.com"
                 value={email}

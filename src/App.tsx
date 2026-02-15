@@ -5,7 +5,6 @@ import { ProgressBar } from './components/layout/ProgressBar'
 import { Navbar } from './components/layout/Navbar'
 import { Footer } from './components/layout/Footer'
 import { Hero } from './components/sections/Hero'
-import { ExecutiveSummary } from './components/sections/ExecutiveSummary'
 import { About } from './components/sections/About'
 import { Highlights } from './components/sections/Highlights'
 import { BackToTop } from './components/shared/BackToTop'
@@ -17,8 +16,6 @@ const LazyJourney = lazy(() => import('./components/sections/Journey').then(m =>
 const LazyProjects = lazy(() => import('./components/sections/Projects').then(m => ({ default: m.Projects })))
 const LazyCommunity = lazy(() => import('./components/sections/Community').then(m => ({ default: m.Community })))
 const LazyServices = lazy(() => import('./components/sections/Services').then(m => ({ default: m.Services })))
-const LazyCertifications = lazy(() => import('./components/sections/Certifications').then(m => ({ default: m.Certifications })))
-const LazyTechnologiesLearning = lazy(() => import('./components/sections/TechnologiesLearning').then(m => ({ default: m.TechnologiesLearning })))
 const LazyTestimonials = lazy(() => import('./components/sections/Testimonials').then(m => ({ default: m.Testimonials })))
 const LazyContact = lazy(() => import('./components/sections/Contact').then(m => ({ default: m.Contact })))
 
@@ -38,13 +35,10 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <ExecutiveSummary />
         <About />
         <Highlights />
         <Suspense fallback={<div style={{ padding: '3.5rem 0', textAlign: 'center' }}>Loading...</div>}>
-          <LazyCertifications />
           <LazySkills />
-          <LazyTechnologiesLearning />
           <LazyProjects />
           <LazyJourney />
           <LazyTestimonials />

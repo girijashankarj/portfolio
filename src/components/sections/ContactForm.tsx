@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Reveal } from '../shared/Reveal'
 import { getAppsScriptUrl } from '@/common/apps-script'
 
@@ -6,6 +6,7 @@ const MAX_NAME_LENGTH = 100
 const MAX_EMAIL_LENGTH = 254
 const MAX_SUBJECT_LENGTH = 150
 const MAX_MESSAGE_LENGTH = 200
+const FORM_IFRAME_NAME = 'portfolio-form-frame'
 
 function sanitize(str: string, maxLen?: number): string {
   const s = str.replace(/<[^>]*>/g, '').replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, '').trim()
@@ -21,11 +22,29 @@ export function ContactForm() {
   })
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+  const resolveRef = useRef<((data: { ok?: boolean; error?: string }) => void) | null>(null)
 
   const scriptUrl = getAppsScriptUrl()
   const isConfigured = scriptUrl.length > 0
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      if (resolveRef.current && typeof e.data === 'string') {
+        try {
+          const data = JSON.parse(e.data) as { ok?: boolean; message?: string; error?: string; formType?: string }
+          if (data.formType !== 'contact') return
+          resolveRef.current(data)
+        } catch {
+          resolveRef.current({ ok: false, error: 'Invalid response' })
+        }
+        resolveRef.current = null
+      }
+    }
+    window.addEventListener('message', handler)
+    return () => window.removeEventListener('message', handler)
+  }, [])
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!isConfigured) {
       setErrorMsg('Contact form is not configured.')
@@ -50,27 +69,25 @@ export function ContactForm() {
 
     setStatus('sending')
     setErrorMsg('')
-    try {
-      const res = await fetch(scriptUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(payload),
-      })
-      const data = (await res.json()) as { ok?: boolean; message?: string; error?: string }
+    resolveRef.current = (data) => {
       if (data.ok) {
         setStatus('success')
         setFormData({ name: '', email: '', subject: '', message: '' })
-        setTimeout(() => setStatus('idle'), 3000)
       } else {
         setErrorMsg(data.error || 'Failed to send message')
         setStatus('error')
-        setTimeout(() => setStatus('idle'), 3000)
       }
-    } catch (err) {
-      setErrorMsg(err instanceof Error ? err.message : 'Network error. Check the script URL.')
-      setStatus('error')
       setTimeout(() => setStatus('idle'), 3000)
     }
+    setTimeout(() => {
+      if (resolveRef.current) {
+        resolveRef.current({ ok: false, error: 'Request timed out' })
+        resolveRef.current = null
+        setErrorMsg('Request timed out. Please try again.')
+        setStatus('error')
+        setTimeout(() => setStatus('idle'), 3000)
+      }
+    }, 30000)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -92,12 +109,19 @@ export function ContactForm() {
     <Reveal>
       <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Send Message</h3>
-        <form onSubmit={handleSubmit} style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
-          flex: '1 1 auto',
-        }}>
+        <form
+          action={scriptUrl}
+          method="POST"
+          target={FORM_IFRAME_NAME}
+          onSubmit={handleSubmit}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem',
+            flex: '1 1 auto',
+          }}
+        >
+          <input type="hidden" name="formType" value="contact" />
           <div>
             <label htmlFor="name" style={{
               display: 'block',

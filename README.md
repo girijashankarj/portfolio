@@ -318,12 +318,10 @@ Edit `src/common/constants.ts` and add projects to the `PROJECTS` array with app
 
 ### Newsletter & Contact Form
 
-**Contact form** and **newsletter** use separate Apps Scripts and env vars:
+Forms submit to Apps Script in a hidden iframe—no new tab. Add `VITE_CONTACT_SCRIPT_URL` and `VITE_NEWSLETTER_SCRIPT_URL` to repo secrets.
 
-1. **Contact** — Deploy `apps-script/ContactCode.gs` as a web app (sends email). Add `VITE_CONTACT_SCRIPT_URL` to GitHub Actions secrets.
-2. **Newsletter** — Deploy `apps-script/NewsletterCode.gs` as a web app (appends to Google Sheet). Script must be bound to a Sheet with tab "Newsletter Subscribers Sheet". Add `VITE_NEWSLETTER_SCRIPT_URL` to GitHub Actions secrets.
-
-You can use the same URL for both if you prefer one combined script; deploy `apps-script/Code.gs` once and set both env vars to that URL.
+1. **Contact** — Deploy `apps-script/ContactCode.gs` as web app.
+2. **Newsletter** — Deploy `apps-script/NewsletterCode.gs` (bound to Sheet).
 
 ---
 

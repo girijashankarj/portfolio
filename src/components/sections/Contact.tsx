@@ -18,8 +18,6 @@ export function Contact() {
             Available for new opportunities · Response time: 24-48 hours
           </strong>
         </p>
-        <iframe name="contact-form-frame" title="Contact form submit" style={{ display: 'none', width: 0, height: 0, position: 'absolute' }} />
-        <iframe name="newsletter-form-frame" title="Newsletter form submit" style={{ display: 'none', width: 0, height: 0, position: 'absolute' }} />
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
@@ -42,26 +40,15 @@ export function Contact() {
                 <span>Pune, Maharashtra, India</span>
               </div>
               <GitHubStats />
-            </div>
-          </Reveal>
-          <ContactForm />
-          <NewsletterSubscribe />
-          <Reveal>
-            <div className="card">
-              <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Quick Note</h3>
-              <p style={{ marginBottom: '1rem' }}>Thanks for visiting. I keep refining this portfolio as I explore new ideas and technologies.</p>
-              <div className="button-group" style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.75rem',
-                marginTop: 'auto',
-              }}>
+              <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+                <h3 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '1rem' }}>Quick Note</h3>
+                <p style={{ marginBottom: '1rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Thanks for visiting. I keep refining this portfolio as I explore new ideas and technologies.</p>
                 <a
                   href="https://www.linkedin.com/in/girijashankarj"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary"
-                  style={{ justifyContent: 'center' }}
+                  style={{ justifyContent: 'center', width: '100%' }}
                 >
                   <i className="fab fa-linkedin"></i>
                   <span>Connect on LinkedIn</span>
@@ -69,6 +56,8 @@ export function Contact() {
               </div>
             </div>
           </Reveal>
+          <ContactForm />
+          <NewsletterSubscribe />
         </div>
       </div>
     </section>

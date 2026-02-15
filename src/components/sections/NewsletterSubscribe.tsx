@@ -4,8 +4,8 @@ import { getNewsletterScriptUrl } from '@/common/apps-script'
 
 const MAX_NAME_LENGTH = 100
 const MAX_EMAIL_LENGTH = 254
-const NEWSLETTER_IFRAME_NAME = 'newsletter-form-frame'
-const REQUEST_TIMEOUT_MS = 60000
+const REQUEST_TIMEOUT_MS = 30000
+const IFRAME_NAME = 'newsletter-form-frame'
 
 export function NewsletterSubscribe() {
   const [name, setName] = useState('')
@@ -13,6 +13,7 @@ export function NewsletterSubscribe() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const resolveRef = useRef<((data: { ok?: boolean; error?: string }) => void) | null>(null)
+  const formRef = useRef<HTMLFormElement>(null)
 
   const newsletterUrl = getNewsletterScriptUrl()
   const isConfigured = newsletterUrl.length > 0
@@ -21,7 +22,8 @@ export function NewsletterSubscribe() {
     const handler = (e: MessageEvent) => {
       if (resolveRef.current && typeof e.data === 'string') {
         try {
-          const data = JSON.parse(e.data) as { ok?: boolean; error?: string }
+          const data = JSON.parse(e.data) as { ok?: boolean; error?: string; formType?: string }
+          if (data.formType && data.formType !== 'newsletter') return
           resolveRef.current(data)
         } catch {
           resolveRef.current({ ok: false, error: 'Invalid response' })
@@ -34,10 +36,15 @@ export function NewsletterSubscribe() {
   }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
     const n = name.trim().slice(0, MAX_NAME_LENGTH)
     const em = email.trim().slice(0, MAX_EMAIL_LENGTH)
-    if (!n || !em) {
-      e.preventDefault()
+    if (!n || !em) return
+
+    if (!isConfigured) {
+      setErrorMsg('Newsletter is not configured.')
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 4000)
       return
     }
 
@@ -63,6 +70,7 @@ export function NewsletterSubscribe() {
         setTimeout(() => setStatus('idle'), 4000)
       }
     }, REQUEST_TIMEOUT_MS)
+    formRef.current?.submit()
   }
 
   const nameOver = name.length > MAX_NAME_LENGTH
@@ -75,6 +83,7 @@ export function NewsletterSubscribe() {
   return (
     <Reveal>
       <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+        <iframe name={IFRAME_NAME} title="Newsletter" style={{ position: 'absolute', width: 0, height: 0, border: 0, opacity: 0, pointerEvents: 'none' }} />
         <h3 style={{ marginTop: 0, marginBottom: '0.5rem' }}>
           <i className="fa-solid fa-newspaper" style={{ marginRight: '0.5rem', color: 'var(--accent)' }}></i>
           Tech Newsletter
@@ -84,9 +93,10 @@ export function NewsletterSubscribe() {
         </p>
         {isConfigured ? (
           <form
+            ref={formRef}
             action={newsletterUrl}
             method="POST"
-            target={NEWSLETTER_IFRAME_NAME}
+            target={IFRAME_NAME}
             onSubmit={handleSubmit}
             style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
           >
@@ -103,13 +113,13 @@ export function NewsletterSubscribe() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 style={{
-                width: '100%',
-                padding: '0.6rem 0.75rem',
-                borderRadius: '8px',
-                border: '1px solid var(--border)',
-                background: 'var(--bg-soft)',
-                color: 'var(--text)',
-                fontSize: '0.95rem',
+                  width: '100%',
+                  padding: '0.6rem 0.75rem',
+                  borderRadius: '8px',
+                  border: '1px solid var(--border)',
+                  background: 'var(--bg-soft)',
+                  color: 'var(--text)',
+                  fontSize: '0.95rem',
                   ...(nameOver ? inputErrorStyle : {}),
                 }}
               />
@@ -128,13 +138,13 @@ export function NewsletterSubscribe() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 style={{
-                width: '100%',
-                padding: '0.6rem 0.75rem',
-                borderRadius: '8px',
-                border: '1px solid var(--border)',
-                background: 'var(--bg-soft)',
-                color: 'var(--text)',
-                fontSize: '0.95rem',
+                  width: '100%',
+                  padding: '0.6rem 0.75rem',
+                  borderRadius: '8px',
+                  border: '1px solid var(--border)',
+                  background: 'var(--bg-soft)',
+                  color: 'var(--text)',
+                  fontSize: '0.95rem',
                   ...(emailOver ? inputErrorStyle : {}),
                 }}
               />

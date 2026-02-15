@@ -6,8 +6,8 @@ const MAX_NAME_LENGTH = 100
 const MAX_EMAIL_LENGTH = 254
 const MAX_SUBJECT_LENGTH = 150
 const MAX_MESSAGE_LENGTH = 200
-const CONTACT_IFRAME_NAME = 'contact-form-frame'
-const REQUEST_TIMEOUT_MS = 60000
+const REQUEST_TIMEOUT_MS = 30000
+const IFRAME_NAME = 'contact-form-frame'
 
 function sanitize(str: string, maxLen?: number): string {
   const s = str.replace(/<[^>]*>/g, '').replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, '').trim()
@@ -24,6 +24,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const resolveRef = useRef<((data: { ok?: boolean; error?: string }) => void) | null>(null)
+  const formRef = useRef<HTMLFormElement>(null)
 
   const contactUrl = getContactScriptUrl()
   const isConfigured = contactUrl.length > 0
@@ -32,7 +33,8 @@ export function ContactForm() {
     const handler = (e: MessageEvent) => {
       if (resolveRef.current && typeof e.data === 'string') {
         try {
-          const data = JSON.parse(e.data) as { ok?: boolean; error?: string }
+          const data = JSON.parse(e.data) as { ok?: boolean; error?: string; formType?: string }
+          if (data.formType && data.formType !== 'contact') return
           resolveRef.current(data)
         } catch {
           resolveRef.current({ ok: false, error: 'Invalid response' })
@@ -45,13 +47,7 @@ export function ContactForm() {
   }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
-    if (!isConfigured) {
-      e.preventDefault()
-      setErrorMsg('Contact form is not configured.')
-      setStatus('error')
-      setTimeout(() => setStatus('idle'), 3000)
-      return
-    }
+    e.preventDefault()
 
     const payload = {
       name: sanitize(formData.name, MAX_NAME_LENGTH),
@@ -61,8 +57,14 @@ export function ContactForm() {
     }
 
     if (!payload.name || !payload.email || !payload.subject || !payload.message) {
-      e.preventDefault()
       setErrorMsg('All fields are required.')
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 3000)
+      return
+    }
+
+    if (!isConfigured) {
+      setErrorMsg('Contact form is not configured.')
       setStatus('error')
       setTimeout(() => setStatus('idle'), 3000)
       return
@@ -89,6 +91,7 @@ export function ContactForm() {
         setTimeout(() => setStatus('idle'), 3000)
       }
     }, REQUEST_TIMEOUT_MS)
+    formRef.current?.submit()
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -109,11 +112,13 @@ export function ContactForm() {
   return (
     <Reveal>
       <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+        <iframe name={IFRAME_NAME} title="Contact" style={{ position: 'absolute', width: 0, height: 0, border: 0, opacity: 0, pointerEvents: 'none' }} />
         <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Send Message</h3>
         <form
+          ref={formRef}
           action={contactUrl}
           method="POST"
-          target={CONTACT_IFRAME_NAME}
+          target={IFRAME_NAME}
           onSubmit={handleSubmit}
           style={{
             display: 'flex',

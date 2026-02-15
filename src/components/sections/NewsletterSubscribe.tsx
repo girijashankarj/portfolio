@@ -34,10 +34,12 @@ export function NewsletterSubscribe() {
   }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
     const n = name.trim().slice(0, MAX_NAME_LENGTH)
     const em = email.trim().slice(0, MAX_EMAIL_LENGTH)
-    if (!n || !em) return
+    if (!n || !em) {
+      e.preventDefault()
+      return
+    }
 
     setStatus('sending')
     setErrorMsg('')
@@ -63,7 +65,6 @@ export function NewsletterSubscribe() {
     }, 30000)
   }
 
-  const isConfigured = APPS_SCRIPT_URL.length > 0
   const nameOver = name.length > MAX_NAME_LENGTH
   const emailOver = email.length > MAX_EMAIL_LENGTH
   const hasLimitError = nameOver || emailOver

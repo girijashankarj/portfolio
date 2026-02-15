@@ -45,8 +45,8 @@ export function ContactForm() {
   }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
     if (!isConfigured) {
+      e.preventDefault()
       setErrorMsg('Contact form is not configured.')
       setStatus('error')
       setTimeout(() => setStatus('idle'), 3000)
@@ -61,6 +61,7 @@ export function ContactForm() {
     }
 
     if (!payload.name || !payload.email || !payload.subject || !payload.message) {
+      e.preventDefault()
       setErrorMsg('All fields are required.')
       setStatus('error')
       setTimeout(() => setStatus('idle'), 3000)

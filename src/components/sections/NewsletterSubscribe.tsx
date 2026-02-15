@@ -24,7 +24,7 @@ export function NewsletterSubscribe() {
     try {
       const res = await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify({ name: n, email: em }),
       })
       const data = (await res.json()) as { ok?: boolean; message?: string; error?: string }

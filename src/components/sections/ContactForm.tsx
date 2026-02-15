@@ -53,7 +53,7 @@ export function ContactForm() {
     try {
       const res = await fetch(scriptUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(payload),
       })
       const data = (await res.json()) as { ok?: boolean; message?: string; error?: string }

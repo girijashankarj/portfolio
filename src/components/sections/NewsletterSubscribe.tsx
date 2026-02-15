@@ -35,31 +35,18 @@ export function NewsletterSubscribe() {
     const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
 
     try {
-      const response = await fetch(newsletterUrl, {
+      await fetch(newsletterUrl, {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ name: n, email: em }),
         signal: controller.signal,
-        redirect: 'follow',
       })
       clearTimeout(timeoutId)
-
-      const text = await response.text()
-      let data: { ok?: boolean; error?: string }
-      try {
-        data = JSON.parse(text)
-      } catch {
-        data = { ok: false, error: 'Invalid response from server' }
-      }
-
-      if (data.ok) {
-        setStatus('success')
-        setName('')
-        setEmail('')
-      } else {
-        setErrorMsg(data.error || 'Subscription failed')
-        setStatus('error')
-      }
+      // no-cors gives opaque response; if we reach here the request was sent
+      setStatus('success')
+      setName('')
+      setEmail('')
     } catch (err) {
       clearTimeout(timeoutId)
       if (err instanceof DOMException && err.name === 'AbortError') {

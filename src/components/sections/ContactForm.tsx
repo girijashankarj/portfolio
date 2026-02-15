@@ -57,30 +57,17 @@ export function ContactForm() {
     const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
 
     try {
-      const response = await fetch(contactUrl, {
+      await fetch(contactUrl, {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload),
         signal: controller.signal,
-        redirect: 'follow',
       })
       clearTimeout(timeoutId)
-
-      const text = await response.text()
-      let data: { ok?: boolean; error?: string }
-      try {
-        data = JSON.parse(text)
-      } catch {
-        data = { ok: false, error: 'Invalid response from server' }
-      }
-
-      if (data.ok) {
-        setStatus('success')
-        setFormData({ name: '', email: '', subject: '', message: '' })
-      } else {
-        setErrorMsg(data.error || 'Failed to send message')
-        setStatus('error')
-      }
+      // no-cors gives opaque response; if we reach here the request was sent
+      setStatus('success')
+      setFormData({ name: '', email: '', subject: '', message: '' })
     } catch (err) {
       clearTimeout(timeoutId)
       if (err instanceof DOMException && err.name === 'AbortError') {

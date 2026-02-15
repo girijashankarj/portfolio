@@ -1,41 +1,21 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { Reveal } from '../shared/Reveal'
 import { getNewsletterScriptUrl } from '@/common/apps-script'
 
 const MAX_NAME_LENGTH = 100
 const MAX_EMAIL_LENGTH = 254
 const REQUEST_TIMEOUT_MS = 30000
-const IFRAME_NAME = 'newsletter-form-frame'
 
 export function NewsletterSubscribe() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
-  const resolveRef = useRef<((data: { ok?: boolean; error?: string }) => void) | null>(null)
-  const formRef = useRef<HTMLFormElement>(null)
 
   const newsletterUrl = getNewsletterScriptUrl()
   const isConfigured = newsletterUrl.length > 0
 
-  useEffect(() => {
-    const handler = (e: MessageEvent) => {
-      if (resolveRef.current && typeof e.data === 'string') {
-        try {
-          const data = JSON.parse(e.data) as { ok?: boolean; error?: string; formType?: string }
-          if (data.formType && data.formType !== 'newsletter') return
-          resolveRef.current(data)
-        } catch {
-          resolveRef.current({ ok: false, error: 'Invalid response' })
-        }
-        resolveRef.current = null
-      }
-    }
-    window.addEventListener('message', handler)
-    return () => window.removeEventListener('message', handler)
-  }, [])
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const n = name.trim().slice(0, MAX_NAME_LENGTH)
     const em = email.trim().slice(0, MAX_EMAIL_LENGTH)
@@ -50,7 +30,28 @@ export function NewsletterSubscribe() {
 
     setStatus('sending')
     setErrorMsg('')
-    resolveRef.current = (data) => {
+
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
+
+    try {
+      const response = await fetch(newsletterUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ name: n, email: em }),
+        signal: controller.signal,
+        redirect: 'follow',
+      })
+      clearTimeout(timeoutId)
+
+      const text = await response.text()
+      let data: { ok?: boolean; error?: string }
+      try {
+        data = JSON.parse(text)
+      } catch {
+        data = { ok: false, error: 'Invalid response from server' }
+      }
+
       if (data.ok) {
         setStatus('success')
         setName('')
@@ -59,18 +60,16 @@ export function NewsletterSubscribe() {
         setErrorMsg(data.error || 'Subscription failed')
         setStatus('error')
       }
-      setTimeout(() => setStatus('idle'), 4000)
-    }
-    setTimeout(() => {
-      if (resolveRef.current) {
-        resolveRef.current({ ok: false, error: 'Request timed out' })
-        resolveRef.current = null
+    } catch (err) {
+      clearTimeout(timeoutId)
+      if (err instanceof DOMException && err.name === 'AbortError') {
         setErrorMsg('Request timed out. Please try again.')
-        setStatus('error')
-        setTimeout(() => setStatus('idle'), 4000)
+      } else {
+        setErrorMsg('Subscription failed. Please try again.')
       }
-    }, REQUEST_TIMEOUT_MS)
-    formRef.current?.submit()
+      setStatus('error')
+    }
+    setTimeout(() => setStatus('idle'), 4000)
   }
 
   const nameOver = name.length > MAX_NAME_LENGTH
@@ -83,7 +82,6 @@ export function NewsletterSubscribe() {
   return (
     <Reveal>
       <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-        <iframe name={IFRAME_NAME} title="Newsletter" style={{ position: 'absolute', width: 0, height: 0, border: 0, opacity: 0, pointerEvents: 'none' }} />
         <h3 style={{ marginTop: 0, marginBottom: '0.5rem' }}>
           <i className="fa-solid fa-newspaper" style={{ marginRight: '0.5rem', color: 'var(--accent)' }}></i>
           Tech Newsletter
@@ -93,10 +91,6 @@ export function NewsletterSubscribe() {
         </p>
         {isConfigured ? (
           <form
-            ref={formRef}
-            action={newsletterUrl}
-            method="POST"
-            target={IFRAME_NAME}
             onSubmit={handleSubmit}
             style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
           >

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { Reveal } from '../shared/Reveal'
 import { getContactScriptUrl } from '@/common/apps-script'
 
@@ -7,7 +7,6 @@ const MAX_EMAIL_LENGTH = 254
 const MAX_SUBJECT_LENGTH = 150
 const MAX_MESSAGE_LENGTH = 200
 const REQUEST_TIMEOUT_MS = 30000
-const IFRAME_NAME = 'contact-form-frame'
 
 function sanitize(str: string, maxLen?: number): string {
   const s = str.replace(/<[^>]*>/g, '').replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, '').trim()
@@ -23,30 +22,11 @@ export function ContactForm() {
   })
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
-  const resolveRef = useRef<((data: { ok?: boolean; error?: string }) => void) | null>(null)
-  const formRef = useRef<HTMLFormElement>(null)
 
   const contactUrl = getContactScriptUrl()
   const isConfigured = contactUrl.length > 0
 
-  useEffect(() => {
-    const handler = (e: MessageEvent) => {
-      if (resolveRef.current && typeof e.data === 'string') {
-        try {
-          const data = JSON.parse(e.data) as { ok?: boolean; error?: string; formType?: string }
-          if (data.formType && data.formType !== 'contact') return
-          resolveRef.current(data)
-        } catch {
-          resolveRef.current({ ok: false, error: 'Invalid response' })
-        }
-        resolveRef.current = null
-      }
-    }
-    window.addEventListener('message', handler)
-    return () => window.removeEventListener('message', handler)
-  }, [])
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     const payload = {
@@ -72,7 +52,28 @@ export function ContactForm() {
 
     setStatus('sending')
     setErrorMsg('')
-    resolveRef.current = (data) => {
+
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
+
+    try {
+      const response = await fetch(contactUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+        redirect: 'follow',
+      })
+      clearTimeout(timeoutId)
+
+      const text = await response.text()
+      let data: { ok?: boolean; error?: string }
+      try {
+        data = JSON.parse(text)
+      } catch {
+        data = { ok: false, error: 'Invalid response from server' }
+      }
+
       if (data.ok) {
         setStatus('success')
         setFormData({ name: '', email: '', subject: '', message: '' })
@@ -80,18 +81,16 @@ export function ContactForm() {
         setErrorMsg(data.error || 'Failed to send message')
         setStatus('error')
       }
-      setTimeout(() => setStatus('idle'), 3000)
-    }
-    setTimeout(() => {
-      if (resolveRef.current) {
-        resolveRef.current({ ok: false, error: 'Request timed out' })
-        resolveRef.current = null
+    } catch (err) {
+      clearTimeout(timeoutId)
+      if (err instanceof DOMException && err.name === 'AbortError') {
         setErrorMsg('Request timed out. Please try again.')
-        setStatus('error')
-        setTimeout(() => setStatus('idle'), 3000)
+      } else {
+        setErrorMsg('Failed to send message. Please try again.')
       }
-    }, REQUEST_TIMEOUT_MS)
-    formRef.current?.submit()
+      setStatus('error')
+    }
+    setTimeout(() => setStatus('idle'), 3000)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -112,13 +111,8 @@ export function ContactForm() {
   return (
     <Reveal>
       <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-        <iframe name={IFRAME_NAME} title="Contact" style={{ position: 'absolute', width: 0, height: 0, border: 0, opacity: 0, pointerEvents: 'none' }} />
         <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Send Message</h3>
         <form
-          ref={formRef}
-          action={contactUrl}
-          method="POST"
-          target={IFRAME_NAME}
           onSubmit={handleSubmit}
           style={{
             display: 'flex',

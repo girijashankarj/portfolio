@@ -74,7 +74,8 @@ graph LR
 - **Project filtering** — filter projects by category (AI/ML, React/Web, JavaScript, Full Stack, Dev Tools)
 - **Search functionality** — Cmd/Ctrl + K to search projects and sections
 - **GitHub stats widget** — live GitHub repository statistics
-- **Contact form** — easy way to reach out
+- **Contact form** — sends via Google Apps Script (requires `VITE_NEWSLETTER_SCRIPT_URL` secret)
+- **Tech newsletter signup** — same Apps Script; appends to Google Sheet
 - **Downloadable resume** — one-click resume download
 - **Back to Top button** — smooth scroll to top
 - **Responsive design** — mobile-first layout
@@ -314,6 +315,10 @@ graph TB
 ### Adding Projects
 
 Edit `src/common/constants.ts` and add projects to the `PROJECTS` array with appropriate category.
+
+### Newsletter & Contact Form
+
+Requires Google Apps Script + Google Sheet. See [garry-tech-news-aggregator/NEWSLETTER_SETUP.md](https://github.com/girijashankarj/garry-tech-news-aggregator/blob/main/NEWSLETTER_SETUP.md) for setup. Add `VITE_NEWSLETTER_SCRIPT_URL` to GitHub Actions secrets (portfolio repo) for deploy.
 
 ---
 

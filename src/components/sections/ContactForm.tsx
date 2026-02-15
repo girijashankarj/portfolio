@@ -50,29 +50,27 @@ export function ContactForm() {
 
     setStatus('sending')
     setErrorMsg('')
-    const form = document.createElement('form')
-    form.method = 'POST'
-    form.action = scriptUrl
-    form.target = 'portfolio-form-frame'
-    form.style.display = 'none'
-    const add = (name: string, value: string) => {
-      const input = document.createElement('input')
-      input.name = name
-      input.value = value
-      form.appendChild(input)
+    try {
+      const res = await fetch(scriptUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const data = (await res.json()) as { ok?: boolean; message?: string; error?: string }
+      if (data.ok) {
+        setStatus('success')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+        setTimeout(() => setStatus('idle'), 3000)
+      } else {
+        setErrorMsg(data.error || 'Failed to send message')
+        setStatus('error')
+        setTimeout(() => setStatus('idle'), 3000)
+      }
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : 'Network error. Check the script URL.')
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 3000)
     }
-    add('name', payload.name)
-    add('email', payload.email)
-    add('subject', payload.subject)
-    add('message', payload.message)
-    document.body.appendChild(form)
-    form.submit()
-    setTimeout(() => {
-      try { document.body.removeChild(form) } catch { /* already removed */ }
-    }, 2000)
-    setStatus('success')
-    setFormData({ name: '', email: '', subject: '', message: '' })
-    setTimeout(() => setStatus('idle'), 3000)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

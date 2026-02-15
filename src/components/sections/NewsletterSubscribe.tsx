@@ -11,35 +11,38 @@ export function NewsletterSubscribe() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const n = name.trim().slice(0, MAX_NAME_LENGTH)
     const em = email.trim().slice(0, MAX_EMAIL_LENGTH)
     if (!n || !em) return
 
     setStatus('sending')
-    const form = document.createElement('form')
-    form.method = 'POST'
-    form.action = APPS_SCRIPT_URL
-    form.target = 'portfolio-form-frame'
-    form.style.display = 'none'
-    const add = (name: string, value: string) => {
-      const input = document.createElement('input')
-      input.name = name
-      input.value = value
-      form.appendChild(input)
+    setErrorMsg('')
+    try {
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: n, email: em }),
+      })
+      const data = (await res.json()) as { ok?: boolean; message?: string; error?: string }
+      if (data.ok) {
+        setStatus('success')
+        setName('')
+        setEmail('')
+        setTimeout(() => setStatus('idle'), 4000)
+      } else {
+        setErrorMsg(data.error || 'Subscription failed')
+        setStatus('error')
+        setTimeout(() => setStatus('idle'), 4000)
+      }
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : 'Network error. Check the script URL.')
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 4000)
     }
-    add('name', n)
-    add('email', em)
-    document.body.appendChild(form)
-    form.submit()
-    setTimeout(() => {
-      try { document.body.removeChild(form) } catch { /* already removed */ }
-    }, 2000)
-    setStatus('success')
-    setName('')
-    setEmail('')
-    setTimeout(() => setStatus('idle'), 4000)
   }
 
   const isConfigured = APPS_SCRIPT_URL.length > 0
@@ -126,7 +129,7 @@ export function NewsletterSubscribe() {
             </button>
             {status === 'error' && (
               <p style={{ fontSize: '0.85rem', color: '#ef4444' }}>
-                <i className="fa-solid fa-exclamation-circle"></i> Something went wrong. Try again.
+                <i className="fa-solid fa-exclamation-circle"></i> {errorMsg || 'Something went wrong. Try again.'}
               </p>
             )}
           </form>

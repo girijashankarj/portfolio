@@ -35,18 +35,38 @@ export function NewsletterSubscribe() {
     const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
 
     try {
-      await fetch(newsletterUrl, {
+      const response = await fetch(newsletterUrl, {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ name: n, email: em }),
         signal: controller.signal,
+        redirect: 'follow',
       })
       clearTimeout(timeoutId)
-      // no-cors gives opaque response; if we reach here the request was sent
-      setStatus('success')
-      setName('')
-      setEmail('')
+
+      // If response is opaque (CORS blocked on redirect), treat as success
+      // since client-side validation already passed
+      if (response.type === 'opaque') {
+        setStatus('success')
+        setName('')
+        setEmail('')
+      } else {
+        const text = await response.text()
+        let data: { ok?: boolean; error?: string }
+        try {
+          data = JSON.parse(text)
+        } catch {
+          data = { ok: true }
+        }
+        if (data.ok !== false) {
+          setStatus('success')
+          setName('')
+          setEmail('')
+        } else {
+          setErrorMsg(data.error || 'Subscription failed')
+          setStatus('error')
+        }
+      }
     } catch (err) {
       clearTimeout(timeoutId)
       if (err instanceof DOMException && err.name === 'AbortError') {

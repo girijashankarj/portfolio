@@ -50,37 +50,43 @@ export function ContactForm() {
 
     setStatus('sending')
     setErrorMsg('')
-    try {
-      const res = await fetch(scriptUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(payload),
-      })
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string }
-      if (!res.ok || !data.ok) {
-        throw new Error(data.error || 'Failed to send')
-      }
-      setStatus('success')
-      setFormData({ name: '', email: '', subject: '', message: '' })
-      setTimeout(() => setStatus('idle'), 3000)
-    } catch {
-      setStatus('error')
-      setErrorMsg('Failed to send message. Please try again.')
-      setTimeout(() => setStatus('idle'), 4000)
+    const form = document.createElement('form')
+    form.method = 'POST'
+    form.action = scriptUrl
+    form.target = 'portfolio-form-frame'
+    form.style.display = 'none'
+    const add = (name: string, value: string) => {
+      const input = document.createElement('input')
+      input.name = name
+      input.value = value
+      form.appendChild(input)
     }
+    add('name', payload.name)
+    add('email', payload.email)
+    add('subject', payload.subject)
+    add('message', payload.message)
+    document.body.appendChild(form)
+    form.submit()
+    document.body.removeChild(form)
+    setStatus('success')
+    setFormData({ name: '', email: '', subject: '', message: '' })
+    setTimeout(() => setStatus('idle'), 3000)
   }
 
-  const limits: Record<string, number> = {
-    name: MAX_NAME_LENGTH,
-    email: MAX_EMAIL_LENGTH,
-    subject: MAX_SUBJECT_LENGTH,
-    message: MAX_MESSAGE_LENGTH,
-  }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    const max = limits[name] ?? Infinity
-    setFormData({ ...formData, [name]: value.slice(0, max) })
+    setFormData({ ...formData, [name]: value })
   }
+
+  const overLimits = {
+    name: formData.name.length > MAX_NAME_LENGTH,
+    email: formData.email.length > MAX_EMAIL_LENGTH,
+    subject: formData.subject.length > MAX_SUBJECT_LENGTH,
+    message: formData.message.length > MAX_MESSAGE_LENGTH,
+  }
+  const hasLimitError = overLimits.name || overLimits.email || overLimits.subject || overLimits.message
+  const submitDisabled = status === 'sending' || hasLimitError
+  const inputErrorStyle = { borderColor: '#ef4444' as const }
 
   return (
     <Reveal>
@@ -99,7 +105,7 @@ export function ContactForm() {
               fontSize: '0.9rem',
               color: 'var(--text)',
             }}>
-              Name * <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(max {MAX_NAME_LENGTH})</span>
+              Name *
             </label>
             <input
               type="text"
@@ -107,7 +113,6 @@ export function ContactForm() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              maxLength={MAX_NAME_LENGTH}
               required
               style={{
                 width: '100%',
@@ -121,14 +126,16 @@ export function ContactForm() {
                 boxSizing: 'border-box',
                 outline: 'none',
                 transition: 'border-color 0.2s ease',
+                ...(overLimits.name ? inputErrorStyle : {}),
               }}
               onFocus={(e) => {
                 e.currentTarget.style.borderColor = 'var(--accent)'
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = 'var(--border)'
+                e.currentTarget.style.borderColor = overLimits.name ? '#ef4444' : 'var(--border)'
               }}
             />
+            {overLimits.name && <p style={{ fontSize: '0.8rem', color: '#ef4444', marginTop: '0.25rem' }}>Max {MAX_NAME_LENGTH} characters</p>}
           </div>
           <div>
             <label htmlFor="email" style={{
@@ -137,7 +144,7 @@ export function ContactForm() {
               fontSize: '0.9rem',
               color: 'var(--text)',
             }}>
-              Email * <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(max {MAX_EMAIL_LENGTH})</span>
+              Email *
             </label>
             <input
               type="email"
@@ -145,7 +152,6 @@ export function ContactForm() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              maxLength={MAX_EMAIL_LENGTH}
               required
               style={{
                 width: '100%',
@@ -159,14 +165,16 @@ export function ContactForm() {
                 boxSizing: 'border-box',
                 outline: 'none',
                 transition: 'border-color 0.2s ease',
+                ...(overLimits.email ? inputErrorStyle : {}),
               }}
               onFocus={(e) => {
                 e.currentTarget.style.borderColor = 'var(--accent)'
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = 'var(--border)'
+                e.currentTarget.style.borderColor = overLimits.email ? '#ef4444' : 'var(--border)'
               }}
             />
+            {overLimits.email && <p style={{ fontSize: '0.8rem', color: '#ef4444', marginTop: '0.25rem' }}>Max {MAX_EMAIL_LENGTH} characters</p>}
           </div>
           <div>
             <label htmlFor="subject" style={{
@@ -175,7 +183,7 @@ export function ContactForm() {
               fontSize: '0.9rem',
               color: 'var(--text)',
             }}>
-              Subject * <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(max {MAX_SUBJECT_LENGTH})</span>
+              Subject *
             </label>
             <input
               type="text"
@@ -183,7 +191,6 @@ export function ContactForm() {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              maxLength={MAX_SUBJECT_LENGTH}
               required
               placeholder="e.g., AI Platform Engineer Role Inquiry"
               style={{
@@ -198,14 +205,16 @@ export function ContactForm() {
                 boxSizing: 'border-box',
                 outline: 'none',
                 transition: 'border-color 0.2s ease',
+                ...(overLimits.subject ? inputErrorStyle : {}),
               }}
               onFocus={(e) => {
                 e.currentTarget.style.borderColor = 'var(--accent)'
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = 'var(--border)'
+                e.currentTarget.style.borderColor = overLimits.subject ? '#ef4444' : 'var(--border)'
               }}
             />
+            {overLimits.subject && <p style={{ fontSize: '0.8rem', color: '#ef4444', marginTop: '0.25rem' }}>Max {MAX_SUBJECT_LENGTH} characters</p>}
           </div>
           <div>
             <label htmlFor="message" style={{
@@ -214,7 +223,7 @@ export function ContactForm() {
               fontSize: '0.9rem',
               color: 'var(--text)',
             }}>
-              Message * <span style={{ color: 'var(--muted)', fontWeight: 400 }}>({formData.message.length}/{MAX_MESSAGE_LENGTH})</span>
+              Message *
             </label>
             <textarea
               id="message"
@@ -222,7 +231,6 @@ export function ContactForm() {
               value={formData.message}
               onChange={handleChange}
               required
-              maxLength={MAX_MESSAGE_LENGTH}
               rows={4}
               placeholder="Tell me about your project or opportunity..."
               style={{
@@ -237,14 +245,16 @@ export function ContactForm() {
                 resize: 'vertical',
                 fontFamily: 'inherit',
                 transition: 'border-color 0.2s ease',
+                ...(overLimits.message ? inputErrorStyle : {}),
               }}
               onFocus={(e) => {
                 e.currentTarget.style.borderColor = 'var(--accent)'
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = 'var(--border)'
+                e.currentTarget.style.borderColor = overLimits.message ? '#ef4444' : 'var(--border)'
               }}
             />
+            {overLimits.message && <p style={{ fontSize: '0.8rem', color: '#ef4444', marginTop: '0.25rem' }}>Max {MAX_MESSAGE_LENGTH} characters</p>}
           </div>
           {status === 'success' && (
             <div style={{
@@ -272,19 +282,19 @@ export function ContactForm() {
           )}
           <button
             type="submit"
-            disabled={status === 'sending'}
+            disabled={submitDisabled}
             style={{
               padding: 'clamp(0.6rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem)',
               borderRadius: '10px',
-              background: status === 'sending' 
+              background: submitDisabled 
                 ? 'rgba(255, 255, 255, 0.1)' 
                 : 'var(--gradient-primary)',
               border: 'none',
-              color: status === 'sending' ? 'var(--muted)' : '#ffffff',
-              boxShadow: status === 'sending' ? 'none' : '0 4px 12px rgba(66, 133, 244, 0.2)',
+              color: submitDisabled ? 'var(--muted)' : '#ffffff',
+              boxShadow: submitDisabled ? 'none' : '0 4px 12px rgba(66, 133, 244, 0.2)',
               fontSize: 'clamp(0.9rem, 2.5vw, 1rem)',
               fontWeight: 700,
-              cursor: status === 'sending' ? 'not-allowed' : 'pointer',
+              cursor: submitDisabled ? 'not-allowed' : 'pointer',
               transition: 'all 0.2s ease',
               display: 'flex',
               alignItems: 'center',

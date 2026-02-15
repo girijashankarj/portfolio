@@ -11,32 +11,42 @@ export function NewsletterSubscribe() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const n = name.trim()
-    const em = email.trim()
+    const n = name.trim().slice(0, MAX_NAME_LENGTH)
+    const em = email.trim().slice(0, MAX_EMAIL_LENGTH)
     if (!n || !em) return
-    if (n.length > MAX_NAME_LENGTH || em.length > MAX_EMAIL_LENGTH) return
 
     setStatus('sending')
-    try {
-      const res = await fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ name: n.slice(0, MAX_NAME_LENGTH), email: em.slice(0, MAX_EMAIL_LENGTH) }),
-      })
-      if (!res.ok) throw new Error('Subscribe failed')
-      setStatus('success')
-      setName('')
-      setEmail('')
-      setTimeout(() => setStatus('idle'), 4000)
-    } catch {
-      setStatus('error')
-      setTimeout(() => setStatus('idle'), 4000)
+    const form = document.createElement('form')
+    form.method = 'POST'
+    form.action = APPS_SCRIPT_URL
+    form.target = 'portfolio-form-frame'
+    form.style.display = 'none'
+    const add = (name: string, value: string) => {
+      const input = document.createElement('input')
+      input.name = name
+      input.value = value
+      form.appendChild(input)
     }
+    add('name', n)
+    add('email', em)
+    document.body.appendChild(form)
+    form.submit()
+    document.body.removeChild(form)
+    setStatus('success')
+    setName('')
+    setEmail('')
+    setTimeout(() => setStatus('idle'), 4000)
   }
 
   const isConfigured = APPS_SCRIPT_URL.length > 0
+  const nameOver = name.length > MAX_NAME_LENGTH
+  const emailOver = email.length > MAX_EMAIL_LENGTH
+  const hasLimitError = nameOver || emailOver
+  const submitDisabled = status === 'sending' || hasLimitError
+
+  const inputErrorStyle = { borderColor: '#ef4444' as const }
 
   return (
     <Reveal>
@@ -52,15 +62,14 @@ export function NewsletterSubscribe() {
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
               <label htmlFor="newsletter-name" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text)' }}>
-                Name * <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(max {MAX_NAME_LENGTH})</span>
+                Name *
               </label>
               <input
                 id="newsletter-name"
                 type="text"
                 placeholder="Your name"
                 value={name}
-                onChange={(e) => setName(e.target.value.slice(0, MAX_NAME_LENGTH))}
-                maxLength={MAX_NAME_LENGTH}
+                onChange={(e) => setName(e.target.value)}
                 required
                 style={{
                 width: '100%',
@@ -70,20 +79,21 @@ export function NewsletterSubscribe() {
                 background: 'var(--bg-soft)',
                 color: 'var(--text)',
                 fontSize: '0.95rem',
+                  ...(nameOver ? inputErrorStyle : {}),
                 }}
               />
+              {nameOver && <p style={{ fontSize: '0.8rem', color: '#ef4444', marginTop: '0.25rem' }}>Max {MAX_NAME_LENGTH} characters</p>}
             </div>
             <div>
               <label htmlFor="newsletter-email" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text)' }}>
-                Email * <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(max {MAX_EMAIL_LENGTH})</span>
+                Email *
               </label>
               <input
                 id="newsletter-email"
                 type="email"
                 placeholder="your@email.com"
                 value={email}
-                onChange={(e) => setEmail(e.target.value.slice(0, MAX_EMAIL_LENGTH))}
-                maxLength={MAX_EMAIL_LENGTH}
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 style={{
                 width: '100%',
@@ -93,12 +103,14 @@ export function NewsletterSubscribe() {
                 background: 'var(--bg-soft)',
                 color: 'var(--text)',
                 fontSize: '0.95rem',
+                  ...(emailOver ? inputErrorStyle : {}),
                 }}
               />
+              {emailOver && <p style={{ fontSize: '0.8rem', color: '#ef4444', marginTop: '0.25rem' }}>Max {MAX_EMAIL_LENGTH} characters</p>}
             </div>
             <button
               type="submit"
-              disabled={status === 'sending'}
+              disabled={submitDisabled}
               className="btn-primary"
               style={{ width: '100%', justifyContent: 'center' }}
             >

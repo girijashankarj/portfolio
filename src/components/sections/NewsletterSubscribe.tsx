@@ -35,38 +35,20 @@ export function NewsletterSubscribe() {
     const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
 
     try {
-      const response = await fetch(newsletterUrl, {
+      await fetch(newsletterUrl, {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ name: n, email: em }),
         signal: controller.signal,
-        redirect: 'follow',
       })
       clearTimeout(timeoutId)
-
-      // If response is opaque (CORS blocked on redirect), treat as success
-      // since client-side validation already passed
-      if (response.type === 'opaque') {
-        setStatus('success')
-        setName('')
-        setEmail('')
-      } else {
-        const text = await response.text()
-        let data: { ok?: boolean; error?: string }
-        try {
-          data = JSON.parse(text)
-        } catch {
-          data = { ok: true }
-        }
-        if (data.ok !== false) {
-          setStatus('success')
-          setName('')
-          setEmail('')
-        } else {
-          setErrorMsg(data.error || 'Subscription failed')
-          setStatus('error')
-        }
-      }
+      // Google Apps Script returns 302 redirect; with no-cors the response is
+      // opaque but the data IS sent and processed. Client-side validation already
+      // passed, so we treat a resolved fetch as success.
+      setStatus('success')
+      setName('')
+      setEmail('')
     } catch (err) {
       clearTimeout(timeoutId)
       if (err instanceof DOMException && err.name === 'AbortError') {

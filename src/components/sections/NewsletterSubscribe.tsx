@@ -3,6 +3,8 @@ import { Reveal } from '../shared/Reveal'
 import { getAppsScriptUrl } from '@/common/apps-script'
 
 const APPS_SCRIPT_URL = getAppsScriptUrl()
+const MAX_NAME_LENGTH = 100
+const MAX_EMAIL_LENGTH = 254
 
 export function NewsletterSubscribe() {
   const [name, setName] = useState('')
@@ -11,14 +13,17 @@ export function NewsletterSubscribe() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!name.trim() || !email.trim()) return
+    const n = name.trim()
+    const em = email.trim()
+    if (!n || !em) return
+    if (n.length > MAX_NAME_LENGTH || em.length > MAX_EMAIL_LENGTH) return
 
     setStatus('sending')
     try {
       const res = await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), email: email.trim() }),
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ name: n.slice(0, MAX_NAME_LENGTH), email: em.slice(0, MAX_EMAIL_LENGTH) }),
       })
       if (!res.ok) throw new Error('Subscribe failed')
       setStatus('success')
@@ -45,13 +50,19 @@ export function NewsletterSubscribe() {
         </p>
         {isConfigured ? (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              style={{
+            <div>
+              <label htmlFor="newsletter-name" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text)' }}>
+                Name * <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(max {MAX_NAME_LENGTH})</span>
+              </label>
+              <input
+                id="newsletter-name"
+                type="text"
+                placeholder="Your name"
+                value={name}
+                onChange={(e) => setName(e.target.value.slice(0, MAX_NAME_LENGTH))}
+                maxLength={MAX_NAME_LENGTH}
+                required
+                style={{
                 width: '100%',
                 padding: '0.6rem 0.75rem',
                 borderRadius: '8px',
@@ -59,15 +70,22 @@ export function NewsletterSubscribe() {
                 background: 'var(--bg-soft)',
                 color: 'var(--text)',
                 fontSize: '0.95rem',
-              }}
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              style={{
+                }}
+              />
+            </div>
+            <div>
+              <label htmlFor="newsletter-email" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text)' }}>
+                Email * <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(max {MAX_EMAIL_LENGTH})</span>
+              </label>
+              <input
+                id="newsletter-email"
+                type="email"
+                placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value.slice(0, MAX_EMAIL_LENGTH))}
+                maxLength={MAX_EMAIL_LENGTH}
+                required
+                style={{
                 width: '100%',
                 padding: '0.6rem 0.75rem',
                 borderRadius: '8px',
@@ -75,8 +93,9 @@ export function NewsletterSubscribe() {
                 background: 'var(--bg-soft)',
                 color: 'var(--text)',
                 fontSize: '0.95rem',
-              }}
-            />
+                }}
+              />
+            </div>
             <button
               type="submit"
               disabled={status === 'sending'}

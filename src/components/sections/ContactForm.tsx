@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { Reveal } from '../shared/Reveal'
 import { getAppsScriptUrl } from '@/common/apps-script'
 
+const MAX_NAME_LENGTH = 100
+const MAX_EMAIL_LENGTH = 254
+const MAX_SUBJECT_LENGTH = 150
 const MAX_MESSAGE_LENGTH = 200
 
 function sanitize(str: string, maxLen?: number): string {
@@ -32,9 +35,9 @@ export function ContactForm() {
     }
 
     const payload = {
-      name: sanitize(formData.name, 100),
-      email: sanitize(formData.email, 254),
-      subject: sanitize(formData.subject, 150),
+      name: sanitize(formData.name, MAX_NAME_LENGTH),
+      email: sanitize(formData.email, MAX_EMAIL_LENGTH),
+      subject: sanitize(formData.subject, MAX_SUBJECT_LENGTH),
       message: sanitize(formData.message, MAX_MESSAGE_LENGTH),
     }
 
@@ -50,7 +53,7 @@ export function ContactForm() {
     try {
       const res = await fetch(scriptUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(payload),
       })
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string }
@@ -67,10 +70,16 @@ export function ContactForm() {
     }
   }
 
+  const limits: Record<string, number> = {
+    name: MAX_NAME_LENGTH,
+    email: MAX_EMAIL_LENGTH,
+    subject: MAX_SUBJECT_LENGTH,
+    message: MAX_MESSAGE_LENGTH,
+  }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    if (name === 'message' && value.length > MAX_MESSAGE_LENGTH) return
-    setFormData({ ...formData, [name]: value })
+    const max = limits[name] ?? Infinity
+    setFormData({ ...formData, [name]: value.slice(0, max) })
   }
 
   return (
@@ -90,7 +99,7 @@ export function ContactForm() {
               fontSize: '0.9rem',
               color: 'var(--text)',
             }}>
-              Name *
+              Name * <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(max {MAX_NAME_LENGTH})</span>
             </label>
             <input
               type="text"
@@ -98,6 +107,7 @@ export function ContactForm() {
               name="name"
               value={formData.name}
               onChange={handleChange}
+              maxLength={MAX_NAME_LENGTH}
               required
               style={{
                 width: '100%',
@@ -127,7 +137,7 @@ export function ContactForm() {
               fontSize: '0.9rem',
               color: 'var(--text)',
             }}>
-              Email *
+              Email * <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(max {MAX_EMAIL_LENGTH})</span>
             </label>
             <input
               type="email"
@@ -135,6 +145,7 @@ export function ContactForm() {
               name="email"
               value={formData.email}
               onChange={handleChange}
+              maxLength={MAX_EMAIL_LENGTH}
               required
               style={{
                 width: '100%',
@@ -164,7 +175,7 @@ export function ContactForm() {
               fontSize: '0.9rem',
               color: 'var(--text)',
             }}>
-              Subject *
+              Subject * <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(max {MAX_SUBJECT_LENGTH})</span>
             </label>
             <input
               type="text"
@@ -172,6 +183,7 @@ export function ContactForm() {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
+              maxLength={MAX_SUBJECT_LENGTH}
               required
               placeholder="e.g., AI Platform Engineer Role Inquiry"
               style={{

@@ -37,6 +37,7 @@ jobs:
       - name: Build
         env:
           GITHUB_PAGES: 'true'
+          VITE_NEWSLETTER_SCRIPT_URL: ${{ secrets.VITE_NEWSLETTER_SCRIPT_URL }}
         run: npx vite build
       
       - name: Debug - Check built HTML

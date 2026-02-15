@@ -1,5 +1,6 @@
 import { Reveal } from '../shared/Reveal'
 import { ContactForm } from './ContactForm'
+import { NewsletterSubscribe } from './NewsletterSubscribe'
 import { GitHubStats } from '../shared/GitHubStats'
 
 export function Contact() {
@@ -42,6 +43,7 @@ export function Contact() {
             </div>
           </Reveal>
           <ContactForm />
+          <NewsletterSubscribe />
           <Reveal>
             <div className="card">
               <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Quick Note</h3>

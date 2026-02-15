@@ -67,7 +67,9 @@ export function ContactForm() {
     add('message', payload.message)
     document.body.appendChild(form)
     form.submit()
-    document.body.removeChild(form)
+    setTimeout(() => {
+      try { document.body.removeChild(form) } catch { /* already removed */ }
+    }, 2000)
     setStatus('success')
     setFormData({ name: '', email: '', subject: '', message: '' })
     setTimeout(() => setStatus('idle'), 3000)

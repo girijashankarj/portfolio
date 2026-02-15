@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { Reveal } from '../shared/Reveal'
-import { getAppsScriptUrl } from '@/common/apps-script'
+import { getNewsletterScriptUrl } from '@/common/apps-script'
 
 const MAX_NAME_LENGTH = 100
 const MAX_EMAIL_LENGTH = 254
-const FORM_IFRAME_NAME = 'portfolio-form-frame'
+const NEWSLETTER_IFRAME_NAME = 'newsletter-form-frame'
+const REQUEST_TIMEOUT_MS = 60000
 
 export function NewsletterSubscribe() {
   const [name, setName] = useState('')
@@ -13,15 +14,14 @@ export function NewsletterSubscribe() {
   const [errorMsg, setErrorMsg] = useState('')
   const resolveRef = useRef<((data: { ok?: boolean; error?: string }) => void) | null>(null)
 
-  const scriptUrl = getAppsScriptUrl()
-  const isConfigured = scriptUrl.length > 0
+  const newsletterUrl = getNewsletterScriptUrl()
+  const isConfigured = newsletterUrl.length > 0
 
   useEffect(() => {
     const handler = (e: MessageEvent) => {
       if (resolveRef.current && typeof e.data === 'string') {
         try {
-          const data = JSON.parse(e.data) as { ok?: boolean; message?: string; error?: string; formType?: string }
-          if (data.formType !== 'newsletter') return
+          const data = JSON.parse(e.data) as { ok?: boolean; error?: string }
           resolveRef.current(data)
         } catch {
           resolveRef.current({ ok: false, error: 'Invalid response' })
@@ -62,7 +62,7 @@ export function NewsletterSubscribe() {
         setStatus('error')
         setTimeout(() => setStatus('idle'), 4000)
       }
-    }, 30000)
+    }, REQUEST_TIMEOUT_MS)
   }
 
   const nameOver = name.length > MAX_NAME_LENGTH
@@ -84,13 +84,12 @@ export function NewsletterSubscribe() {
         </p>
         {isConfigured ? (
           <form
-            action={scriptUrl}
+            action={newsletterUrl}
             method="POST"
-            target={FORM_IFRAME_NAME}
+            target={NEWSLETTER_IFRAME_NAME}
             onSubmit={handleSubmit}
             style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
           >
-            <input type="hidden" name="formType" value="newsletter" />
             <div>
               <label htmlFor="newsletter-name" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text)' }}>
                 Name *

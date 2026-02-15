@@ -37,6 +37,7 @@ jobs:
       - name: Build
         env:
           GITHUB_PAGES: 'true'
+          VITE_CONTACT_SCRIPT_URL: ${{ secrets.VITE_CONTACT_SCRIPT_URL }}
           VITE_NEWSLETTER_SCRIPT_URL: ${{ secrets.VITE_NEWSLETTER_SCRIPT_URL }}
         run: npx vite build
       

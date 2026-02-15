@@ -18,7 +18,8 @@ export function Contact() {
             Available for new opportunities · Response time: 24-48 hours
           </strong>
         </p>
-        <iframe name="portfolio-form-frame" title="Form submit" style={{ display: 'none', width: 0, height: 0, position: 'absolute' }} />
+        <iframe name="contact-form-frame" title="Contact form submit" style={{ display: 'none', width: 0, height: 0, position: 'absolute' }} />
+        <iframe name="newsletter-form-frame" title="Newsletter form submit" style={{ display: 'none', width: 0, height: 0, position: 'absolute' }} />
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',

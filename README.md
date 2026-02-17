@@ -326,7 +326,7 @@ Both forms submit via `fetch` to Google Apps Script web apps. Data is stored in 
 - `VITE_CONTACT_SCRIPT_URL` — Web app URL for the contact form (Deploy `apps-script/ContactCode.gs`).
 - `VITE_NEWSLETTER_SCRIPT_URL` — Web app URL for the newsletter (Deploy `apps-script/NewsletterCode.gs`).
 
-Add these to GitHub repo secrets for deployment, or to `.env` for local build. See `apps-script/README.md` for script setup and sheet IDs.
+Copy `.env.example` to `.env` and fill in the URLs for local build; use the same vars in GitHub repo secrets for deployment. See `apps-script/README.md` for script setup and sheet IDs.
 
 ---
 

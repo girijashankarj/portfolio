@@ -41,35 +41,65 @@ function ProjectCategoryCard({ categoryId, categoryLabel, projects }: ProjectCat
                 e.currentTarget.style.backgroundColor = 'transparent'
               }}
             >
-              <a 
-                href={project.url} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                style={{
-                  color: 'var(--accent)',
-                  fontWeight: 600,
-                  textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  borderBottom: '1px solid transparent',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--accent-2)'
-                  e.currentTarget.style.borderBottomColor = 'var(--accent-2)'
-                  e.currentTarget.style.transform = 'translateX(2px)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--accent)'
-                  e.currentTarget.style.borderBottomColor = 'transparent'
-                  e.currentTarget.style.transform = 'translateX(0)'
-                }}
-              >
-                <span>{project.title}</span>
-                <i className="fa-solid fa-external-link" style={{ fontSize: '0.75rem', opacity: 0.7 }}></i>
-              </a>
+              <span style={{ fontWeight: 600 }}>{project.title}</span>
+              <span style={{ display: 'inline-flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.25rem' }}>
+                <a 
+                  href={project.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  style={{
+                    color: 'var(--accent)',
+                    fontSize: '0.9rem',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.35rem',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                    borderBottom: '1px solid transparent',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--accent-2)'
+                    e.currentTarget.style.borderBottomColor = 'var(--accent-2)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--accent)'
+                    e.currentTarget.style.borderBottomColor = 'transparent'
+                  }}
+                >
+                  <i className="fa-brands fa-github" style={{ fontSize: '0.85rem' }}></i>
+                  Repo
+                </a>
+                {project.liveUrl && (
+                  <a 
+                    href={project.liveUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    style={{
+                      color: 'var(--accent)',
+                      fontSize: '0.9rem',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      borderBottom: '1px solid transparent',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--accent-2)'
+                      e.currentTarget.style.borderBottomColor = 'var(--accent-2)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--accent)'
+                      e.currentTarget.style.borderBottomColor = 'transparent'
+                    }}
+                  >
+                    <i className="fa-solid fa-external-link" style={{ fontSize: '0.8rem' }}></i>
+                    Live
+                  </a>
+                )}
+              </span>
               {project.description && (
                 <p style={{ 
                   margin: '0.25rem 0 0 0', 

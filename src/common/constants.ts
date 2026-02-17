@@ -6,10 +6,29 @@ export const PROJECTS: Project[] = [
     id: 'rag-harness', 
     title: 'RAG Repo Harness', 
     url: 'https://github.com/girijashankarj/garry-rag-repo-harness', 
+    liveUrl: 'https://girijashankarj.github.io/garry-rag-repo-harness/',
     category: 'ai-ml',
     description: 'Retrieval-Augmented Generation (RAG) system for codebase knowledge extraction and intelligent Q&A.',
     technologies: ['RAG', 'LLM', 'Vector Databases', 'Semantic Search'],
     highlights: ['Codebase indexing', 'Semantic search', 'AI-powered Q&A']
+  },
+  { 
+    id: 'tech-news-aggregator', 
+    title: 'Tech News Aggregator', 
+    url: 'https://github.com/girijashankarj/garry-tech-news-aggregator', 
+    category: 'dev-tools',
+    description: 'Automated tech news aggregator: fetches RSS, filters by relevance, sends curated daily digests via email (GitHub Actions).',
+    technologies: ['TypeScript', 'RSS', 'GitHub Actions', 'Google Sheets'],
+    highlights: ['Daily digest', 'Per-subscriber topics', 'Zero-cost automation']
+  },
+  { 
+    id: 'mlops-learnings', 
+    title: 'MLOps Learnings', 
+    url: 'https://github.com/girijashankarj/garry-mlops-learnings', 
+    category: 'ai-ml',
+    description: 'Structured learning path for ML, Data Engineering, MLOps, and modern LLM tooling.',
+    technologies: ['Python', 'MLOps', 'Data Engineering', 'LLM'],
+    highlights: ['Learning path', 'Documentation', 'Best practices']
   },
   { 
     id: 'tensorflow', 
@@ -35,6 +54,7 @@ export const PROJECTS: Project[] = [
     id: 'clear-prompt', 
     title: 'Clear Prompt', 
     url: 'https://github.com/girijashankarj/garry-clear-prompt', 
+    liveUrl: 'https://girijashankarj.github.io/garry-clear-prompt/',
     category: 'dev-tools',
     description: 'Prompt quality analyzer and optimizer for AI-assisted development with real-time scoring.',
     technologies: ['AI Tools', 'NLP', 'TypeScript', 'React'],
@@ -46,6 +66,7 @@ export const PROJECTS: Project[] = [
     id: 'micro-dev', 
     title: 'Micro Dev Utilities', 
     url: 'https://github.com/girijashankarj/garry-micro-dev-utilities', 
+    liveUrl: 'https://girijashankarj.github.io/garry-micro-dev-utilities/',
     category: 'dev-tools',
     description: 'Collection of micro-utilities and helper functions for faster development workflows.',
     technologies: ['Utilities', 'Developer Tools'],
@@ -55,6 +76,7 @@ export const PROJECTS: Project[] = [
     id: 'n8n-decision', 
     title: 'N8N Decision Action', 
     url: 'https://github.com/girijashankarj/garry-n8n-decision-action', 
+    liveUrl: 'https://girijashankarj.github.io/garry-n8n-decision-action/',
     category: 'dev-tools',
     description: 'Custom N8N workflow action for decision-making and conditional logic in automation.',
     technologies: ['N8N', 'Workflow Automation'],
@@ -68,6 +90,52 @@ export const PROJECTS: Project[] = [
     description: 'Opinionated boilerplate template for rapid project setup with best practices and conventions.',
     technologies: ['Boilerplate', 'Project Templates'],
     highlights: ['Quick setup', 'Best practices']
+  },
+  { 
+    id: 'newsletter-subscription', 
+    title: "Garry's Daily Digest — Newsletter", 
+    url: 'https://github.com/girijashankarj/garry-newsletter-subscription-page', 
+    liveUrl: 'https://girijashankarj.github.io/garry-newsletter-subscription-page/',
+    category: 'react-web',
+    description: 'Newsletter subscription page: subscribe/unsubscribe, topic tags, article count. React + Vite + Tailwind, Google Sheet via Apps Script.',
+    technologies: ['React 19', 'Vite 7', 'Tailwind v4', 'Apps Script'],
+    highlights: ['Live on GitHub Pages', '3-step wizard', 'Light/dark theme']
+  },
+  { 
+    id: 'linkedin-scheduler', 
+    title: 'LinkedIn Content Scheduler', 
+    url: 'https://github.com/girijashankarj/garry-linkedin-scheduler', 
+    category: 'dev-tools',
+    description: 'Automated LinkedIn posting from a version-controlled content calendar via GitHub Actions (daily 9:00 AM IST).',
+    technologies: ['TypeScript', 'LinkedIn API', 'GitHub Actions'],
+    highlights: ['Daily automation', 'Email notifications', 'CSV/JSON calendar']
+  },
+  { 
+    id: 'google-tasks-digest', 
+    title: 'Google Tasks Daily Digest', 
+    url: 'https://github.com/girijashankarj/garry-google-tasks-digest', 
+    category: 'dev-tools',
+    description: 'Daily digest of Google Tasks delivered to your inbox (7-day + Common + Targets lists). Runs at 7:00 AM IST on GitHub Actions.',
+    technologies: ['TypeScript', 'Google Tasks API', 'GitHub Actions'],
+    highlights: ['HTML email digest', 'Pending tasks only', 'Zero cost']
+  },
+  { 
+    id: 'dsa-leet', 
+    title: "Garry's DSA & LeetCode", 
+    url: 'https://github.com/girijashankarj/garry-dsa-leet', 
+    category: 'dev-tools',
+    description: 'Data Structures & Algorithms learning path with LeetCode practice and structured notes.',
+    technologies: ['Python', 'DSA', 'LeetCode'],
+    highlights: ['Structured learning', 'Patterns & solutions']
+  },
+  { 
+    id: 'architecture-prep', 
+    title: "Garry's Architecture Preparation", 
+    url: 'https://github.com/girijashankarj/garry-architecture-prep', 
+    category: 'dev-tools',
+    description: 'Language-neutral repo for HLD, LLD, Software Architecture, and AWS Solutions Architecture.',
+    technologies: ['System Design', 'HLD', 'LLD', 'AWS'],
+    highlights: ['Interview prep', 'Design patterns', 'AWS cert focus']
   },
   
   // React/Web Projects
@@ -108,9 +176,19 @@ export const PROJECTS: Project[] = [
     highlights: ['Full-stack auth', 'Modern UI', 'JWT tokens']
   },
   { 
+    id: 'python-backend', 
+    title: 'Garry Python Backend', 
+    url: 'https://github.com/girijashankarj/garry-python-backend', 
+    category: 'fullstack',
+    description: 'Production-ready FastAPI backend: SQLAlchemy async, JWT auth, rate limiting, structured logging, Docker, AWS deployment.',
+    technologies: ['FastAPI', 'PostgreSQL', 'JWT', 'Docker', 'AWS'],
+    highlights: ['CRUD + auth', 'Rate limiting', 'ECS/Lambda ready']
+  },
+  { 
     id: 'react-patterns', 
     title: 'React Concepts & Patterns', 
-    url: 'https://girijashankarj.github.io/discuss_react_patterns/', 
+    url: 'https://github.com/girijashankarj/discuss_react_patterns', 
+    liveUrl: 'https://girijashankarj.github.io/discuss_react_patterns/',
     category: 'react-web',
     description: 'Educational website explaining React concepts, patterns, and best practices with interactive examples.',
     technologies: ['Documentation', 'Education', 'React'],
@@ -148,7 +226,8 @@ export const PROJECTS: Project[] = [
   { 
     id: 'idkjs', 
     title: 'I Don\'t Know JS - Series', 
-    url: 'https://girijashankarj.github.io/idkjs_javascript_series/', 
+    url: 'https://github.com/girijashankarj/idkjs_javascript_series', 
+    liveUrl: 'https://girijashankarj.github.io/idkjs_javascript_series/',
     category: 'javascript',
     description: 'Educational series exploring JavaScript fundamentals, advanced concepts, and language quirks.',
     technologies: ['JavaScript', 'Education', 'Documentation'],
@@ -169,6 +248,7 @@ export const PROJECTS: Project[] = [
     id: 'kings-riders', 
     title: 'Kings Royal Riders (JavaScript)', 
     url: 'https://github.com/girijashankarj/kings-royal-riders', 
+    liveUrl: 'https://girijashankarj.github.io/kings-royal-riders/',
     category: 'fullstack',
     description: 'Interactive web application showcasing JavaScript capabilities and modern web features.',
     technologies: ['JavaScript', 'Web APIs'],

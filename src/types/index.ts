@@ -5,6 +5,8 @@ export interface Project {
   title: string
   url: string
   category: ProjectCategory
+  /** When set, project has a live demo; url = repo, this = demo. Shown as "Live" link. */
+  liveUrl?: string
   description?: string
   technologies?: string[]
   highlights?: string[]

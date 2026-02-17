@@ -8,6 +8,7 @@ import { Hero } from './components/sections/Hero'
 import { About } from './components/sections/About'
 import { Highlights } from './components/sections/Highlights'
 import { BackToTop } from './components/shared/BackToTop'
+import { ErrorBoundary } from './components/shared/ErrorBoundary'
 import './App.css'
 
 // Lazy load below-fold sections
@@ -33,19 +34,21 @@ function App() {
       </a>
       <ProgressBar />
       <Navbar />
-      <main>
+      <main id="main" role="main">
         <Hero />
         <About />
         <Highlights />
-        <Suspense fallback={<div style={{ padding: '3.5rem 0', textAlign: 'center' }}>Loading...</div>}>
-          <LazySkills />
-          <LazyProjects />
-          <LazyJourney />
-          <LazyTestimonials />
-          <LazyCommunity />
-          <LazyServices />
-          <LazyContact />
-        </Suspense>
+        <ErrorBoundary fallback={<section className="section"><div className="container"><p style={{ textAlign: 'center', color: 'var(--muted)' }}>Something went wrong loading this section. Please refresh the page.</p></div></section>}>
+          <Suspense fallback={<div style={{ padding: '3.5rem 0', textAlign: 'center' }} role="status" aria-live="polite">Loading...</div>}>
+            <LazySkills />
+            <LazyProjects />
+            <LazyJourney />
+            <LazyTestimonials />
+            <LazyCommunity />
+            <LazyServices />
+            <LazyContact />
+          </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer />
       <BackToTop />

@@ -20,14 +20,15 @@
     <link rel="canonical" href="https://girijashankarj.github.io/portfolio/">
     
     <!-- Content Security Policy -->
-    <!-- Note: frame-ancestors only works in HTTP headers, not meta tags -->
+    <!-- script-src: unsafe-eval removed for production; add back if a dependency requires it -->
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
-      script-src 'self' 'unsafe-inline' 'unsafe-eval';
+      script-src 'self' 'unsafe-inline';
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
       font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com;
       img-src 'self' data: https:;
-      connect-src 'self' https://api.github.com https://script.google.com;
+      connect-src 'self' https://api.github.com https://script.google.com https://script.googleusercontent.com;
+      frame-src 'self' https://script.google.com https://script.googleusercontent.com;
     ">
     
     <!-- Open Graph / Facebook -->

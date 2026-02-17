@@ -9,7 +9,10 @@ export function Footer() {
     }}>
       <div className="container">
         <p>Thank you for visiting my portfolio. Updated for 2025.</p>
-        <p className="muted" style={{ color: 'var(--muted)' }}>&copy; 2025 Girijashankar Jambhale</p>
+        <p style={{ fontSize: '0.85rem', color: 'var(--muted)', marginTop: '0.5rem' }}>
+          Theme preference is stored locally; no tracking or advertising cookies are used.
+        </p>
+        <p className="muted" style={{ color: 'var(--muted)', marginTop: '1rem' }}>&copy; 2025 Girijashankar Jambhale</p>
       </div>
     </footer>
   )

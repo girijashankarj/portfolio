@@ -1,17 +1,15 @@
 import { useState } from 'react'
 import { Reveal } from '../shared/Reveal'
 import { getContactScriptUrl } from '@/common/apps-script'
+import { CONTACT, sanitizeContactField } from '@/utils/formValidation'
 
-const MAX_NAME_LENGTH = 100
-const MAX_EMAIL_LENGTH = 254
-const MAX_SUBJECT_LENGTH = 150
-const MAX_MESSAGE_LENGTH = 200
-const REQUEST_TIMEOUT_MS = 30000
+const MAX_NAME_LENGTH = CONTACT.MAX_NAME_LENGTH
+const MAX_EMAIL_LENGTH = CONTACT.MAX_EMAIL_LENGTH
+const MAX_SUBJECT_LENGTH = CONTACT.MAX_SUBJECT_LENGTH
+const MAX_MESSAGE_LENGTH = CONTACT.MAX_MESSAGE_LENGTH
+const REQUEST_TIMEOUT_MS = 25000
 
-function sanitize(str: string, maxLen?: number): string {
-  const s = str.replace(/<[^>]*>/g, '').replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, '').trim()
-  return maxLen ? s.slice(0, maxLen) : s
-}
+type ScriptResponse = { ok?: boolean; error?: string; formType?: string }
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -30,10 +28,10 @@ export function ContactForm() {
     e.preventDefault()
 
     const payload = {
-      name: sanitize(formData.name, MAX_NAME_LENGTH),
-      email: sanitize(formData.email, MAX_EMAIL_LENGTH),
-      subject: sanitize(formData.subject, MAX_SUBJECT_LENGTH),
-      message: sanitize(formData.message, MAX_MESSAGE_LENGTH),
+      name: sanitizeContactField(formData.name, MAX_NAME_LENGTH),
+      email: sanitizeContactField(formData.email, MAX_EMAIL_LENGTH),
+      subject: sanitizeContactField(formData.subject, MAX_SUBJECT_LENGTH),
+      message: sanitizeContactField(formData.message, MAX_MESSAGE_LENGTH),
     }
 
     if (!payload.name || !payload.email || !payload.subject || !payload.message) {
@@ -57,25 +55,36 @@ export function ContactForm() {
     const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
 
     try {
-      await fetch(contactUrl, {
+      const res = await fetch(contactUrl, {
         method: 'POST',
-        mode: 'no-cors',
+        mode: 'cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload),
         signal: controller.signal,
       })
       clearTimeout(timeoutId)
-      // Google Apps Script returns 302 redirect; with no-cors the response is
-      // opaque but the data IS sent and processed. Client-side validation already
-      // passed, so we treat a resolved fetch as success.
-      setStatus('success')
-      setFormData({ name: '', email: '', subject: '', message: '' })
+
+      const text = await res.text()
+      let data: ScriptResponse = {}
+      try {
+        data = text ? JSON.parse(text) : {}
+      } catch {
+        /* ignore */
+      }
+
+      if (res.ok && data.ok) {
+        setStatus('success')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        setErrorMsg(data.error || `Request failed (${res.status}). Please try again.`)
+        setStatus('error')
+      }
     } catch (err) {
       clearTimeout(timeoutId)
       if (err instanceof DOMException && err.name === 'AbortError') {
         setErrorMsg('Request timed out. Please try again.')
       } else {
-        setErrorMsg('Failed to send message. Please try again.')
+        setErrorMsg('Failed to send. Check your connection or try again later.')
       }
       setStatus('error')
     }

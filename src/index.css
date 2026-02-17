@@ -303,6 +303,16 @@ p, span, a, li {
   top: 0;
 }
 
+/* Keyboard focus visibility (accessibility) */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex="0"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 /* List styles */
 .list {
   margin: 0;

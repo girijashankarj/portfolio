@@ -26,6 +26,7 @@
 - [Quick Start](#quick-start)
 - [Project Structure](#project-structure)
 - [Development](#development)
+- [Security](#security)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -74,8 +75,8 @@ graph LR
 - **Project filtering** — filter projects by category (AI/ML, React/Web, JavaScript, Full Stack, Dev Tools)
 - **Search functionality** — Cmd/Ctrl + K to search projects and sections
 - **GitHub stats widget** — live GitHub repository statistics
-- **Contact form** — sends via Google Apps Script (requires `VITE_NEWSLETTER_SCRIPT_URL` secret)
-- **Tech newsletter signup** — same Apps Script; appends to Google Sheet
+- **Contact form** — submits via Google Apps Script; stores in Contact Subscribers sheet (requires `VITE_CONTACT_SCRIPT_URL`)
+- **Tech newsletter signup** — submits via Google Apps Script; stores in Newsletter Subscribers sheet (requires `VITE_NEWSLETTER_SCRIPT_URL`)
 - **Downloadable resume** — one-click resume download
 - **Back to Top button** — smooth scroll to top
 - **Responsive design** — mobile-first layout
@@ -318,10 +319,20 @@ Edit `src/common/constants.ts` and add projects to the `PROJECTS` array with app
 
 ### Newsletter & Contact Form
 
-Forms submit to Apps Script in a hidden iframe—no new tab. Add `VITE_CONTACT_SCRIPT_URL` and `VITE_NEWSLETTER_SCRIPT_URL` to repo secrets.
+Both forms submit via `fetch` to Google Apps Script web apps. Data is stored in Google Sheets (no backend on the portfolio).
 
-1. **Contact** — Deploy `apps-script/ContactCode.gs` as web app.
-2. **Newsletter** — Deploy `apps-script/NewsletterCode.gs` (bound to Sheet).
+**Required env / secrets (build time):**
+
+- `VITE_CONTACT_SCRIPT_URL` — Web app URL for the contact form (Deploy `apps-script/ContactCode.gs`).
+- `VITE_NEWSLETTER_SCRIPT_URL` — Web app URL for the newsletter (Deploy `apps-script/NewsletterCode.gs`).
+
+Add these to GitHub repo secrets for deployment, or to `.env` for local build. See `apps-script/README.md` for script setup and sheet IDs.
+
+---
+
+## Security
+
+The portfolio is a static site with no server or database. Form submissions go to Google Apps Script and Sheets. For details on safety from DDoS, data leaks, and common attacks, see [SECURITY.md](SECURITY.md).
 
 ---
 

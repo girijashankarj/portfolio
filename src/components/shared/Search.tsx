@@ -99,7 +99,9 @@ export function Search() {
   if (!isOpen) {
     return (
       <button
+        type="button"
         onClick={() => setIsOpen(true)}
+        aria-label="Open search (Ctrl+K or Cmd+K)"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -114,7 +116,7 @@ export function Search() {
         }}
         title="Search (Cmd/Ctrl + K)"
       >
-        <i className="fa-solid fa-magnifying-glass"></i>
+        <i className="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
         <span>Search...</span>
         <kbd style={{
           padding: '0.2rem 0.4rem',
@@ -149,6 +151,9 @@ export function Search() {
       />
       <div
         ref={searchRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Search projects and sections"
         style={{
           position: 'fixed',
           top: '50%',
@@ -173,13 +178,14 @@ export function Search() {
           padding: '1rem',
           borderBottom: '1px solid var(--border)',
         }}>
-          <i className="fa-solid fa-magnifying-glass" style={{ color: 'var(--muted)' }}></i>
+          <i className="fa-solid fa-magnifying-glass" style={{ color: 'var(--muted)' }} aria-hidden="true"></i>
           <input
-            type="text"
+            type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search projects, sections..."
             autoFocus
+            aria-label="Search input"
             style={{
               flex: 1,
               background: 'transparent',
@@ -190,10 +196,12 @@ export function Search() {
             }}
           />
           <button
+            type="button"
             onClick={() => {
               setIsOpen(false)
               setQuery('')
             }}
+            aria-label="Close search"
             style={{
               background: 'transparent',
               border: 'none',
@@ -202,7 +210,7 @@ export function Search() {
               padding: '0.25rem',
             }}
           >
-            <i className="fa-solid fa-xmark"></i>
+            <i className="fa-solid fa-xmark" aria-hidden="true"></i>
           </button>
         </div>
         <div style={{
@@ -229,6 +237,7 @@ export function Search() {
             results.map((result, index) => (
               <button
                 key={index}
+                type="button"
                 onClick={() => handleResultClick(result)}
                 style={{
                 width: '100%',

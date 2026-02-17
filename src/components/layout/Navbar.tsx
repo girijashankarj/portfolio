@@ -50,7 +50,7 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="navbar" style={{
+      <nav className="navbar" aria-label="Main navigation" style={{
         position: 'sticky',
         top: 0,
         zIndex: 60,

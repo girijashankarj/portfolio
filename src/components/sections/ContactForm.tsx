@@ -9,6 +9,10 @@ const MAX_SUBJECT_LENGTH = CONTACT.MAX_SUBJECT_LENGTH
 const MAX_MESSAGE_LENGTH = CONTACT.MAX_MESSAGE_LENGTH
 const REQUEST_TIMEOUT_MS = 25000
 
+/** Set to true to disable the contact form and show the disabled message. */
+const FORM_DISABLED = true
+const FORM_DISABLED_MESSAGE = 'The contact form is temporarily paused while we upgrade the email system. Check back soon!'
+
 type ScriptResponse = { ok?: boolean; error?: string; formType?: string }
 
 export function ContactForm() {
@@ -26,6 +30,7 @@ export function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (FORM_DISABLED) return
 
     const payload = {
       name: sanitizeContactField(formData.name, MAX_NAME_LENGTH),
@@ -103,13 +108,45 @@ export function ContactForm() {
     message: formData.message.length > MAX_MESSAGE_LENGTH,
   }
   const hasLimitError = overLimits.name || overLimits.email || overLimits.subject || overLimits.message
-  const submitDisabled = status === 'sending' || hasLimitError
+  const submitDisabled = FORM_DISABLED || status === 'sending' || hasLimitError
   const inputErrorStyle = { borderColor: '#ef4444' as const }
 
   return (
     <Reveal>
       <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Send Message</h3>
+        {FORM_DISABLED ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <p style={{ fontSize: '0.9rem', color: 'var(--muted)', margin: 0 }}>
+              <i className="fa-solid fa-pause-circle" style={{ marginRight: '0.5rem', color: 'var(--accent)' }}></i>
+              {FORM_DISABLED_MESSAGE}
+            </p>
+            <button
+              type="button"
+              disabled
+              style={{
+                padding: 'clamp(0.6rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem)',
+                borderRadius: '10px',
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: 'none',
+                color: 'var(--muted)',
+                fontSize: 'clamp(0.9rem, 2.5vw, 1rem)',
+                fontWeight: 700,
+                cursor: 'not-allowed',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                minHeight: '44px',
+                width: '100%',
+                opacity: 0.6,
+              }}
+            >
+              <i className="fa-solid fa-paper-plane"></i>
+              <span>Send Message (temporarily unavailable)</span>
+            </button>
+          </div>
+        ) : (
         <form
           onSubmit={handleSubmit}
           style={{
@@ -339,6 +376,7 @@ export function ContactForm() {
             )}
           </button>
         </form>
+        )}
 
       </div>
     </Reveal>

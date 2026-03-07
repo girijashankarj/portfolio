@@ -10,6 +10,10 @@ import {
 
 const REQUEST_TIMEOUT_MS = 25000
 
+/** Set to true to disable the newsletter form and show the disabled message. */
+const FORM_DISABLED = true
+const FORM_DISABLED_MESSAGE = 'Newsletter signup is temporarily paused while we upgrade the email system. Check back soon!'
+
 type ScriptResponse = { ok?: boolean; error?: string; formType?: string }
 
 const MAX_FIRST_NAME_LENGTH = NEWSLETTER.MAX_FIRST_NAME_LENGTH
@@ -43,6 +47,7 @@ export function NewsletterSubscribe() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (FORM_DISABLED) return
     if (!validateAll()) return
 
     const first = firstName.trim().slice(0, MAX_FIRST_NAME_LENGTH)
@@ -108,7 +113,7 @@ export function NewsletterSubscribe() {
   const hasLimitError = firstOver || lastOver || emailOver
   const hasFieldError = Boolean(fieldErrors.firstName || fieldErrors.lastName || fieldErrors.email)
   const missingRequired = !firstName.trim() || !lastName.trim() || !email.trim()
-  const submitDisabled = status === 'sending' || hasLimitError || hasFieldError || missingRequired
+  const submitDisabled = FORM_DISABLED || status === 'sending' || hasLimitError || hasFieldError || missingRequired
 
   const inputErrorStyle = { borderColor: '#ef4444' as const }
   const showError = (field: keyof FieldErrors) => fieldErrors[field] || (field === 'firstName' && firstOver) || (field === 'lastName' && lastOver) || (field === 'email' && emailOver)
@@ -123,7 +128,17 @@ export function NewsletterSubscribe() {
         <p style={{ marginBottom: '1rem', fontSize: '0.9rem', color: 'var(--muted)' }}>
           Curated AI, GenAI & MLOps digest. Weekly insights, no spam.
         </p>
-        {isConfigured ? (
+        {FORM_DISABLED ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <p style={{ fontSize: '0.9rem', color: 'var(--muted)', margin: 0 }}>
+              <i className="fa-solid fa-pause-circle" style={{ marginRight: '0.5rem', color: 'var(--accent)' }}></i>
+              {FORM_DISABLED_MESSAGE}
+            </p>
+            <button type="button" disabled className="btn-primary" style={{ width: '100%', justifyContent: 'center', opacity: 0.6, cursor: 'not-allowed' }}>
+              <i className="fa-solid fa-bell"></i> Subscribe (temporarily unavailable)
+            </button>
+          </div>
+        ) : isConfigured ? (
           <form
             onSubmit={handleSubmit}
             style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}

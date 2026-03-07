@@ -42,13 +42,13 @@ export const PROJECTS: Project[] = [
   
   // Gen AI Developer Tools
   { 
-    id: 'cursor-config', 
-    title: 'Cursor Config', 
-    url: 'https://github.com/girijashankarj/garry-cursor-config', 
+    id: 'cursor-handbook', 
+    title: 'Cursor Handbook', 
+    url: 'https://github.com/girijashankarj/cursor-handbook', 
     category: 'dev-tools',
-    description: 'Comprehensive Cursor IDE configuration and rules for AI-assisted development workflows.',
-    technologies: ['Cursor IDE', 'AI Tools', 'Configuration'],
-    highlights: ['AI development setup', 'Best practices']
+    description: 'Open-source rules engine for Cursor IDE — 110 rules, agents, and skills that turn your AI into a senior engineer who follows your standards.',
+    technologies: ['Cursor IDE', 'Rules Engine', 'Agents', 'Skills', 'Hooks'],
+    highlights: ['110 components', '30%+ token savings', 'Security guardrails']
   },
   { 
     id: 'clear-prompt', 
@@ -90,6 +90,16 @@ export const PROJECTS: Project[] = [
     description: 'Opinionated boilerplate template for rapid project setup with best practices and conventions.',
     technologies: ['Boilerplate', 'Project Templates'],
     highlights: ['Quick setup', 'Best practices']
+  },
+  { 
+    id: 'animal-care-gateway', 
+    title: 'Animal Care Gateway', 
+    url: 'https://github.com/girijashankarj/animalcaregateway', 
+    liveUrl: 'https://animalcaregateway.com/',
+    category: 'react-web',
+    description: 'Community-powered coordination hub for animal emergencies — verified resource listings, emergency SOPs, decision guides. Pune-first, live at animalcaregateway.com.',
+    technologies: ['React 19', 'Vite 7', 'Tailwind v4', 'TypeScript'],
+    highlights: ['Live production site', 'Emergency SOPs', 'Resource registry', 'Community-driven']
   },
   { 
     id: 'newsletter-subscription', 

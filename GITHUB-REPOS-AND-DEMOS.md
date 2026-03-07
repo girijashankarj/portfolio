@@ -13,7 +13,7 @@
 | Animal Care Gateway | [animalcaregateway](https://github.com/girijashankarj/animalcaregateway) | React, Vite, Tailwind, TypeScript |
 | RAG Repo Harness | [garry-rag-repo-harness](https://github.com/girijashankarj/garry-rag-repo-harness) | TypeScript, RAG, LLM |
 | Tech News Aggregator | [garry-tech-news-aggregator](https://github.com/girijashankarj/garry-tech-news-aggregator) | TypeScript, RSS, GitHub Actions |
-| Cursor Config | [garry-cursor-config](https://github.com/girijashankarj/garry-cursor-config) | Config, Cursor IDE |
+| Cursor Handbook | [cursor-handbook](https://github.com/girijashankarj/cursor-handbook) | Rules Engine, Cursor IDE, Agents, Skills |
 | Clear Prompt | [garry-clear-prompt](https://github.com/girijashankarj/garry-clear-prompt) | TypeScript, React |
 | Micro Dev Utilities | [garry-micro-dev-utilities](https://github.com/girijashankarj/garry-micro-dev-utilities) | TypeScript, Node, Vite |
 | N8N Decision Action | [garry-n8n-decision-action](https://github.com/girijashankarj/garry-n8n-decision-action) | TypeScript, React, N8N |
@@ -109,12 +109,12 @@ flowchart LR
 
 ### Group 2 — Config & template providers
 
-**Linkage:** Cursor config and OCD boilerplate are shared foundations; other garry-* repos reference or are bootstrapped from them (no runtime data shared).
+**Linkage:** Cursor handbook and OCD boilerplate are shared foundations; other garry-* repos reference or are bootstrapped from them (no runtime data shared).
 
 ```mermaid
 flowchart TB
   subgraph group2_providers["Group 2 — Providers"]
-    cursor_config[garry-cursor-config]
+    cursor_handbook[cursor-handbook]
     ocd_boilerplate[garry-ocd-boilerplate]
   end
   subgraph group2_consumers["Reference / bootstrap from"]
@@ -123,9 +123,9 @@ flowchart TB
     micro[garry-micro-dev-utilities]
     other[other garry-* projects]
   end
-  cursor_config -.->|"Cursor rules / config"| clear_prompt
-  cursor_config -.->|"Cursor rules / config"| n8n
-  cursor_config -.->|"Cursor rules / config"| other
+  cursor_handbook -.->|"Cursor rules / config"| clear_prompt
+  cursor_handbook -.->|"Cursor rules / config"| n8n
+  cursor_handbook -.->|"Cursor rules / config"| other
   ocd_boilerplate -.->|"scaffold"| other
 ```
 

@@ -12,7 +12,8 @@ export function Contact() {
           Contact
         </h2>
         <p className="section-kicker reveal">
-          Open to AI Platform Engineer roles, Gen AI/MLOps positions, consulting, and AI-enabled product work. 
+          Open to AI Platform Engineer roles, Gen AI/MLOps positions, consulting, and AI-enabled product work.
+          Also available for resume/portfolio reviews, architecture reviews, and workflow automation consulting.
           <strong style={{ display: 'block', marginTop: '0.5rem', color: 'var(--accent)' }}>
             <i className="fa-solid fa-circle-check" style={{ marginRight: '0.5rem' }}></i>
             Available for new opportunities · Response time: 24-48 hours

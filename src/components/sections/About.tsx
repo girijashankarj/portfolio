@@ -86,7 +86,7 @@ export function About() {
         </Reveal>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
+          gridTemplateColumns: 'repeat(2, 1fr)',
           gap: '1.5rem',
           alignItems: 'stretch',
         }}>
@@ -134,35 +134,6 @@ export function About() {
               display: 'flex',
               flexDirection: 'column',
             }}>
-              <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Achievements & Contributions</h3>
-              <div style={{ marginBottom: '1rem' }}>
-                <h4 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '0.95rem', fontWeight: 600 }}>Key Achievements:</h4>
-                <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem' }}>
-                  <li>Built Node.js packages for PR quality checks achieving <strong>98% test coverage</strong></li>
-                  <li>Created OpenAPI documentation automation and OpenSearch dashboards</li>
-                  <li>Developed advanced Cursor configurations with role-based AI assistance</li>
-                  <li>Building open-source agentic AI tooling — Cursor Handbook (110 rules/agents/skills) and Clear Prompt (AI prompt quality analyzer)</li>
-                </ul>
-              </div>
-              <div style={{ marginBottom: '1rem' }}>
-                <h4 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '0.95rem', fontWeight: 600 }}>Organizational Contributions:</h4>
-                <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem' }}>
-                  <li>Contributing to onboarding new team members with documentation and knowledge transfer</li>
-                  <li>Providing KT (Knowledge Transfer) sessions and technical training</li>
-                  <li>Sharing tech news, trends, and best practices across the organization</li>
-                  <li>Always vocal about new technologies, improvements, and innovation opportunities</li>
-                </ul>
-              </div>
-              <div style={{ marginTop: 'auto' }}></div>
-            </div>
-          </Reveal>
-          <Reveal>
-            <div className="card" style={{
-              gridColumn: 'span 1',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-            }}>
               <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>What I'm Looking For</h3>
               <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem', marginBottom: '1rem' }}>
                 <li><strong>AI Platform Engineer</strong> roles focusing on Gen AI and MLOps</li>
@@ -191,14 +162,6 @@ export function About() {
           @media (max-width: 900px) {
             #about > div > div:last-child {
               grid-template-columns: 1fr !important;
-            }
-          }
-          @media (min-width: 901px) and (max-width: 1200px) {
-            #about > div > div:last-child {
-              grid-template-columns: repeat(2, 1fr) !important;
-            }
-            #about > div > div:last-child > div:first-child {
-              grid-column: span 2 !important;
             }
           }
         `}</style>

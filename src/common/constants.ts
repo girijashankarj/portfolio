@@ -291,8 +291,6 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'skills', label: 'Skills', href: '#skills' },
   { id: 'projects', label: 'Projects', href: '#projects' },
   { id: 'journey', label: 'Journey', href: '#journey' },
-  { id: 'testimonials', label: 'Testimonials', href: '#testimonials' },
   { id: 'community', label: 'Community', href: '#community' },
-  { id: 'services', label: 'Services', href: '#services' },
   { id: 'contact', label: 'Contact', href: '#contact' },
 ]

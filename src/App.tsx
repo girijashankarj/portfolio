@@ -17,8 +17,6 @@ const LazySkills = lazy(() => import('./components/sections/Skills').then(m => (
 const LazyJourney = lazy(() => import('./components/sections/Journey').then(m => ({ default: m.Journey })))
 const LazyProjects = lazy(() => import('./components/sections/Projects').then(m => ({ default: m.Projects })))
 const LazyCommunity = lazy(() => import('./components/sections/Community').then(m => ({ default: m.Community })))
-const LazyServices = lazy(() => import('./components/sections/Services').then(m => ({ default: m.Services })))
-const LazyTestimonials = lazy(() => import('./components/sections/Testimonials').then(m => ({ default: m.Testimonials })))
 const LazyContact = lazy(() => import('./components/sections/Contact').then(m => ({ default: m.Contact })))
 
 function App() {
@@ -49,9 +47,7 @@ function App() {
             <LazySkills />
             <LazyProjects />
             <LazyJourney />
-            <LazyTestimonials />
             <LazyCommunity />
-            <LazyServices />
             <LazyContact />
           </Suspense>
         </ErrorBoundary>

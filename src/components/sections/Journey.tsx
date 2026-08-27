@@ -63,35 +63,15 @@ const EXPERIENCES = [
     ],
   },
   {
-    title: 'GS Lab · Senior Software Engineer',
-    period: 'Oct 2021 - Sep 2023 · Pune',
+    title: 'GS Lab · Full Stack Developer → Senior Software Engineer',
+    period: 'Feb 2020 - Sep 2023 · Pune',
     themes: [
       {
-        title: 'Gen AI & Product Development',
+        title: 'Product & Infrastructure',
         points: [
-          'Worked on Gen AI tool (Flutter Flow), building AI-powered applications and intelligent workflows, improving user engagement by <strong>50%</strong>',
-          'Built security systems, user management, and subscription management solutions for financial projects using React and Node.js, serving <strong>100K+ users</strong>',
-        ],
-      },
-      {
-        title: 'Real-time Analytics & Infrastructure',
-        points: [
-          'Developed real-time monitoring dashboard for UPI transactions, processing <strong>500K+ transactions daily</strong>',
+          'Built security, IAM, and subscription management solutions for financial projects using React and Node.js, serving <strong>100K+ users</strong>',
+          'Worked on Gen AI tool (Flutter Flow) and a real-time UPI transaction monitoring dashboard processing <strong>500K+ transactions daily</strong>',
           'Implemented AWS Serverless architecture with shared layers, reducing infrastructure costs by <strong>30%</strong>',
-        ],
-      },
-    ],
-  },
-  {
-    title: 'GS Lab · Full Stack Developer',
-    period: 'Feb 2020 - Sep 2021 · Pune',
-    themes: [
-      {
-        title: 'Full Stack Development',
-        points: [
-          'Built security, user management, and subscription management features for financial projects',
-          'Developed IAM solutions for global enterprise clients using React and Node.js',
-          'Built shared AWS layers, pipelines, and local debugging workflows for efficient development',
         ],
       },
     ],
@@ -103,9 +83,7 @@ const EXPERIENCES = [
       {
         title: 'Frontend & Product Development',
         points: [
-          'Worked on enterprise product suite including PIM (Product Information Management) and Marketing Document Management (MXM)',
-          'Gained foundational experience with React class components and early React versions (2017), building marketing experience management tools',
-          'Built POCs, reusable UI utilities, and refactored legacy codebases to modern ES6 and React patterns',
+          'Worked on enterprise product suite (PIM, Marketing Document Management), building with early React versions and refactoring legacy code to modern ES6/React patterns',
         ],
       },
     ],

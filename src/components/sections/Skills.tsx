@@ -2,21 +2,17 @@ import { Reveal } from '../shared/Reveal'
 
 const SKILLS = {
   'Data Engineering & Gen AI': [
-    'Data Engineering', 'Spark', 'Delta Lake', 'MLflow', 'Lakehouse Architecture', 'Databricks', 'Gen AI on Databricks', 'Databricks Workflows'
+    'Data Engineering', 'Spark', 'Delta Lake', 'MLflow', 'Databricks', 'Lakehouse Architecture'
   ],
   'Developer Tools & Automation': [
-    'Node.js Packages', 'PR Quality Checks', 'Lint & Format', 'Commit Message Validation', 'SQL Scaffold', 'Test Coverage (98%)', 'TypeScript Types', 'Enum Management', 'Interface Management', 'Mock Context Creation', 'API Mocking', 'OpenAPI YAML', 'Swagger', 'Readme.io', 'OpenSearch', 'Dashboard Creation', 'Log Processing', 'Metrics & KPIs'
+    'Node.js Tooling', 'PR Quality Automation', 'TypeScript Tooling', 'API Mocking', 'OpenAPI / Swagger', 'OpenSearch Dashboards'
   ],
   'AI Platform & MLOps': [
-    'AWS', 'AWS Bedrock', 'MLOps', 'Gen AI', 'Machine Learning', 'Serverless', 'Architecture', 'CI/CD', 'Jest',
-    'MCP Servers', 'GitHub Copilot', 'ChatMade', 'Cursor Hooks', 'Cursor Rules', 'Cursor Skills', 'RAG', 'Agent Mode', 'Plan Mode', 'Snowflake', 'Azure'
-  ],
-  'Workflow Automation & Gen AI Tools': [
-    'n8n', 'Retool', 'Flutter Flow', 'Workflow Automation', 'AI Workflows', 'Process Automation'
+    'AWS', 'AWS Bedrock', 'MLOps', 'Gen AI', 'MCP Servers', 'Cursor (Rules/Hooks/Skills)', 'GitHub Copilot', 'RAG', 'CI/CD',
+    'n8n', 'Retool', 'Flutter Flow', 'Snowflake', 'Azure'
   ],
   'Backend': [
-    'JavaScript (Primary)', 'Node.js', 'Python', 'Java', 'C++', 'GraphQL', 'REST APIs', 'MySQL', 'Data Structures & Algorithms',
-    'Google Firebase', 'Google Analytics', 'Google Maps API'
+    'JavaScript (Primary)', 'Node.js', 'Python', 'Java', 'REST APIs', 'GraphQL'
   ],
   'Development Tools & IDEs': [
     'Cursor', 'VSCode', 'IntelliJ IDEA', 'WebStorm'

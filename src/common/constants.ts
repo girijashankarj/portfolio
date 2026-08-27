@@ -286,6 +286,7 @@ export const PROJECT_CATEGORIES = [
 
 export const NAV_ITEMS: NavItem[] = [
   { id: 'about', label: 'About', href: '#about' },
+  { id: 'live-demo', label: 'Live Demo', href: '#live-demo' },
   { id: 'highlights', label: 'Highlights', href: '#highlights' },
   { id: 'skills', label: 'Skills', href: '#skills' },
   { id: 'projects', label: 'Projects', href: '#projects' },

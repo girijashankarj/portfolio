@@ -106,6 +106,7 @@ export function About() {
               <div style={{ marginBottom: '1rem' }}>
                 <h4 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '0.95rem', fontWeight: 600 }}>Core Specializations:</h4>
                 <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem' }}>
+                  <li>Agentic AI development — Claude Code agents, skills, and workflows built for real SDLC needs across roles</li>
                   <li>Workflow automation tools (n8n) and Gen AI tools (Flutter Flow, Retool)</li>
                   <li>Google services (Firebase, Analytics, Maps API) for backend and analytics</li>
                   <li>MLOps (AWS) and AI enablement leadership</li>
@@ -140,6 +141,7 @@ export function About() {
                   <li>Built Node.js packages for PR quality checks achieving <strong>98% test coverage</strong></li>
                   <li>Created OpenAPI documentation automation and OpenSearch dashboards</li>
                   <li>Developed advanced Cursor configurations with role-based AI assistance</li>
+                  <li>Building open-source agentic AI tooling — Cursor Handbook (110 rules/agents/skills) and Clear Prompt (AI prompt quality analyzer)</li>
                 </ul>
               </div>
               <div style={{ marginBottom: '1rem' }}>
@@ -167,6 +169,7 @@ export function About() {
                 <li><strong>Senior/Lead positions</strong> in AI enablement and developer tooling</li>
                 <li><strong>Consulting opportunities</strong> for AI adoption and automation</li>
                 <li><strong>AI-enabled product work</strong> in innovative startups or enterprises</li>
+                <li><strong>Agentic AI Engineering</strong> — designing agents, skills, and workflows for real SDLC use cases</li>
               </ul>
               <div style={{ marginBottom: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
                 <h4 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '0.95rem', fontWeight: 600 }}>Credentials:</h4>

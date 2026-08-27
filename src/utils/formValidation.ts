@@ -44,6 +44,7 @@ export function validateNewsletterEmail(value: string): string | undefined {
  * Strip HTML tags and control characters, trim, optionally truncate.
  */
 export function sanitizeContactField(str: string, maxLen?: number): string {
+  // eslint-disable-next-line no-control-regex -- intentional: strips control characters from user input as part of sanitization
   const s = str.replace(/<[^>]*>/g, '').replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, '').trim()
   return maxLen ? s.slice(0, maxLen) : s
 }

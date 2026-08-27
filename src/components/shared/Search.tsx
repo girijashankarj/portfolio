@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { PROJECTS } from '@/common/constants'
 import { NAV_ITEMS } from '@/common/constants'
 
@@ -13,7 +13,6 @@ interface SearchResult {
 export function Search() {
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
-  const [results, setResults] = useState<SearchResult[]>([])
   const searchRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -46,11 +45,8 @@ export function Search() {
     }
   }, [isOpen])
 
-  useEffect(() => {
-    if (!query.trim()) {
-      setResults([])
-      return
-    }
+  const results = useMemo<SearchResult[]>(() => {
+    if (!query.trim()) return []
 
     const searchLower = query.toLowerCase()
     const searchResults: SearchResult[] = []
@@ -82,7 +78,7 @@ export function Search() {
       }
     })
 
-    setResults(searchResults.slice(0, 10))
+    return searchResults.slice(0, 10)
   }, [query])
 
   const handleResultClick = (result: SearchResult) => {

@@ -174,6 +174,7 @@ export function Highlights() {
                 <li>Synechron Surpass Award</li>
                 <li>Synechron STAR Award</li>
                 <li>AWS ML Engineer Associate + AI Practitioner</li>
+                <li>Claude Certified Architect - Foundations (CCA-F)</li>
                 <li style={{ marginBottom: 0 }}>Leading AI enablement initiatives at Synechron</li>
               </ol>
             </div>

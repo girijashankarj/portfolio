@@ -172,7 +172,7 @@ export function About() {
                 <h4 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '0.95rem', fontWeight: 600 }}>Credentials:</h4>
                 <p style={{ marginBottom: 0, fontSize: '0.9rem' }}>
                   <strong>Education:</strong> MCA (Savitribai Phule Pune University)<br/>
-                  <strong>Certifications:</strong> AWS Certified AI Practitioner, AWS ML Engineer Associate<br/>
+                  <strong>Certifications:</strong> Claude Certified Architect - Foundations, AWS Certified AI Practitioner, AWS ML Engineer Associate<br/>
                   <strong>Pursuing:</strong> AWS Solutions Architect<br/>
                   <strong>Current Role:</strong> Leading AI enablement initiatives at Synechron
                 </p>

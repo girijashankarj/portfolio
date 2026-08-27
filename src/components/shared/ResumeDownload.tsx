@@ -173,6 +173,7 @@ CERTIFICATIONS & CREDENTIALS
 ═══════════════════════════════════════════════════════════════
 
 Professional Certifications:
+• Claude Certified Architect - Foundations (CCA-F) (Achieved: 2026) ✓
 • AWS Certified Machine Learning Engineer - Associate (Achieved: 2025, Expires: 2028) ✓
 • AWS Certified AI Practitioner (Achieved: 2025, Expires: 2028) ✓
 • Microsoft Azure Fundamentals (AZ900) (Achieved: 2023) ✓

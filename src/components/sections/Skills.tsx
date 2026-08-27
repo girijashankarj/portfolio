@@ -27,6 +27,7 @@ const SKILLS = {
 }
 
 const CERTIFICATIONS = [
+  { name: 'Claude Certified Architect - Foundations (CCA-F)', achieved: '2026', expires: null, verified: true },
   { name: 'AWS Certified Machine Learning Engineer - Associate', achieved: '2025', expires: '2028', verified: true },
   { name: 'AWS Certified AI Practitioner', achieved: '2025', expires: '2028', verified: true },
   { name: 'Microsoft Azure Fundamentals (AZ900)', achieved: '2023', expires: null, verified: true },

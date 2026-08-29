@@ -478,41 +478,195 @@ If the market converges around the feature, the platform can remain valuable und
 
 ---
 
-# Act 12: So Will Cursor Disappear?
-
-**Guest:**
-
-Let's answer the original question directly.
-
-Will Cursor disappear if VS Code becomes equally capable?
+# Act 12: The Economics of Building Instead of Buying
 
 **Host:**
 
-Not necessarily.
+There's another part of this debate we shouldn't ignore.
 
-But its current value proposition would become much harder to defend.
+Why would a company pay for Cursor indefinitely if it can build an adequate internal capability for a predictable cost?
 
-The likely possibilities are:
+Imagine a 100-developer company receives a quote of **₹1 crore for one year** of premium AI development tooling.
+
+Now imagine the company decides to invest in:
 
 ```text
-Scenario A
-VS Code remains behind
-→ Cursor remains strong
-
-Scenario B
-VS Code reaches parity
-→ Cursor differentiates on UX/innovation
-
-Scenario C
-VS Code becomes better
-→ Cursor needs a new moat
+Existing / purchased hardware
+        ↓
+Open coding models
+        ↓
+Internal AI gateway
+        ↓
+RAG + MCP
+        ↓
+VS Code integration
+        ↓
+Monitoring + evaluation
+        ↓
+Two engineers operating the platform
 ```
 
-The important thing is that **Cursor's existence is not guaranteed merely because it was first**.
+The company does not need to beat Cursor on every benchmark.
+
+It needs to achieve an acceptable SDLC outcome at a lower total cost.
+
+**Guest:**
+
+But building infrastructure has its own cost.
+
+**Host:**
+
+Absolutely. This isn't an argument that self-hosting is automatically cheaper.
+
+The correct comparison is:
+
+> **Cursor's total cost versus the total cost of ownership of the internal platform.**
+
+That includes hardware, electricity, engineering, maintenance, model evaluation, operations and opportunity cost.
+
+If the internal platform costs more, buy Cursor.
+
+If it costs materially less while delivering acceptable quality, the company has a rational reason to build.
 
 ---
 
-# Act 13: The Deeper Strategic Question
+# Act 13: The Individual Developer Case
+
+**Host:**
+
+For an individual developer, the calculation can be even simpler.
+
+If the developer already owns a capable MacBook, the hardware is effectively a sunk cost.
+
+They can run a suitable open model locally and accept slower inference.
+
+Suppose:
+
+```text
+Cursor → 2 minutes
+Local model → 2 hours
+```
+
+That sounds like a massive Cursor advantage.
+
+But if the developer is happy to let the local model run asynchronously, the relevant question becomes:
+
+> **Does the two-hour AI task prevent me from completing my work on time?**
+
+If the answer is no, the speed difference may not justify a recurring subscription.
+
+**Guest:**
+
+So latency only matters when it changes the outcome.
+
+**Host:**
+
+Exactly.
+
+> **Latency is a business variable, not automatically a business objective.**
+
+---
+
+# Act 14: The One-Week to One-Day Example
+
+**Host:**
+
+Consider an API feature that historically takes one week from approved requirement to production.
+
+An internal AI platform brings that down to one day through:
+
+- API generation
+- database operations
+- test generation
+- Playwright automation
+- code review assistance
+- deployment automation
+
+Now compare two AI systems:
+
+**System A:** completes its individual AI tasks extremely quickly.
+
+**System B:** is slower but still gets the complete feature into production in one day.
+
+If the production release cadence is weekly or biweekly, the extra inference speed may have limited incremental business value.
+
+The real metric is:
+
+> **Requirement approved → reliable production feature.**
+
+Not:
+
+> **Prompt submitted → first token.**
+
+This is why a company may rationally accept slower inference when the overall SDLC improvement is already substantial.
+
+---
+
+# Act 15: Why Cursor Still Has a Defence
+
+**Guest:**
+
+At this point, what is the strongest reason to keep paying Cursor?
+
+**Host:**
+
+There are still legitimate reasons.
+
+### Convenience
+
+You don't want to build and maintain the platform.
+
+### Frontier capability
+
+Cursor may provide better access to frontier models and agent workflows.
+
+### Developer experience
+
+A polished product can save engineering effort compared with maintaining your own system.
+
+### Product velocity
+
+Cursor can continuously improve without the customer operating the model infrastructure.
+
+But these are **economic and capability advantages**, not proof that companies must permanently depend on Cursor.
+
+---
+
+# Act 16: The Strongest Counterargument
+
+**Guest:**
+
+What if Cursor remains substantially better?
+
+What if its agents consistently solve difficult tasks that internal open models cannot?
+
+**Host:**
+
+Then use Cursor.
+
+The argument is not ideological.
+
+If the additional capability saves enough engineering time to exceed its cost, paying is rational.
+
+The internal platform can also route exceptional tasks to frontier APIs.
+
+```text
+                 AI Gateway
+                     │
+        ┌────────────┼────────────┐
+        ▼            ▼            ▼
+   Local Model   Private Model  Frontier API
+      80–90%          │            10–20%
+        │             │              │
+   Commodity      Sensitive       Difficult
+   SDLC tasks       work           tasks
+```
+
+The company can own the architecture without pretending every local model is better.
+
+---
+
+# Act 17: The Deeper Strategic Question
 
 **Host:**
 
@@ -540,7 +694,7 @@ And AI may accelerate this because many of the building blocks are software abst
 
 ---
 
-# Act 14: The Counterargument Against the Host
+# Act 18: The Counterargument Against the Host
 
 **Guest:**
 
@@ -562,7 +716,7 @@ A standalone product survives platform absorption when it can repeatedly create 
 
 ---
 
-# Act 15: The Final Debate
+# Act 19: The Final Debate
 
 **Guest:**
 
@@ -643,6 +797,8 @@ Cursor can survive if it continuously stays ahead, develops a durable moat, or c
 
 But if VS Code reaches or exceeds Cursor's practical AI capability while retaining its massive existing developer distribution and ecosystem, Cursor's current differentiation could become increasingly difficult to defend.
 
+The same logic applies economically: if an individual can run an adequate open model on hardware they already own, or a company can operate an internal AI platform at lower TCO than premium seats, then paying for Cursor needs to be justified by measurable additional value rather than simply speed or convenience.
+
 ---
 
 ## Discussion Questions
@@ -656,9 +812,14 @@ But if VS Code reaches or exceeds Cursor's practical AI capability while retaini
 7. Should an AI developer platform own the IDE or remain IDE-agnostic?
 8. Could Cursor's strongest long-term strategy be becoming the best AI development platform rather than simply the best AI IDE?
 9. What happens to Cursor if VS Code becomes 100% as capable but remains free?
+10. At what annual AI spend does private inference become economically attractive?
+11. When does an internal AI platform become cheaper than 100 premium developer seats?
+12. If local inference takes two hours but still delivers a one-day production cycle, how much is faster inference actually worth?
 
 ---
 
 ## Important Caveat
 
 The China–South Korea comparison in this discussion is a metaphor for capability internalisation and is not intended as a factual equivalence between semiconductor industrial development and software tooling. Semiconductor manufacturing involves vastly different physical, capital, supply-chain and intellectual-property barriers.
+
+The economic arguments are also scenario-based. Actual build-versus-buy decisions should use measured total cost of ownership, model quality, concurrency, reliability, security requirements, electricity costs and developer outcomes.

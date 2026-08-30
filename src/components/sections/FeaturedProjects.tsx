@@ -2,7 +2,10 @@ import { PROJECTS } from '@/common/constants'
 import { Reveal } from '../shared/Reveal'
 
 // Curated allowlist. Add project IDs here when you want to feature them publicly.
-const FEATURED_PROJECT_IDS = ['github-security-agent-mcp']
+const FEATURED_PROJECT_IDS = [
+  'github-security-agent-mcp',
+  'cursor-handbook',
+]
 
 export function FeaturedProjects() {
   const featuredProjects = FEATURED_PROJECT_IDS

@@ -7,8 +7,15 @@ import type { Project } from '@/types'
 import { Reveal } from '../shared/Reveal'
 
 // Public portfolio hide list. This does not delete or change GitHub repositories.
+// Educational/legacy work stays on GitHub but is intentionally hidden here.
 // Kalu Memories is intentionally retained.
 const HIDDEN_PROJECT_IDS = new Set([
+  // Educational / learning projects
+  'architecture-prep',
+  'react-patterns',
+  'idkjs',
+
+  // Legacy / low-signal projects
   'react-webpack',
   'react-explorer',
   'material-todo',
@@ -20,7 +27,19 @@ const HIDDEN_PROJECT_IDS = new Set([
   'vvedding',
 ])
 
-const VISIBLE_PROJECTS = PROJECTS.filter((project) => !HIDDEN_PROJECT_IDS.has(project.id))
+// Projects already presented in dedicated sections must not be repeated here.
+const DEDICATED_SECTION_PROJECT_IDS = new Set([
+  // Featured Projects
+  'github-security-agent-mcp',
+  'cursor-handbook',
+
+  // Live Demo
+  'clear-prompt',
+])
+
+const VISIBLE_PROJECTS = PROJECTS.filter(
+  (project) => !HIDDEN_PROJECT_IDS.has(project.id) && !DEDICATED_SECTION_PROJECT_IDS.has(project.id),
+)
 
 interface ProjectCategoryCardProps {
   categoryId: string
@@ -71,10 +90,12 @@ export function Projects() {
     return groups
   }, {}), [])
 
+  // Only show category filters that contain at least one visible project.
   const visibleCategories = PROJECT_CATEGORIES.filter((category) => category.id === 'all' || (projectsByCategory[category.id]?.length ?? 0) > 0)
   const filteredProjects = activeCategory === 'all' ? VISIBLE_PROJECTS : projectsByCategory[activeCategory] || []
 
   useEffect(() => {
+    // If a selected category becomes empty, return to All Projects.
     if (activeCategory !== 'all' && filteredProjects.length === 0) dispatch(setActiveCategory('all'))
   }, [activeCategory, filteredProjects.length, dispatch])
 
@@ -91,7 +112,9 @@ export function Projects() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '1.5rem', alignItems: 'stretch' }}>
-          {activeCategory === 'all' ? categoryCards.map((category) => <ProjectCategoryCard key={category.id} categoryId={category.id} categoryLabel={category.label} projects={projectsByCategory[category.id] ?? []} />) : <ProjectCategoryCard categoryId={activeCategory} categoryLabel={PROJECT_CATEGORIES.find(c => c.id === activeCategory)?.label || ''} projects={filteredProjects} />}
+          {activeCategory === 'all'
+            ? categoryCards.map((category) => <ProjectCategoryCard key={category.id} categoryId={category.id} categoryLabel={category.label} projects={projectsByCategory[category.id] ?? []} />)
+            : <ProjectCategoryCard categoryId={activeCategory} categoryLabel={PROJECT_CATEGORIES.find(c => c.id === activeCategory)?.label || ''} projects={filteredProjects} />}
         </div>
       </div>
     </section>

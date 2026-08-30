@@ -1,6 +1,6 @@
 # GitHub Repos, Live Demos & Design Connectivity
 
-**Portfolio project count: 25** (curated public repositories only)
+**Portfolio project count: 24** (curated public repositories only)
 
 ---
 
@@ -18,7 +18,6 @@ Only repositories that are **public on GitHub** and intentionally selected for t
 
 | Project | Repo | Tech |
 |--------|------|------|
-| Animal Care Gateway | [animalcaregateway](https://github.com/girijashankarj/animalcaregateway) | React, Vite, Tailwind, TypeScript |
 | RAG Repo Harness | [garry-rag-repo-harness](https://github.com/girijashankarj/garry-rag-repo-harness) | TypeScript, RAG, LLM |
 | Tech News Aggregator | [garry-tech-news-aggregator](https://github.com/girijashankarj/garry-tech-news-aggregator) | TypeScript, RSS, GitHub Actions |
 | Cursor Handbook | [cursor-handbook](https://github.com/girijashankarj/cursor-handbook) | Rules Engine, Cursor IDE, Agents, Skills |
@@ -60,7 +59,6 @@ Only projects with an actual live deployment are listed here. The GitHub Securit
 | React Patterns | [discuss_react_patterns](https://girijashankarj.github.io/discuss_react_patterns/) | React |
 | IDKJS Series | [idkjs_javascript_series](https://girijashankarj.github.io/idkjs_javascript_series/) | JavaScript |
 | Kings Royal Riders | [kings-royal-riders](https://girijashankarj.github.io/kings-royal-riders/) | JavaScript |
-| Animal Care Gateway | [animalcaregateway.com](https://animalcaregateway.com/) | React, Vite, Tailwind |
 
 ---
 

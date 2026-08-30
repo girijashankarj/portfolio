@@ -36,6 +36,7 @@ export const PROJECTS: Project[] = [
     title: 'Cursor Handbook',
     url: 'https://github.com/girijashankarj/cursor-handbook',
     category: 'dev-tools',
+    featured: true,
     description: 'Open-source rules engine for Cursor IDE — 110 rules, agents, and skills that turn your AI into a senior engineer who follows your standards.',
     technologies: ['Cursor IDE', 'Rules Engine', 'Agents', 'Skills', 'Hooks'],
     highlights: ['110 components', '30%+ token savings', 'Security guardrails']

@@ -1,6 +1,6 @@
 # GitHub Repos, Live Demos & Design Connectivity
 
-**Repo count: 30** (matches [GitHub profile](https://github.com/girijashankarj))
+**Repo count: 31** (matches [GitHub profile](https://github.com/girijashankarj))
 
 ---
 
@@ -12,6 +12,7 @@
 |--------|------|------|
 | Animal Care Gateway | [animalcaregateway](https://github.com/girijashankarj/animalcaregateway) | React, Vite, Tailwind, TypeScript |
 | RAG Repo Harness | [garry-rag-repo-harness](https://github.com/girijashankarj/garry-rag-repo-harness) | TypeScript, RAG, LLM |
+| **GitHub Security Agent MCP** | [garry-github-security-agent-mcp](https://github.com/girijashankarj/garry-github-security-agent-mcp) | TypeScript, MCP, Claude Code, GitHub API, GitHub Actions |
 | Tech News Aggregator | [garry-tech-news-aggregator](https://github.com/girijashankarj/garry-tech-news-aggregator) | TypeScript, RSS, GitHub Actions |
 | Cursor Handbook | [cursor-handbook](https://github.com/girijashankarj/cursor-handbook) | Rules Engine, Cursor IDE, Agents, Skills |
 | Clear Prompt | [garry-clear-prompt](https://github.com/girijashankarj/garry-clear-prompt) | TypeScript, React |

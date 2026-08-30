@@ -5,11 +5,9 @@ import { ResumeDownload } from '../shared/ResumeDownload'
 interface GitHubStats {
   publicRepos: number
   totalStars: number
-  securityAgentStars: number
 }
 
 const GITHUB_USER = 'girijashankarj'
-const SECURITY_AGENT_REPO = 'garry-github-security-agent-mcp'
 const GITHUB_API = `https://api.github.com/users/${GITHUB_USER}/repos`
 
 function useGitHubStats() {
@@ -21,16 +19,14 @@ function useGitHubStats() {
     const loadStats = async () => {
       try {
         const repos: Array<{
-          name: string
           fork: boolean
           stargazers_count: number
         }> = []
         let page = 1
 
-        // GitHub's unauthenticated API returns public repositories only.
-        // Follow pagination so the aggregate stays accurate as the profile grows.
-        while (page <= 10) {
-          const response = await fetch(`${GITHUB_API}?per_page=100&page=${page}&type=owner&sort=updated`, {
+        // Fetch every public repository page so the total reflects all repositories.
+        while (true) {
+          const response = await fetch(`${GITHUB_API}?per_page=100&page=${page}&type=owner`, {
             cache: 'no-store',
           })
           if (!response.ok) throw new Error(`GitHub API returned ${response.status}`)
@@ -41,20 +37,19 @@ function useGitHubStats() {
           page += 1
         }
 
-        // Count original public work, excluding forks from the portfolio metric.
+        // Aggregate stars from original repositories. Forks are excluded so the
+        // metric represents work published by this profile, not inherited stars.
         const originalRepos = repos.filter((repo) => !repo.fork)
         const totalStars = originalRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0)
-        const securityAgent = originalRepos.find((repo) => repo.name === SECURITY_AGENT_REPO)
 
         if (!cancelled) {
           setStats({
             publicRepos: originalRepos.length,
             totalStars,
-            securityAgentStars: securityAgent?.stargazers_count ?? 0,
           })
         }
       } catch {
-        // Keep the hero clean if GitHub is rate-limited or temporarily unavailable.
+        // Do not show a misleading value if GitHub is temporarily unavailable.
         if (!cancelled) setStats(null)
       }
     }
@@ -107,14 +102,14 @@ export function Hero() {
               Open to Opportunities
             </span>
           </div>
-          
+
           <h1 className="hero-title" style={{
             fontSize: 'clamp(2.4rem, 3.4vw, 3.6rem)',
             margin: '0.6rem 0 1rem',
           }}>
             Building Gen AI solutions and enabling teams with intelligent automation.
           </h1>
-          
+
           <p className="hero-subtitle" style={{
             color: 'var(--muted)',
             fontSize: '1.05rem',
@@ -122,7 +117,7 @@ export function Hero() {
           }}>
             Senior Associate Consultant with 8+ years specializing in AI Platform Engineering, MLOps, and leading AI enablement initiatives. <strong>JavaScript is my primary language</strong>, with experience in Python, Java, and C++.
           </p>
-          
+
           <div className="button-group" style={{
             marginBottom: '1rem',
             display: 'flex',
@@ -143,50 +138,29 @@ export function Hero() {
             </a>
             <ResumeDownload />
           </div>
-          
+
           <div style={{ marginTop: '1rem', display: 'flex', gap: '0.6rem' }}>
-            <a
-              href="https://www.linkedin.com/in/girijashankarj"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="icon-only"
-              style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-blue)', transition: 'all 0.2s ease' }}
-              aria-label="LinkedIn"
-            >
+            <a href="https://www.linkedin.com/in/girijashankarj" target="_blank" rel="noopener noreferrer" className="icon-only" style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-blue)', transition: 'all 0.2s ease' }} aria-label="LinkedIn">
               <i className="fab fa-linkedin-in"></i>
             </a>
-            <a
-              href="https://github.com/girijashankarj"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="icon-only"
-              style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-green)', transition: 'all 0.2s ease' }}
-              aria-label="GitHub"
-            >
+            <a href="https://github.com/girijashankarj" target="_blank" rel="noopener noreferrer" className="icon-only" style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-green)', transition: 'all 0.2s ease' }} aria-label="GitHub">
               <i className="fab fa-github"></i>
             </a>
-            <a
-              href="https://medium.com/@girijashankarj"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="icon-only"
-              style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-blue)', transition: 'all 0.2s ease' }}
-              aria-label="Medium"
-            >
+            <a href="https://medium.com/@girijashankarj" target="_blank" rel="noopener noreferrer" className="icon-only" style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-blue)', transition: 'all 0.2s ease' }} aria-label="Medium">
               <i className="fab fa-medium"></i>
             </a>
           </div>
         </Reveal>
-        
+
         <Reveal>
           <div className="card-elevated">
-            <img 
+            <img
               src={`${import.meta.env.BASE_URL}assets/profile.png`}
-              alt="Girijashankar Jambhale - AI Platform Engineer specializing in Gen AI and MLOps" 
+              alt="Girijashankar Jambhale - AI Platform Engineer specializing in Gen AI and MLOps"
               loading="lazy"
               width="400"
               height="400"
-              style={{ borderRadius: '1rem', border: '1px solid var(--border)', width: '100%', marginBottom: '1rem' }} 
+              style={{ borderRadius: '1rem', border: '1px solid var(--border)', width: '100%', marginBottom: '1rem' }}
             />
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(0.4rem, 2vw, 0.6rem)' }}>
               <span className="pill" style={{ background: 'var(--pill-bg-green)', borderColor: 'var(--pill-border-green)' }}>
@@ -208,41 +182,25 @@ export function Hero() {
             </div>
 
             <div
-              aria-label="GitHub open source statistics"
+              aria-label="GitHub repository statistics"
               style={{
                 marginTop: '1rem',
                 paddingTop: '1rem',
                 borderTop: '1px solid var(--border)',
                 display: 'grid',
-                gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
                 gap: '0.6rem',
                 textAlign: 'center',
               }}
             >
               <div>
-                <strong style={{ display: 'block', fontSize: '1.15rem' }}>
-                  {githubStats?.publicRepos ?? '—'}
-                </strong>
-                <span style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>Public Repos</span>
+                <strong style={{ display: 'block', fontSize: '1.15rem' }}>{githubStats?.publicRepos ?? '—'}</strong>
+                <span style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>Repos</span>
               </div>
               <div>
-                <strong style={{ display: 'block', fontSize: '1.15rem' }}>
-                  {githubStats?.totalStars ?? '—'}
-                </strong>
-                <span style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>GitHub Stars</span>
+                <strong style={{ display: 'block', fontSize: '1.15rem' }}>{githubStats?.totalStars ?? '—'}</strong>
+                <span style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>Stars</span>
               </div>
-              <a
-                href="https://github.com/girijashankarj/garry-github-security-agent-mcp"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: 'inherit', textDecoration: 'none' }}
-                aria-label="GitHub Security Agent MCP repository"
-              >
-                <strong style={{ display: 'block', fontSize: '1.15rem' }}>
-                  {githubStats?.securityAgentStars ?? '—'}
-                </strong>
-                <span style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>Security Agent ★</span>
-              </a>
             </div>
           </div>
         </Reveal>

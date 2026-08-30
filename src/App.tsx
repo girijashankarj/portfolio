@@ -13,6 +13,7 @@ import './App.css'
 
 // Lazy load below-fold sections
 const LazyLiveDemo = lazy(() => import('./components/sections/LiveDemo').then(m => ({ default: m.LiveDemo })))
+const LazyFeaturedProjects = lazy(() => import('./components/sections/FeaturedProjects').then(m => ({ default: m.FeaturedProjects })))
 const LazySkills = lazy(() => import('./components/sections/Skills').then(m => ({ default: m.Skills })))
 const LazyJourney = lazy(() => import('./components/sections/Journey').then(m => ({ default: m.Journey })))
 const LazyProjects = lazy(() => import('./components/sections/Projects').then(m => ({ default: m.Projects })))
@@ -38,6 +39,7 @@ function App() {
         <ErrorBoundary fallback={<section className="section"><div className="container"><p style={{ textAlign: 'center', color: 'var(--muted)' }}>Something went wrong loading this section. Please refresh the page.</p></div></section>}>
           <Suspense fallback={<div style={{ padding: '3.5rem 0', textAlign: 'center' }} role="status" aria-live="polite">Loading...</div>}>
             <LazyLiveDemo />
+            <LazyFeaturedProjects />
           </Suspense>
         </ErrorBoundary>
         <About />

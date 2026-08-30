@@ -1,7 +1,76 @@
+import { useEffect, useState } from 'react'
 import { Reveal } from '../shared/Reveal'
 import { ResumeDownload } from '../shared/ResumeDownload'
 
+interface GitHubStats {
+  publicRepos: number
+  totalStars: number
+  securityAgentStars: number
+}
+
+const GITHUB_USER = 'girijashankarj'
+const SECURITY_AGENT_REPO = 'garry-github-security-agent-mcp'
+const GITHUB_API = `https://api.github.com/users/${GITHUB_USER}/repos`
+
+function useGitHubStats() {
+  const [stats, setStats] = useState<GitHubStats | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+
+    const loadStats = async () => {
+      try {
+        const repos: Array<{
+          name: string
+          fork: boolean
+          stargazers_count: number
+        }> = []
+        let page = 1
+
+        // GitHub's unauthenticated API returns public repositories only.
+        // Follow pagination so the aggregate stays accurate as the profile grows.
+        while (page <= 10) {
+          const response = await fetch(`${GITHUB_API}?per_page=100&page=${page}&type=owner&sort=updated`, {
+            cache: 'no-store',
+          })
+          if (!response.ok) throw new Error(`GitHub API returned ${response.status}`)
+
+          const pageRepos = await response.json() as typeof repos
+          repos.push(...pageRepos)
+          if (pageRepos.length < 100) break
+          page += 1
+        }
+
+        // Count original public work, excluding forks from the portfolio metric.
+        const originalRepos = repos.filter((repo) => !repo.fork)
+        const totalStars = originalRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0)
+        const securityAgent = originalRepos.find((repo) => repo.name === SECURITY_AGENT_REPO)
+
+        if (!cancelled) {
+          setStats({
+            publicRepos: originalRepos.length,
+            totalStars,
+            securityAgentStars: securityAgent?.stargazers_count ?? 0,
+          })
+        }
+      } catch {
+        // Keep the hero clean if GitHub is rate-limited or temporarily unavailable.
+        if (!cancelled) setStats(null)
+      }
+    }
+
+    loadStats()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  return stats
+}
+
 export function Hero() {
+  const githubStats = useGitHubStats()
+
   return (
     <header
       id="top"
@@ -81,17 +150,7 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               className="icon-only"
-              style={{
-                width: '40px',
-                height: '40px',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: '999px',
-                border: '1px solid var(--border)',
-                background: 'var(--icon-bg-blue)',
-                transition: 'all 0.2s ease',
-              }}
+              style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-blue)', transition: 'all 0.2s ease' }}
               aria-label="LinkedIn"
             >
               <i className="fab fa-linkedin-in"></i>
@@ -101,17 +160,7 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               className="icon-only"
-              style={{
-                width: '40px',
-                height: '40px',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: '999px',
-                border: '1px solid var(--border)',
-                background: 'var(--icon-bg-green)',
-                transition: 'all 0.2s ease',
-              }}
+              style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-green)', transition: 'all 0.2s ease' }}
               aria-label="GitHub"
             >
               <i className="fab fa-github"></i>
@@ -121,17 +170,7 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               className="icon-only"
-              style={{
-                width: '40px',
-                height: '40px',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: '999px',
-                border: '1px solid var(--border)',
-                background: 'var(--icon-bg-blue)',
-                transition: 'all 0.2s ease',
-              }}
+              style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-blue)', transition: 'all 0.2s ease' }}
               aria-label="Medium"
             >
               <i className="fab fa-medium"></i>
@@ -147,46 +186,63 @@ export function Hero() {
               loading="lazy"
               width="400"
               height="400"
-              style={{
-                borderRadius: '1rem',
-                border: '1px solid var(--border)',
-                width: '100%',
-                marginBottom: '1rem',
-              }} 
+              style={{ borderRadius: '1rem', border: '1px solid var(--border)', width: '100%', marginBottom: '1rem' }} 
             />
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: 'clamp(0.4rem, 2vw, 0.6rem)',
-            }}>
-              <span className="pill" style={{
-                background: 'var(--pill-bg-green)',
-                borderColor: 'var(--pill-border-green)',
-              }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(0.4rem, 2vw, 0.6rem)' }}>
+              <span className="pill" style={{ background: 'var(--pill-bg-green)', borderColor: 'var(--pill-border-green)' }}>
                 <i className="fa-solid fa-cloud" style={{ marginRight: '0.45rem' }}></i>
                 <span>AWS · Cloud · Serverless</span>
               </span>
-              <span className="pill" style={{
-                background: 'var(--pill-bg-blue)',
-                borderColor: 'var(--pill-border-blue)',
-              }}>
+              <span className="pill" style={{ background: 'var(--pill-bg-blue)', borderColor: 'var(--pill-border-blue)' }}>
                 <i className="fa-solid fa-sitemap" style={{ marginRight: '0.45rem' }}></i>
                 <span>Architecture · Systems</span>
               </span>
-              <span className="pill" style={{
-                background: 'var(--pill-bg-blue)',
-                borderColor: 'var(--pill-border-blue)',
-              }}>
+              <span className="pill" style={{ background: 'var(--pill-bg-blue)', borderColor: 'var(--pill-border-blue)' }}>
                 <i className="fa-solid fa-wand-magic-sparkles" style={{ marginRight: '0.45rem' }}></i>
                 <span>n8n · Gen AI · Automation</span>
               </span>
-              <span className="pill" style={{
-                background: 'var(--pill-bg-blue)',
-                borderColor: 'var(--pill-border-blue)',
-              }}>
+              <span className="pill" style={{ background: 'var(--pill-bg-blue)', borderColor: 'var(--pill-border-blue)' }}>
                 <i className="fa-solid fa-code" style={{ marginRight: '0.45rem' }}></i>
                 <span>React · Node · Next.js</span>
               </span>
+            </div>
+
+            <div
+              aria-label="GitHub open source statistics"
+              style={{
+                marginTop: '1rem',
+                paddingTop: '1rem',
+                borderTop: '1px solid var(--border)',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+                gap: '0.6rem',
+                textAlign: 'center',
+              }}
+            >
+              <div>
+                <strong style={{ display: 'block', fontSize: '1.15rem' }}>
+                  {githubStats?.publicRepos ?? '—'}
+                </strong>
+                <span style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>Public Repos</span>
+              </div>
+              <div>
+                <strong style={{ display: 'block', fontSize: '1.15rem' }}>
+                  {githubStats?.totalStars ?? '—'}
+                </strong>
+                <span style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>GitHub Stars</span>
+              </div>
+              <a
+                href="https://github.com/girijashankarj/garry-github-security-agent-mcp"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'inherit', textDecoration: 'none' }}
+                aria-label="GitHub Security Agent MCP repository"
+              >
+                <strong style={{ display: 'block', fontSize: '1.15rem' }}>
+                  {githubStats?.securityAgentStars ?? '—'}
+                </strong>
+                <span style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>Security Agent ★</span>
+              </a>
             </div>
           </div>
         </Reveal>

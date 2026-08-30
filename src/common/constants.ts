@@ -17,6 +17,7 @@ export const PROJECTS: Project[] = [
     title: 'GitHub Security Agent MCP',
     url: 'https://github.com/girijashankarj/garry-github-security-agent-mcp',
     category: 'ai-ml',
+    featured: true,
     description: 'Agentic GitHub security platform combining Claude Code, Cursor, MCP, deterministic remediation, CI automation, and post-change verification.',
     technologies: ['TypeScript', 'MCP', 'Claude Code', 'GitHub API', 'GitHub Actions'],
     highlights: ['Agentic security workflows', 'MCP server', 'Deterministic remediation', 'Security verification']
@@ -30,26 +31,6 @@ export const PROJECTS: Project[] = [
     technologies: ['TypeScript', 'RSS', 'GitHub Actions', 'Google Sheets'],
     highlights: ['Daily digest', 'Per-subscriber topics', 'Zero-cost automation']
   },
-  {
-    id: 'mlops-learnings',
-    title: 'MLOps Learnings',
-    url: 'https://github.com/girijashankarj/garry-mlops-learnings',
-    category: 'ai-ml',
-    description: 'Structured learning path for ML, Data Engineering, MLOps, and modern LLM tooling.',
-    technologies: ['Python', 'MLOps', 'Data Engineering', 'LLM'],
-    highlights: ['Learning path', 'Documentation', 'Best practices']
-  },
-  {
-    id: 'tensorflow',
-    title: 'TensorFlow Practice App',
-    url: 'https://github.com/girijashankarj/tensorflow_practise_app',
-    category: 'ai-ml',
-    description: 'Hands-on machine learning practice application using TensorFlow for building and training neural networks.',
-    technologies: ['TensorFlow', 'Python', 'Machine Learning'],
-    highlights: ['Neural network implementation', 'Model training and evaluation']
-  },
-
-  // Gen AI Developer Tools
   {
     id: 'cursor-handbook',
     title: 'Cursor Handbook',
@@ -101,16 +82,6 @@ export const PROJECTS: Project[] = [
     highlights: ['Quick setup', 'Best practices']
   },
   {
-    id: 'animal-care-gateway',
-    title: 'Animal Care Gateway',
-    url: 'https://github.com/girijashankarj/animalcaregateway',
-    liveUrl: 'https://animalcaregateway.com/',
-    category: 'react-web',
-    description: 'Community-powered coordination hub for animal emergencies — verified resource listings, emergency SOPs, decision guides. Pune-first, live at animalcaregateway.com.',
-    technologies: ['React 19', 'Vite 7', 'Tailwind v4', 'TypeScript'],
-    highlights: ['Live production site', 'Emergency SOPs', 'Resource registry', 'Community-driven']
-  },
-  {
     id: 'newsletter-subscription',
     title: "Garry's Daily Digest — Newsletter",
     url: 'https://github.com/girijashankarj/garry-newsletter-subscription-page',
@@ -137,15 +108,6 @@ export const PROJECTS: Project[] = [
     description: 'Daily digest of Google Tasks delivered to your inbox (7-day + Common + Targets lists). Runs at 7:00 AM IST on GitHub Actions.',
     technologies: ['TypeScript', 'Google Tasks API', 'GitHub Actions'],
     highlights: ['HTML email digest', 'Pending tasks only', 'Zero cost']
-  },
-  {
-    id: 'dsa-leet',
-    title: "Garry's DSA & LeetCode",
-    url: 'https://github.com/girijashankarj/garry-dsa-leet',
-    category: 'dev-tools',
-    description: 'Data Structures & Algorithms learning path with LeetCode practice and structured notes.',
-    technologies: ['Python', 'DSA', 'LeetCode'],
-    highlights: ['Structured learning', 'Patterns & solutions']
   },
   {
     id: 'architecture-prep',
@@ -193,15 +155,6 @@ export const PROJECTS: Project[] = [
     description: 'Full-stack authentication system with Next.js, Node.js, and Chakra UI for modern login experience.',
     technologies: ['Node.js', 'Authentication', 'Next.js', 'Chakra UI'],
     highlights: ['Full-stack auth', 'Modern UI', 'JWT tokens']
-  },
-  {
-    id: 'python-backend',
-    title: 'Garry Python Backend',
-    url: 'https://github.com/girijashankarj/garry-python-backend',
-    category: 'fullstack',
-    description: 'Production-ready FastAPI backend: SQLAlchemy async, JWT auth, rate limiting, structured logging, Docker, AWS deployment.',
-    technologies: ['FastAPI', 'PostgreSQL', 'JWT', 'Docker', 'AWS'],
-    highlights: ['CRUD + auth', 'Rate limiting', 'ECS/Lambda ready']
   },
   {
     id: 'react-patterns',
@@ -272,15 +225,6 @@ export const PROJECTS: Project[] = [
     description: 'Interactive web application showcasing JavaScript capabilities and modern web features.',
     technologies: ['JavaScript', 'Web APIs'],
     highlights: ['Interactive features']
-  },
-  {
-    id: 'vvedding',
-    title: 'Vvedding',
-    url: 'https://github.com/girijashankarj/vvedding',
-    category: 'fullstack',
-    description: 'Full-stack wedding management application with modern UI and backend integration.',
-    technologies: ['Full Stack', 'Node.js', 'React'],
-    highlights: ['Wedding management', 'Full-stack app']
   },
 ]
 

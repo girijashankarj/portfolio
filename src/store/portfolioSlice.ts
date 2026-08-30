@@ -19,7 +19,7 @@ const getInitialTheme = (): 'light' | 'dark' => {
 }
 
 const initialState: PortfolioState = {
-  activeCategory: 'dev-tools',
+  activeCategory: 'all',
   activeNav: 'about',
   theme: getInitialTheme(),
 }

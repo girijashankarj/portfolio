@@ -50,8 +50,6 @@ export const PROJECTS: Project[] = [
     technologies: ['AI Tools', 'NLP', 'TypeScript', 'React'],
     highlights: ['Prompt optimization', 'Quality scoring', 'AI workflow']
   },
-
-  // Developer Tools & Config
   {
     id: 'micro-dev',
     title: 'Micro Dev Utilities',
@@ -118,8 +116,6 @@ export const PROJECTS: Project[] = [
     technologies: ['System Design', 'HLD', 'LLD', 'AWS'],
     highlights: ['Interview prep', 'Design patterns', 'AWS cert focus']
   },
-
-  // React/Web Projects
   {
     id: 'react-webpack',
     title: 'React Basic Webpack App',
@@ -166,8 +162,6 @@ export const PROJECTS: Project[] = [
     technologies: ['Documentation', 'Education', 'React'],
     highlights: ['Interactive examples', 'Pattern explanations']
   },
-
-  // JavaScript Projects
   {
     id: 'js-flux-explorer',
     title: 'JS File Explorer App (Flux)',
@@ -197,7 +191,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'idkjs',
-    title: 'I Don\'t Know JS - Series',
+    title: "I Don't Know JS - Series",
     url: 'https://github.com/girijashankarj/idkjs_javascript_series',
     liveUrl: 'https://girijashankarj.github.io/idkjs_javascript_series/',
     category: 'javascript',
@@ -205,8 +199,6 @@ export const PROJECTS: Project[] = [
     technologies: ['JavaScript', 'Education', 'Documentation'],
     highlights: ['Deep JS concepts', 'Learning resource']
   },
-
-  // Full Stack Applications
   {
     id: 'kalu-memories',
     title: 'Kalu Memories (HTML/CSS/JS)',
@@ -240,6 +232,7 @@ export const PROJECT_CATEGORIES = [
 export const NAV_ITEMS: NavItem[] = [
   { id: 'about', label: 'About', href: '#about' },
   { id: 'live-demo', label: 'Live Demo', href: '#live-demo' },
+  { id: 'featured-projects', label: 'Featured Projects', href: '#featured-projects' },
   { id: 'highlights', label: 'Highlights', href: '#highlights' },
   { id: 'skills', label: 'Skills', href: '#skills' },
   { id: 'projects', label: 'Projects', href: '#projects' },

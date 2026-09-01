@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setActiveCategory } from '@/store/portfolioSlice'
 import type { RootState } from '@/store'
 import { PROJECTS, PROJECT_CATEGORIES } from '@/common/constants'
+import { isArchivedGitHubProject } from '@/common/github'
+import { useGitHubRepos } from '@/hooks/useGitHubRepos'
 import type { Project } from '@/types'
 import { Reveal } from '../shared/Reveal'
 
@@ -10,9 +12,7 @@ import { Reveal } from '../shared/Reveal'
 // Educational/learning and low-signal legacy work stays on GitHub but is intentionally hidden.
 // Kalu Memories is intentionally retained.
 const HIDDEN_PROJECT_IDS = new Set([
-  'architecture-prep', 'react-patterns', 'idkjs',
-  'react-webpack', 'react-explorer', 'material-todo', 'next-login',
-  'js-flux-explorer', 'neon-counter', 'json-diff', 'kings-riders', 'vvedding',
+  'architecture-prep',
 ])
 
 // Live Demo and Featured projects are intentionally also shown in this catalogue.
@@ -57,14 +57,20 @@ function ProjectCategoryCard({ categoryId, categoryLabel, projects }: ProjectCat
 export function Projects() {
   const dispatch = useDispatch()
   const { activeCategory } = useSelector((state: RootState) => state.portfolio)
+  const { archivedRepoNames } = useGitHubRepos()
 
-  const projectsByCategory = useMemo(() => VISIBLE_PROJECTS.reduce<Record<string, Project[]>>((groups, project) => {
+  const visibleProjects = useMemo(
+    () => VISIBLE_PROJECTS.filter((project) => !isArchivedGitHubProject(project.url, archivedRepoNames)),
+    [archivedRepoNames],
+  )
+
+  const projectsByCategory = useMemo(() => visibleProjects.reduce<Record<string, Project[]>>((groups, project) => {
     ;(groups[project.category] ??= []).push(project)
     return groups
-  }, {}), [])
+  }, {}), [visibleProjects])
 
   const visibleCategories = PROJECT_CATEGORIES.filter((category) => category.id === 'all' || (projectsByCategory[category.id]?.length ?? 0) > 0)
-  const filteredProjects = activeCategory === 'all' ? VISIBLE_PROJECTS : projectsByCategory[activeCategory] || []
+  const filteredProjects = activeCategory === 'all' ? visibleProjects : projectsByCategory[activeCategory] || []
 
   useEffect(() => {
     if (activeCategory !== 'all' && filteredProjects.length === 0) dispatch(setActiveCategory('all'))

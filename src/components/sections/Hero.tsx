@@ -1,70 +1,9 @@
-import { useEffect, useState } from 'react'
 import { Reveal } from '../shared/Reveal'
 import { ResumeDownload } from '../shared/ResumeDownload'
-
-interface GitHubStats {
-  publicRepos: number
-  totalStars: number
-}
-
-const GITHUB_USER = 'girijashankarj'
-const GITHUB_API = `https://api.github.com/users/${GITHUB_USER}/repos`
-
-function useGitHubStats() {
-  const [stats, setStats] = useState<GitHubStats | null>(null)
-
-  useEffect(() => {
-    let cancelled = false
-
-    const loadStats = async () => {
-      try {
-        const repos: Array<{
-          fork: boolean
-          stargazers_count: number
-        }> = []
-        let page = 1
-
-        // Fetch every public repository page so the total reflects all repositories.
-        while (true) {
-          const response = await fetch(`${GITHUB_API}?per_page=100&page=${page}&type=owner`, {
-            cache: 'no-store',
-          })
-          if (!response.ok) throw new Error(`GitHub API returned ${response.status}`)
-
-          const pageRepos = await response.json() as typeof repos
-          repos.push(...pageRepos)
-          if (pageRepos.length < 100) break
-          page += 1
-        }
-
-        // Aggregate stars from original repositories. Forks are excluded so the
-        // metric represents work published by this profile, not inherited stars.
-        const originalRepos = repos.filter((repo) => !repo.fork)
-        const totalStars = originalRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0)
-
-        if (!cancelled) {
-          setStats({
-            publicRepos: originalRepos.length,
-            totalStars,
-          })
-        }
-      } catch {
-        // Do not show a misleading value if GitHub is temporarily unavailable.
-        if (!cancelled) setStats(null)
-      }
-    }
-
-    loadStats()
-    return () => {
-      cancelled = true
-    }
-  }, [])
-
-  return stats
-}
+import { useGitHubRepos } from '@/hooks/useGitHubRepos'
 
 export function Hero() {
-  const githubStats = useGitHubStats()
+  const { totalStars } = useGitHubRepos()
 
   return (
     <header
@@ -182,25 +121,16 @@ export function Hero() {
             </div>
 
             <div
-              aria-label="GitHub repository statistics"
+              aria-label="GitHub star count"
               style={{
                 marginTop: '1rem',
                 paddingTop: '1rem',
                 borderTop: '1px solid var(--border)',
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-                gap: '0.6rem',
                 textAlign: 'center',
               }}
             >
-              <div>
-                <strong style={{ display: 'block', fontSize: '1.15rem' }}>{githubStats?.publicRepos ?? '—'}</strong>
-                <span style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>Repos</span>
-              </div>
-              <div>
-                <strong style={{ display: 'block', fontSize: '1.15rem' }}>{githubStats?.totalStars ?? '—'}</strong>
-                <span style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>Stars</span>
-              </div>
+              <strong style={{ display: 'block', fontSize: '1.15rem' }}>{totalStars ?? '—'}</strong>
+              <span style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>Stars</span>
             </div>
           </div>
         </Reveal>

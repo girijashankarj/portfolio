@@ -30,9 +30,6 @@ export const PROJECTS: Project[] = [
     id: 'n8n-decision', title: 'N8N Decision Action', url: 'https://github.com/girijashankarj/garry-n8n-decision-action', liveUrl: 'https://girijashankarj.github.io/garry-n8n-decision-action/', category: 'dev-tools', description: 'Custom N8N workflow action for decision-making and conditional logic in automation.', technologies: ['N8N', 'Workflow Automation'], highlights: ['Workflow automation', 'Decision logic']
   },
   {
-    id: 'ocd-boilerplate', title: 'OCD Boilerplate', url: 'https://github.com/girijashankarj/garry-ocd-boilerplate', category: 'dev-tools', description: 'Opinionated boilerplate template for rapid project setup with best practices and conventions.', technologies: ['Boilerplate', 'Project Templates'], highlights: ['Quick setup', 'Best practices']
-  },
-  {
     id: 'newsletter-subscription', title: "Garry's Daily Digest — Newsletter", url: 'https://github.com/girijashankarj/garry-newsletter-subscription-page', liveUrl: 'https://girijashankarj.github.io/garry-newsletter-subscription-page/', category: 'react-web', description: 'Newsletter subscription page: subscribe/unsubscribe, topic tags, article count. React + Vite + Tailwind, Google Sheet via Apps Script.', technologies: ['React 19', 'Vite 7', 'Tailwind v4', 'Apps Script'], highlights: ['Live on GitHub Pages', '3-step wizard', 'Light/dark theme']
   },
   {
@@ -45,37 +42,7 @@ export const PROJECTS: Project[] = [
     id: 'architecture-prep', title: "Garry's Architecture Preparation", url: 'https://github.com/girijashankarj/garry-architecture-prep', category: 'dev-tools', description: 'Language-neutral repo for HLD, LLD, Software Architecture, and AWS Solutions Architecture.', technologies: ['System Design', 'HLD', 'LLD', 'AWS'], highlights: ['Interview prep', 'Design patterns', 'AWS cert focus']
   },
   {
-    id: 'react-webpack', title: 'React Basic Webpack App', url: 'https://github.com/girijashankarj/react_basic_webpack_app', category: 'react-web', description: 'React application with custom Webpack configuration demonstrating build setup and optimization.', technologies: ['Webpack', 'Babel', 'React', 'SCSS'], highlights: ['Custom Webpack config', 'Build optimization']
-  },
-  {
-    id: 'react-explorer', title: 'React File Explorer App', url: 'https://github.com/girijashankarj/reactjs_file_explorer_app', category: 'react-web', description: 'File explorer component built with React showcasing tree navigation and file management UI.', technologies: ['File System API', 'JavaScript', 'React'], highlights: ['Tree structure navigation', 'File management UI']
-  },
-  {
-    id: 'material-todo', title: 'Material-UI Todo App', url: 'https://github.com/girijashankarj/material_ui_todo_app', category: 'react-web', description: 'Todo application built with React and Material-UI demonstrating modern UI patterns and state management.', technologies: ['State Management', 'React', 'Material-UI'], highlights: ['Material Design', 'CRUD operations', 'Filtering']
-  },
-  {
-    id: 'next-login', title: 'Next Login Page (React/Node/Chakra)', url: 'https://github.com/girijashankarj/next_login_page', category: 'react-web', description: 'Full-stack authentication system with Next.js, Node.js, and Chakra UI for modern login experience.', technologies: ['Node.js', 'Authentication', 'Next.js', 'Chakra UI'], highlights: ['Full-stack auth', 'Modern UI', 'JWT tokens']
-  },
-  {
-    id: 'react-patterns', title: 'React Concepts & Patterns', url: 'https://github.com/girijashankarj/discuss_react_patterns', liveUrl: 'https://girijashankarj.github.io/discuss_react_patterns/', category: 'react-web', description: 'Educational website explaining React concepts, patterns, and best practices with interactive examples.', technologies: ['Documentation', 'Education', 'React'], highlights: ['Interactive examples', 'Pattern explanations']
-  },
-  {
-    id: 'js-flux-explorer', title: 'JS File Explorer App (Flux)', url: 'https://github.com/girijashankarj/js_file_explorer_app_with_flux', category: 'javascript', description: 'File explorer implementation using Flux architecture pattern demonstrating unidirectional data flow.', technologies: ['JavaScript', 'Flux Architecture', 'Vanilla JS'], highlights: ['Flux pattern', 'Unidirectional data flow']
-  },
-  {
-    id: 'neon-counter', title: 'Neon Counter App (Flux)', url: 'https://github.com/girijashankarj/neon_counter_app_with_flux_architecture', category: 'javascript', description: 'Neon-styled counter application implementing Flux architecture with modern UI effects.', technologies: ['Flux', 'JavaScript', 'CSS Animations'], highlights: ['Flux architecture', 'Neon UI effects']
-  },
-  {
-    id: 'json-diff', title: 'JSON Diff using Lodash', url: 'https://github.com/girijashankarj/json_diff_using_lodash', category: 'javascript', description: 'Utility tool for comparing JSON objects and highlighting differences using Lodash library.', technologies: ['JavaScript', 'Lodash', 'JSON'], highlights: ['Deep comparison', 'Difference highlighting']
-  },
-  {
-    id: 'idkjs', title: "I Don't Know JS - Series", url: 'https://github.com/girijashankarj/idkjs_javascript_series', liveUrl: 'https://girijashankarj.github.io/idkjs_javascript_series/', category: 'javascript', description: 'Educational series exploring JavaScript fundamentals, advanced concepts, and language quirks.', technologies: ['JavaScript', 'Education', 'Documentation'], highlights: ['Deep JS concepts', 'Learning resource']
-  },
-  {
     id: 'kalu-memories', title: 'Kalu Memories (HTML/CSS/JS)', url: 'https://github.com/girijashankarj/kalu_memories', category: 'fullstack', description: 'Memory sharing web application built with vanilla HTML, CSS, and JavaScript.', technologies: ['HTML', 'CSS', 'JavaScript'], highlights: ['Vanilla JS', 'Memory sharing']
-  },
-  {
-    id: 'kings-riders', title: 'Kings Royal Riders (JavaScript)', url: 'https://github.com/girijashankarj/kings-royal-riders', liveUrl: 'https://girijashankarj.github.io/kings-royal-riders/', category: 'fullstack', description: 'Interactive web application showcasing JavaScript capabilities and modern web features.', technologies: ['JavaScript', 'Web APIs'], highlights: ['Interactive features']
   },
 ]
 

@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { isArchivedGitHubProject } from '@/common/github'
+import { useGitHubRepos } from '@/hooks/useGitHubRepos'
 import { Reveal } from '../shared/Reveal'
 
 const DEMOS = [
@@ -128,6 +130,14 @@ function DemoCard({
 }
 
 export function LiveDemo() {
+  const { archivedRepoNames } = useGitHubRepos()
+  const visibleDemos = useMemo(
+    () => DEMOS.filter((demo) => !isArchivedGitHubProject(demo.repoUrl, archivedRepoNames)),
+    [archivedRepoNames],
+  )
+
+  if (visibleDemos.length === 0) return null
+
   return (
     <section id="live-demo" className="section">
       <div className="container">
@@ -138,7 +148,7 @@ export function LiveDemo() {
         <p className="section-kicker reveal">
           Real tools I built and shipped, not screenshots. Try them below, or open them in their own tab.
         </p>
-        {DEMOS.map((demo) => (
+        {visibleDemos.map((demo) => (
           <DemoCard key={demo.title} {...demo} />
         ))}
       </div>

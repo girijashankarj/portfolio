@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { PROJECTS } from '@/common/constants'
 import { NAV_ITEMS } from '@/common/constants'
+import { isArchivedGitHubProject } from '@/common/github'
+import { useGitHubRepos } from '@/hooks/useGitHubRepos'
 
 interface SearchResult {
   type: 'project' | 'section'
@@ -14,6 +16,7 @@ export function Search() {
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
   const searchRef = useRef<HTMLDivElement>(null)
+  const { archivedRepoNames } = useGitHubRepos()
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -53,6 +56,7 @@ export function Search() {
 
     // Search projects
     PROJECTS.forEach((project) => {
+      if (isArchivedGitHubProject(project.url, archivedRepoNames)) return
       if (
         project.title.toLowerCase().includes(searchLower) ||
         project.description?.toLowerCase().includes(searchLower) ||
@@ -79,7 +83,7 @@ export function Search() {
     })
 
     return searchResults.slice(0, 10)
-  }, [query])
+  }, [query, archivedRepoNames])
 
   const handleResultClick = (result: SearchResult) => {
     if (result.url) {

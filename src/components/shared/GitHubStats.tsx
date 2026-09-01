@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
 interface GitHubStats {
-  public_repos: number
   followers: number
   following: number
 }
@@ -29,7 +28,6 @@ export function GitHubStats() {
         if (response.ok) {
           const data = await response.json()
           setStats({
-            public_repos: data.public_repos || 0,
             followers: data.followers || 0,
             following: data.following || 0,
           })
@@ -100,9 +98,6 @@ export function GitHubStats() {
         color: 'var(--muted)',
         flexWrap: 'wrap',
       }}>
-        <span>
-          <strong style={{ color: 'var(--text)' }}>{stats.public_repos}</strong> Repos
-        </span>
         <span>
           <strong style={{ color: 'var(--text)' }}>{stats.followers}</strong> Followers
         </span>

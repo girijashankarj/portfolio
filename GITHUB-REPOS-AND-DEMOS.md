@@ -1,6 +1,6 @@
 # GitHub Repos, Live Demos & Design Connectivity
 
-**Portfolio project count: 24** (curated public repositories only)
+**Portfolio project count: 25** (curated public repositories only)
 
 ---
 
@@ -13,6 +13,7 @@ Only repositories that are **public on GitHub** and intentionally selected for t
 | Project | Repo | Tech |
 |--------|------|------|
 | **GitHub Security Agent MCP** | [garry-github-security-agent-mcp](https://github.com/girijashankarj/garry-github-security-agent-mcp) | TypeScript, MCP, Claude Code, GitHub API, GitHub Actions |
+| **AWS Infra Canvas** | [aws-infra-canvas](https://github.com/girijashankarj/aws-infra-canvas) | React, TypeScript, CloudFormation, Terraform, AWS CDK, Vite |
 
 ### Other selected repositories
 
@@ -46,7 +47,7 @@ Only repositories that are **public on GitHub** and intentionally selected for t
 
 ## 2. Live demos
 
-Only projects with an actual live deployment are listed here. The GitHub Security Agent MCP is intentionally **not** listed as a live demo.
+Only projects with an actual live deployment are listed here. AWS Infra Canvas and the GitHub Security Agent MCP are intentionally **not** listed as live demos.
 
 | Project | Live URL | Tech |
 |--------|----------|------|

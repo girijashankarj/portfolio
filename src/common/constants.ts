@@ -21,6 +21,9 @@ export const PROJECTS: Project[] = [
     id: 'mcp-caply', title: 'MCP Caply — MCP Server Explorer', url: 'https://github.com/girijashankarj/mcp-caply', liveUrl: 'https://girijashankarj.github.io/mcp-caply/', category: 'ai-ml', featured: true, description: 'Interactive MCP server explorer and capability viewer. Explore MCP tools and server capabilities through a live browser-based demo.', technologies: ['MCP', 'TypeScript', 'AI Tools'], highlights: ['Interactive MCP explorer', 'Live demo', 'Capability viewer']
   },
   {
+    id: 'aws-infra-canvas', title: 'AWS Infra Canvas', url: 'https://github.com/girijashankarj/aws-infra-canvas', category: 'dev-tools', featured: true, description: 'Two-pane editor: infrastructure-as-code on the left, an AWS architecture diagram on the right, kept in sync both ways — with a Well-Architected review. Runs entirely in the browser; no backend or AWS credentials.', technologies: ['React', 'TypeScript', 'CloudFormation', 'Terraform', 'AWS CDK', 'Vite'], highlights: ['Bidirectional IaC ↔ diagram', 'Well-Architected scoring', 'CloudFormation, Terraform, and CDK', 'Client-side only']
+  },
+  {
     id: 'micro-dev', title: 'Micro Dev Utilities', url: 'https://github.com/girijashankarj/garry-micro-dev-utilities', liveUrl: 'https://girijashankarj.github.io/garry-micro-dev-utilities/', category: 'dev-tools', description: 'Collection of micro-utilities and helper functions for faster development workflows.', technologies: ['Utilities', 'Developer Tools'], highlights: ['Productivity tools', 'Reusable utilities']
   },
   {

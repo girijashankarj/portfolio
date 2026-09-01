@@ -5,6 +5,7 @@ import { Reveal } from '../shared/Reveal'
 const FEATURED_PROJECT_IDS = [
   'github-security-agent-mcp',
   'cursor-handbook',
+  'aws-infra-canvas',
 ]
 
 export function FeaturedProjects() {

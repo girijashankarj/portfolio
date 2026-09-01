@@ -1,4 +1,4 @@
-export type ProjectCategory = 'all' | 'ai-ml' | 'react-web' | 'javascript' | 'fullstack' | 'dev-tools'
+export type ProjectCategory = 'ai-agents' | 'cloud-arch' | 'automation' | 'products'
 
 export interface Project {
   id: string

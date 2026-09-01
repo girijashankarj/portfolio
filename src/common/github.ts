@@ -10,24 +10,9 @@ export interface GitHubRepo {
   stargazers_count: number
 }
 
-export function githubRepoNameFromUrl(url: string): string | undefined {
-  try {
-    const { pathname } = new URL(url)
-    const [, repo] = pathname.split('/').filter(Boolean)
-    return repo || undefined
-  } catch {
-    return undefined
-  }
-}
-
-/** Public, active, original work only. Private and archived repos stay off the portfolio. */
+/** Count stars from public original repos only. */
 export function isPortfolioEligibleRepo(repo: Pick<GitHubRepo, 'private' | 'archived' | 'fork'>): boolean {
   return !repo.private && !repo.archived && !repo.fork
-}
-
-export function isArchivedGitHubProject(projectUrl: string, archivedRepoNames: Set<string>): boolean {
-  const name = githubRepoNameFromUrl(projectUrl)
-  return Boolean(name && archivedRepoNames.has(name))
 }
 
 let ownerReposPromise: Promise<GitHubRepo[]> | null = null

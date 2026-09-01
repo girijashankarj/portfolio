@@ -1,6 +1,4 @@
 import { PROJECTS } from '@/common/constants'
-import { isArchivedGitHubProject } from '@/common/github'
-import { useGitHubRepos } from '@/hooks/useGitHubRepos'
 import { Reveal } from '../shared/Reveal'
 
 // Curated allowlist. Add project IDs here when you want to feature them publicly.
@@ -11,11 +9,9 @@ const FEATURED_PROJECT_IDS = [
 ]
 
 export function FeaturedProjects() {
-  const { archivedRepoNames } = useGitHubRepos()
   const featuredProjects = FEATURED_PROJECT_IDS
     .map((id) => PROJECTS.find((project) => project.id === id))
     .filter((project): project is NonNullable<typeof project> => Boolean(project))
-    .filter((project) => !isArchivedGitHubProject(project.url, archivedRepoNames))
 
   if (featuredProjects.length === 0) return null
 

@@ -24,11 +24,6 @@ export function useGitHubRepos() {
     }
   }, [])
 
-  const archivedRepoNames = useMemo(
-    () => new Set((repos ?? []).filter((repo) => repo.archived).map((repo) => repo.name)),
-    [repos],
-  )
-
   const totalStars = useMemo(
     () => (repos ?? [])
       .filter(isPortfolioEligibleRepo)
@@ -37,8 +32,6 @@ export function useGitHubRepos() {
   )
 
   return {
-    repos,
-    archivedRepoNames,
     totalStars: repos ? totalStars : null,
   }
 }

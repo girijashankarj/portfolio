@@ -8,6 +8,12 @@ export const PROJECTS: Project[] = [
     id: 'cursor-handbook', title: 'Cursor Handbook', url: 'https://github.com/girijashankarj/cursor-handbook', category: 'ai-agents', featured: true, description: 'Open-source rules engine for Cursor IDE — 110 rules, agents, and skills that turn your AI into a senior engineer who follows your standards.', technologies: ['Cursor IDE', 'Rules Engine', 'Agents', 'Skills', 'Hooks'], highlights: ['110 components', '30%+ token savings', 'Security guardrails']
   },
   {
+    id: 'claude-handbook', title: 'Claude Handbook', url: 'https://github.com/girijashankarj/claude-handbook', category: 'ai-agents', description: 'Curated Claude Code configuration — skills, subagents, path-scoped rules, hooks, and output styles — plus a reference handbook for every Claude Code extension surface.', technologies: ['Claude Code', 'Skills', 'Subagents', 'Hooks', 'Plugins'], highlights: ['22 skills, 12 subagents', 'Installable as a plugin', 'Every extension surface documented']
+  },
+  {
+    id: 'claude-cursor-handbook', title: 'Claude + Cursor Handbook', url: 'https://github.com/girijashankarj/claude-cursor-handbook', category: 'ai-agents', description: 'One repository configured for both Claude Code and Cursor, sharing a single source of truth for instructions, rules, skills, hooks, and MCP — with the converters and tests to prove it.', technologies: ['Claude Code', 'Cursor IDE', 'Python', 'Bash', 'MCP'], highlights: ['One config, both agents', 'Rule converter, both directions', 'Hooks that run under either tool']
+  },
+  {
     id: 'mcp-caply', title: 'MCP Caply — MCP Server Explorer', url: 'https://github.com/girijashankarj/mcp-caply', liveUrl: 'https://girijashankarj.github.io/mcp-caply/', category: 'ai-agents', featured: true, description: 'Interactive MCP server explorer and capability viewer. Explore MCP tools and server capabilities through a live browser-based demo.', technologies: ['MCP', 'TypeScript', 'AI Tools'], highlights: ['Interactive MCP explorer', 'Live demo', 'Capability viewer']
   },
   {

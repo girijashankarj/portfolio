@@ -1,6 +1,6 @@
 # GitHub Repos, Live Demos & Design Connectivity
 
-**Portfolio project count: 14** (curated public repositories only)
+**Portfolio project count: 15** (curated public repositories only)
 
 ---
 
@@ -22,13 +22,14 @@ Only repositories that are **public on GitHub** and intentionally selected for t
 | RAG Repo Harness | [garry-rag-repo-harness](https://github.com/girijashankarj/garry-rag-repo-harness) | AI Agents & MCP | TypeScript, RAG, LLM |
 | Tech News Aggregator | [garry-tech-news-aggregator](https://github.com/girijashankarj/garry-tech-news-aggregator) | Automation & Workflows | TypeScript, RSS, GitHub Actions |
 | Cursor Handbook | [cursor-handbook](https://github.com/girijashankarj/cursor-handbook) | AI Agents & MCP | Rules Engine, Cursor IDE, Agents, Skills |
+| Claude Handbook | [claude-handbook](https://github.com/girijashankarj/claude-handbook) | AI Agents & MCP | Claude Code, Skills, Subagents, Hooks, Plugins |
+| Claude + Cursor Handbook | [claude-cursor-handbook](https://github.com/girijashankarj/claude-cursor-handbook) | AI Agents & MCP | Claude Code, Cursor IDE, Python, Bash, MCP |
 | Clear Prompt | [garry-clear-prompt](https://github.com/girijashankarj/garry-clear-prompt) | AI Agents & MCP | TypeScript, React |
 | Micro Dev Utilities | [garry-micro-dev-utilities](https://github.com/girijashankarj/garry-micro-dev-utilities) | Products & Web Apps | TypeScript, Node, Vite |
 | N8N Decision Action | [garry-n8n-decision-action](https://github.com/girijashankarj/garry-n8n-decision-action) | Automation & Workflows | TypeScript, React, N8N |
 | Newsletter Subscription | [garry-newsletter-subscription-page](https://github.com/girijashankarj/garry-newsletter-subscription-page) | Products & Web Apps | React, Vite, Tailwind |
 | Kalu Memories | [kalu_memories](https://github.com/girijashankarj/kalu_memories) | Products & Web Apps | HTML, CSS, JavaScript |
 | Portfolio | [portfolio](https://github.com/girijashankarj/portfolio) | Products & Web Apps | React, TypeScript, Vite |
-| Claude Handbook | [claude-handbook](https://github.com/girijashankarj/claude-handbook) | AI Agents & MCP | Claude, AI tooling |
 | MCP Caply | [mcp-caply](https://github.com/girijashankarj/mcp-caply) | AI Agents & MCP | TypeScript, MCP |
 | Architecture Prep | [garry-architecture-prep](https://github.com/girijashankarj/garry-architecture-prep) | Cloud & Architecture | System Design, HLD, LLD, AWS |
 

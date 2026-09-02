@@ -33,7 +33,10 @@ jobs:
       
       - name: Type-check
         run: npx tsc -b
-      
+
+      - name: Test
+        run: npx vitest run
+
       - name: Build
         env:
           GITHUB_PAGES: 'true'

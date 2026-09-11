@@ -1,18 +1,25 @@
 # Claude Certified Architect - Foundations (CCAR-F / CCA-F) v2
 
-> An architecture-first study guide for Claude Certified Architect - Foundations. The goal is not feature memorization. The goal is to recognize the requirement, identify the failure mode, select the smallest reliable mechanism, place it at the correct boundary, and explain why the alternatives are weaker.
+## 1. Verified exam facts
 
-## 1. Exam model
+The following are current preparation facts verified against Anthropic's certification portal and certification FAQ. Certification logistics can change, so re-check the current official certification documentation before booking or publishing updates.
 
-| Item | Preparation reference |
+| Item | Current fact |
 |---|---|
+| Certification | Claude Certified Architect - Foundations |
+| Role | Architect |
+| Level | Foundations |
 | Questions | 60 |
-| Time | 120 minutes |
-| Question formats | Multiple choice and multiple response |
+| Exam time | 120 minutes |
+| Total seat time | Approximately 135 minutes |
+| Question formats | Multiple choice and scenario-based multiple response |
+| Language | English |
 | Score | Scaled 100-1000 |
 | Passing score | 720 |
 | Validity | 12 months |
 | Delivery | Online proctored or Pearson VUE test center |
+| Eligibility | Currently available to people at Claude Partner Network organizations; registration requires a recognized partner company email |
+| Minimum age | 18 |
 
 ### Domain weighting
 
@@ -26,7 +33,22 @@
 
 Mnemonic: **A Thief Can Prompt Correctly**.
 
-Certification logistics and eligibility can change. Current official Anthropic certification documentation is the authority for booking, delivery, eligibility, scoring, and policy.
+Anthropic describes the certification as validating the ability to scope and design Claude-based solutions, select an appropriate model and deployment platform, distinguish agentic from single-shot architectures, and account for evaluation, cost, and responsible deployment.
+
+Anthropic's certification FAQ identifies the current exam guide as the authoritative source for exam scope and task statements. The earlier practice exam on the old platform was retired during the Pearson VUE migration; the current exam guide includes sample questions.
+
+### What is not an official exam rule in this guide
+
+The following are study heuristics created for this guide, not claims about Anthropic's scoring algorithm or official exam procedure:
+
+- PROOF
+- STER
+- PICK-FLAG-MOVE
+- the 105-minute first-pass target
+- the pacing checkpoints
+- the decision matrix
+- the anti-pattern list
+- the illustrative scenario patterns below
 
 ---
 
@@ -553,7 +575,9 @@ A concise escalation package should include case ID, root cause, relevant identi
 
 ---
 
-# 9. Scenario patterns
+# 9. Illustrative scenario patterns
+
+> These are practice scenarios synthesized from the published domain areas, not claims about the actual confidential exam scenario bank or question content.
 
 ## Customer support
 
@@ -765,12 +789,20 @@ Review every incorrect answer, every guessed-correct answer, and every question 
 
 Prioritize PROOF, the decision matrix, orchestration, tools/MCP, Claude Code surfaces, structured output, context/reliability, anti-patterns, and pacing.
 
+### Eligibility check
+
+Before booking, verify that you currently meet Anthropic's partner eligibility and registration requirements.
+
 ---
 
 # 14. Final checklist
 
 - [ ] I know the 60-question / 120-minute structure.
-- [ ] I understand multiple choice vs multiple response.
+- [ ] I know total seat time is approximately 135 minutes.
+- [ ] I understand multiple choice vs scenario-based multiple response.
+- [ ] I know the exam is English only.
+- [ ] I understand the current Partner Network eligibility requirement.
+- [ ] I meet the minimum age requirement of 18.
 - [ ] I know the 720 scaled passing score.
 - [ ] I know the five domain weights.
 - [ ] I can explain the client-side agentic loop.
@@ -804,7 +836,7 @@ Prioritize PROOF, the decision matrix, orchestration, tools/MCP, Claude Code sur
 
 # Official documentation to verify before publication
 
-Use the current official Anthropic documentation as the authority for product behavior:
+Use the current official Anthropic documentation as the authority for product behavior and the current CCA-F certification guide/certification portal as the authority for exam facts and scope:
 
 - Anthropic Claude API tool use
 - Tool-use loop and stop reasons
@@ -826,10 +858,11 @@ Claude and Claude Code evolve quickly. If this document conflicts with current o
 When maintaining this guide:
 
 1. Verify product behavior against current official docs.
-2. Remove deprecated API/configuration terminology.
-3. Label preparation heuristics as heuristics, not official exam rules.
-4. Do not add recalled confidential exam questions or answer keys.
-5. Re-check model-specific limitations before publishing API examples.
+2. Verify exam facts against the current CCA-F exam guide, certification page, and certification FAQ.
+3. Remove deprecated API/configuration terminology.
+4. Label preparation heuristics as heuristics, not official exam rules.
+5. Do not add recalled confidential exam questions or answer keys.
+6. Re-check model-specific limitations before publishing API examples.
 
 ## Scope
 

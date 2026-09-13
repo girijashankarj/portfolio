@@ -33,3 +33,6 @@ build
 
 # Note: index.html is the source template and should be tracked
 # Only ignore built HTML files in dist/
+
+# Claude Code local settings (per-machine; launch.json is shared config)
+.claude/settings.local.json

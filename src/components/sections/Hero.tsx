@@ -58,8 +58,8 @@ export function Hero() {
           </p>
 
           <div className="button-group" style={{
-            marginBottom: '1rem',
             display: 'flex',
+            alignItems: 'center',
             flexWrap: 'wrap',
             gap: 'clamp(0.5rem, 2vw, 0.75rem)',
           }}>
@@ -76,18 +76,17 @@ export function Hero() {
               <span>Consulting Services</span>
             </a>
             <ResumeDownload />
-          </div>
-
-          <div style={{ marginTop: '1rem', display: 'flex', gap: '0.6rem' }}>
-            <a href="https://www.linkedin.com/in/girijashankarj" target="_blank" rel="noopener noreferrer" className="icon-only" style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-blue)', transition: 'all 0.2s ease' }} aria-label="LinkedIn">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-            <a href="https://github.com/girijashankarj" target="_blank" rel="noopener noreferrer" className="icon-only" style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-green)', transition: 'all 0.2s ease' }} aria-label="GitHub">
-              <i className="fab fa-github"></i>
-            </a>
-            <a href="https://medium.com/@girijashankarj" target="_blank" rel="noopener noreferrer" className="icon-only" style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-blue)', transition: 'all 0.2s ease' }} aria-label="Medium">
-              <i className="fab fa-medium"></i>
-            </a>
+            <div className="hero-social">
+              <a href="https://www.linkedin.com/in/girijashankarj" target="_blank" rel="noopener noreferrer" className="icon-only" style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-blue)', transition: 'all 0.2s ease' }} aria-label="LinkedIn">
+                <i className="fab fa-linkedin-in"></i>
+              </a>
+              <a href="https://github.com/girijashankarj" target="_blank" rel="noopener noreferrer" className="icon-only" style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-green)', transition: 'all 0.2s ease' }} aria-label="GitHub">
+                <i className="fab fa-github"></i>
+              </a>
+              <a href="https://medium.com/@girijashankarj" target="_blank" rel="noopener noreferrer" className="icon-only" style={{ width: '40px', height: '40px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '999px', border: '1px solid var(--border)', background: 'var(--icon-bg-blue)', transition: 'all 0.2s ease' }} aria-label="Medium">
+                <i className="fab fa-medium"></i>
+              </a>
+            </div>
           </div>
         </Reveal>
 
@@ -110,6 +109,10 @@ export function Hero() {
                 <i className="fa-solid fa-sitemap" style={{ marginRight: '0.45rem' }}></i>
                 <span>Architecture · Systems</span>
               </span>
+              <span className="pill" aria-label="GitHub star count" style={{ background: 'var(--pill-bg-green)', borderColor: 'var(--pill-border-green)' }}>
+                <i className="fa-solid fa-star" style={{ marginRight: '0.45rem' }}></i>
+                <span><strong>{totalStars ?? '—'}</strong> Stars</span>
+              </span>
               <span className="pill" style={{ background: 'var(--pill-bg-blue)', borderColor: 'var(--pill-border-blue)' }}>
                 <i className="fa-solid fa-wand-magic-sparkles" style={{ marginRight: '0.45rem' }}></i>
                 <span>n8n · Gen AI · Automation</span>
@@ -118,19 +121,6 @@ export function Hero() {
                 <i className="fa-solid fa-code" style={{ marginRight: '0.45rem' }}></i>
                 <span>React · Node · Next.js</span>
               </span>
-            </div>
-
-            <div
-              aria-label="GitHub star count"
-              style={{
-                marginTop: '1rem',
-                paddingTop: '1rem',
-                borderTop: '1px solid var(--border)',
-                textAlign: 'center',
-              }}
-            >
-              <strong style={{ display: 'block', fontSize: '1.15rem' }}>{totalStars ?? '—'}</strong>
-              <span style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>Stars</span>
             </div>
           </div>
         </Reveal>

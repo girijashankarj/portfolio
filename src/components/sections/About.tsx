@@ -84,15 +84,9 @@ export function About() {
             </div>
           </div>
         </Reveal>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: '1.5rem',
-          alignItems: 'stretch',
-        }}>
+        <div className="about-grid">
           <Reveal>
             <div className="card" style={{
-              gridColumn: 'span 1',
               height: '100%',
               display: 'flex',
               flexDirection: 'column',
@@ -129,7 +123,6 @@ export function About() {
           </Reveal>
           <Reveal>
             <div className="card" style={{
-              gridColumn: 'span 1',
               height: '100%',
               display: 'flex',
               flexDirection: 'column',
@@ -158,13 +151,6 @@ export function About() {
             </div>
           </Reveal>
         </div>
-        <style>{`
-          @media (max-width: 900px) {
-            #about > div > div:last-child {
-              grid-template-columns: 1fr !important;
-            }
-          }
-        `}</style>
       </div>
     </section>
   )

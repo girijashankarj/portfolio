@@ -113,6 +113,19 @@ export function Hero() {
                 <i className="fa-solid fa-star" style={{ marginRight: '0.45rem' }}></i>
                 <span><strong>{totalStars ?? '—'}</strong> Stars</span>
               </span>
+              <a
+                href="https://m8ven.ai/mcp/girijashankarj/yt-playlist-studio"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="M8ven Score for yt-playlist-studio"
+                style={{ display: 'inline-flex', alignItems: 'center' }}
+              >
+                <img
+                  src="https://m8ven.ai/badge/mcp/girijashankarj/yt-playlist-studio"
+                  alt="M8ven Score"
+                  loading="lazy"
+                />
+              </a>
               <span className="pill" style={{ background: 'var(--pill-bg-blue)', borderColor: 'var(--pill-border-blue)' }}>
                 <i className="fa-solid fa-wand-magic-sparkles" style={{ marginRight: '0.45rem' }}></i>
                 <span>n8n · Gen AI · Automation</span>

@@ -9,7 +9,7 @@ export function About() {
           About
         </h2>
         <p className="section-kicker reveal">
-          AI Platform Engineer specializing in Gen AI, data engineering, and developer tooling. Building production-ready solutions and enabling teams with intelligent automation.
+          Lead Engineer specializing in AI Platform Engineering, cloud architecture, data engineering, and developer tooling. Building production-ready systems and enabling teams through automation.
         </p>
         <Reveal>
           <div className="card-elevated section-band" style={{
@@ -33,7 +33,7 @@ export function About() {
               marginBottom: '1.5rem',
               color: 'var(--text)',
             }}>
-              AI Platform Engineer with <strong>8+ years</strong> improving development workflows through intelligent automation.
+              Lead Engineer with <strong>8+ years</strong> improving engineering workflows through intelligent automation.
               Reduced team productivity bottlenecks by <strong>40%</strong>, enabled <strong>100+ developers</strong> with AI tooling,
               and built <strong>10+ production ML pipelines</strong>. Currently leading AI enablement initiatives at Synechron,
               driving <strong>35% faster</strong> delivery and significant cost savings through automation and productivity improvements.
@@ -93,7 +93,7 @@ export function About() {
             }}>
               <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Profile</h3>
               <p style={{ marginBottom: '1rem' }}>
-                AI Platform Engineer and Senior Associate Consultant with <strong>8+ years</strong> of full-stack experience 
+                Lead Engineer and AI Platform Engineer with <strong>8+ years</strong> of full-stack experience 
                 across product-based and service companies. <strong>JavaScript is my primary and favorite language</strong>, 
                 with experience in Python, Java, and C++.
               </p>
@@ -129,7 +129,7 @@ export function About() {
             }}>
               <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>What I'm Looking For</h3>
               <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem', marginBottom: '1rem' }}>
-                <li><strong>AI Platform Engineer</strong> roles focusing on Gen AI and MLOps</li>
+                <li><strong>Lead / AI Platform Engineering</strong> roles focusing on cloud, developer platforms, MLOps and intelligent automation</li>
                 <li><strong>Senior/Lead positions</strong> in AI enablement and developer tooling</li>
                 <li><strong>Consulting opportunities</strong> for AI adoption and automation</li>
                 <li><strong>AI-enabled product work</strong> in innovative startups or enterprises</li>
@@ -141,7 +141,7 @@ export function About() {
                   <strong>Education:</strong> MCA (Savitribai Phule Pune University)<br/>
                   <strong>Certifications:</strong> Claude Certified Architect - Foundations, AWS Certified AI Practitioner, AWS ML Engineer Associate<br/>
                   <strong>Pursuing:</strong> AWS Solutions Architect<br/>
-                  <strong>Current Role:</strong> Leading AI enablement initiatives at Synechron
+                  <strong>Current Role:</strong> Lead Engineer at Synechron
                 </p>
               </div>
               <p style={{ marginTop: 'auto', marginBottom: 0, fontSize: '0.85rem', color: 'var(--muted)' }}>

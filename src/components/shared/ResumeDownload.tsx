@@ -4,13 +4,13 @@ export function ResumeDownload() {
     // For now, we'll create a downloadable link
     const resumeData = {
       name: 'Girijashankar Jambhale',
-      title: 'AI Platform Engineer',
+      title: 'Lead Engineer · AI Platform Engineering',
       email: 'girijashankarj@gmail.com',
       phone: '888-***-****',
       location: 'Pune, Maharashtra, India',
       linkedin: 'https://www.linkedin.com/in/girijashankarj',
       github: 'https://github.com/girijashankarj',
-      summary: 'AI Platform Engineer with 8+ years specializing in data engineering and Gen AI, workflow automation (n8n), Gen AI tools, MLOps (AWS), Google services (Firebase, Analytics, Maps API), AI enablement leadership, and building production-ready developer tools. JavaScript is my primary and favorite language, with production experience in Python, Java, and C++. Actively practicing Data Structures & Algorithms on LeetCode.',
+      summary: 'Lead Engineer with 8+ years specializing in data engineering, cloud architecture, AI Platform Engineering, and workflow automation (n8n), Gen AI tools, MLOps (AWS), Google services (Firebase, Analytics, Maps API), AI enablement leadership, and building production-ready developer tools. JavaScript is my primary and favorite language, with production experience in Python, Java, and C++. Actively practicing Data Structures & Algorithms on LeetCode.',
     }
 
     // Create a comprehensive text version that can be converted to PDF
@@ -43,7 +43,7 @@ Organizational Contributions:
 PROFESSIONAL EXPERIENCE
 ═══════════════════════════════════════════════════════════════
 
-Synechron · Senior Associate Consultant · AI Platform Engineer
+Synechron · Lead Engineer · AI Platform Engineering
 Mar 2024 - Present · Pune (Hybrid)
 
 AI Enablement & Leadership:
@@ -72,33 +72,23 @@ Product Delivery:
 Velotio Technologies · Senior Software Engineer
 Oct 2023 - Mar 2024 · Remote
 
-Gen AI & Automation:
-• Worked on Gen AI tool (Retool), building intelligent automation solutions and AI-powered applications, reducing manual processes by 60%
-
-Data Engineering:
-• Automated large-scale data engineering workflows using AWS services (Lambda, S3, ECS) and cloud data platforms, handling 1M+ records daily for health insurance project
+Cloud & Data Engineering:
+• Automated large-scale data engineering workflows using AWS Lambda, S3, ECS and cloud data platforms, handling 1M+ records daily for a health insurance project
+• Designed reliable data-processing workflows with focus on scalability, observability and operational efficiency
 
 System Architecture:
 • Built scalable fintech systems with strong data consistency patterns and security controls, improving system reliability by 45%
 
-GS Lab · Senior Software Engineer
-Oct 2021 - Sep 2023 · Pune
+GS Lab · Full Stack Developer → Senior Software Engineer
+Feb 2020 - Sep 2023 · Pune
 
-Gen AI & Product Development:
-• Worked on Gen AI tool (Flutter Flow), building AI-powered applications and intelligent workflows, improving user engagement by 50%
-• Built security systems, user management, and subscription management solutions for financial projects using React and Node.js, serving 100K+ users
+Product Engineering:
+• Built security, IAM, user management and subscription-management solutions for financial products using React and Node.js, serving 100K+ users
+• Developed a real-time UPI transaction monitoring dashboard processing 500K+ transactions daily
 
-Real-time Analytics & Infrastructure:
-• Developed real-time monitoring dashboard for UPI transactions, processing 500K+ transactions daily
-• Implemented AWS Serverless architecture with shared layers, reducing infrastructure costs by 30%
-
-GS Lab · Full Stack Developer
-Feb 2020 - Sep 2021 · Pune
-
-Full Stack Development:
-• Built security, user management, and subscription management features for financial projects
-• Developed IAM solutions for global enterprise clients using React and Node.js
-• Built shared AWS layers, pipelines, and local debugging workflows for efficient development
+AWS & Infrastructure:
+• Implemented AWS Serverless architecture with shared layers and development pipelines, reducing infrastructure costs by 30%
+• Built IAM solutions and local debugging workflows for global enterprise clients
 
 ContentServ Technologies · Frontend Developer
 Dec 2017 - Feb 2020 · Pune

@@ -3,7 +3,7 @@ import { sanitizeHtml } from '../../utils/sanitizeHtml'
 
 const EXPERIENCES = [
   {
-    title: 'Synechron · Senior Associate Consultant · AI Platform Engineer',
+    title: 'Synechron · Lead Engineer · AI Platform Engineering',
     period: 'Mar 2024 - Present · Pune (Hybrid)',
     themes: [
       {
@@ -43,15 +43,10 @@ const EXPERIENCES = [
     period: 'Oct 2023 - Mar 2024 · Remote',
     themes: [
       {
-        title: 'Gen AI & Automation',
+        title: 'Cloud & Data Engineering',
         points: [
-          'Worked on Gen AI tool (Retool), building intelligent automation solutions and AI-powered applications, reducing manual processes by <strong>60%</strong>',
-        ],
-      },
-      {
-        title: 'Data Engineering',
-        points: [
-          'Automated large-scale data engineering workflows using AWS services (Lambda, S3, ECS) and cloud data platforms, handling <strong>1M+ records daily</strong> for health insurance project',
+          'Automated large-scale data engineering workflows using AWS Lambda, S3, ECS and cloud data platforms, handling <strong>1M+ records daily</strong> for a health insurance project',
+          'Designed reliable data-processing workflows with focus on scalability, observability and operational efficiency',
         ],
       },
       {
@@ -67,11 +62,16 @@ const EXPERIENCES = [
     period: 'Feb 2020 - Sep 2023 · Pune',
     themes: [
       {
-        title: 'Product & Infrastructure',
+        title: 'Product Engineering',
         points: [
-          'Built security, IAM, and subscription management solutions for financial projects using React and Node.js, serving <strong>100K+ users</strong>',
-          'Worked on Gen AI tool (Flutter Flow) and a real-time UPI transaction monitoring dashboard processing <strong>500K+ transactions daily</strong>',
-          'Implemented AWS Serverless architecture with shared layers, reducing infrastructure costs by <strong>30%</strong>',
+          'Built security, IAM, user management and subscription-management solutions for financial products using React and Node.js, serving <strong>100K+ users</strong>',
+          'Developed a real-time UPI transaction monitoring dashboard processing <strong>500K+ transactions daily</strong>',
+        ],
+      },
+      {
+        title: 'AWS & Infrastructure',
+        points: [
+          'Implemented AWS Serverless architecture with shared layers and development pipelines, reducing infrastructure costs by <strong>30%</strong>',
         ],
       },
     ],
@@ -102,7 +102,7 @@ export function Journey() {
         </Reveal>
         <Reveal>
           <p className="section-kicker">
-            Career progression showcasing growth from frontend development to AI Platform Engineering leadership.
+            Career progression from frontend development to Lead Engineering, cloud platforms, developer tooling, and AI Platform Engineering.
           </p>
         </Reveal>
         <div className="timeline">

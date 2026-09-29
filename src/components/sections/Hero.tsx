@@ -26,7 +26,7 @@ export function Hero() {
         <Reveal>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1rem', alignItems: 'center' }}>
             <span className="pill" style={{ background: 'var(--pill-bg-blue)', borderColor: 'var(--pill-border-blue)', fontWeight: 500 }}>
-              AI Platform Engineer · Pune, India
+              Lead Engineer · Pune, India
             </span>
             <span className="pill" style={{ background: 'var(--pill-bg-green)', borderColor: 'var(--pill-border-green)', fontWeight: 500 }}>
               <i className="fa-solid fa-circle-check" style={{ marginRight: '0.35rem', fontSize: '0.7rem' }}></i>
@@ -39,7 +39,7 @@ export function Hero() {
           </h1>
 
           <p className="hero-subtitle" style={{ color: 'var(--muted)', fontSize: '1.05rem', marginBottom: '1.5rem' }}>
-            Senior Associate Consultant with 8+ years specializing in AI Platform Engineering, MLOps, and leading AI enablement initiatives. <strong>JavaScript is my primary language</strong>, with experience in Python, Java, and C++.
+            Lead Engineer with 8+ years specializing in AI Platform Engineering, MLOps, cloud architecture, and developer productivity. <strong>JavaScript is my primary language</strong>, with experience in Python, Java, and C++.
           </p>
 
           <div className="button-group" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 'clamp(0.5rem, 2vw, 0.75rem)' }}>
@@ -57,7 +57,7 @@ export function Hero() {
 
         <Reveal>
           <div className="card-elevated">
-            <img src={`${import.meta.env.BASE_URL}assets/profile.png`} alt="Girijashankar Jambhale - AI Platform Engineer specializing in Gen AI and MLOps" loading="lazy" width="400" height="400" style={{ borderRadius: '1rem', border: '1px solid var(--border)', width: '100%', marginBottom: '1rem' }} />
+            <img src={`${import.meta.env.BASE_URL}assets/profile.png`} alt="Girijashankar Jambhale - Lead Engineer specializing in AI Platform Engineering, MLOps and cloud architecture" loading="lazy" width="400" height="400" style={{ borderRadius: '1rem', border: '1px solid var(--border)', width: '100%', marginBottom: '1rem' }} />
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(0.4rem, 2vw, 0.6rem)' }}>
               <span className="pill" style={{ background: 'var(--pill-bg-green)', borderColor: 'var(--pill-border-green)' }}><i className="fa-solid fa-cloud" style={{ marginRight: '0.45rem' }}></i><span>AWS · Cloud · Serverless</span></span>
               <span className="pill" style={{ background: 'var(--pill-bg-blue)', borderColor: 'var(--pill-border-blue)' }}><i className="fa-solid fa-sitemap" style={{ marginRight: '0.45rem' }}></i><span>Architecture · Systems</span></span>
